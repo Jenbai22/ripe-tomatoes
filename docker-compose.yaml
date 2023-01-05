@@ -12,6 +12,10 @@ services:
       - 8000:8000
     volumes:
       - ./ripe_tomatoes:/app
+    environment:
+      DATABASE_URL: postgresql://username:password@postgres/tomatoes
+      WAIT_HOST: postgres:5432
+      PORT: 8000
   postgres:
     image: postgres:14.5-bullseye
     volumes:
