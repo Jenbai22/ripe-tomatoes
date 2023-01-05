@@ -9,4 +9,9 @@ Today, I worked on:
 
 Today, I worked on:
 
-##
+1. Today we did team coding and completed the yaml file. It appears to be working as we were able as Docker seems to be running.
+2.
+
+## Jan 6
+
+Today, I worked on:
