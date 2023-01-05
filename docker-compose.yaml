@@ -1,13 +1,37 @@
 volumes:
+  postgres-data:
+    external: true
+  pg-admin:
+    external: true
 services:
   fastapi:
     build:
-      context: sample_service
+      context: ripe_tomatoes
       dockerfile: Dockerfile.dev
     ports:
       - 8000:8000
     volumes:
-      - ./sample_service:/app
+      - ./ripe_tomatoes:/app
+  postgres:
+    image: postgres:14.5-bullseye
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: username
+      POSTGRES_DB: tomatoes
+    ports:
+      - 15432:5432
+  pg-admin:
+    image: dpage/pgadmin4
+    volumes:
+      - pg-admin:/var/lib/pgadmin
+    ports:
+      - 8082:80
+    environment:
+      PGADMIN_DEFAULT_EMAIL: a@a.com
+      PGADMIN_DEFAULT_PASSWORD: password
+      PGADMIN_DISABLE_POSTFIX: 1
 
   ghi:
     image: node:lts-bullseye
@@ -22,4 +46,4 @@ services:
       NODE_ENV: development
       HOST: "0.0.0.0"
       PUBLIC_URL: http://localhost:3000
-      REACT_APP_SAMPLE_SERVICE_API_HOST: http://localhost:8000
+      REACT_APP_RIPE_TOMATOES_API_HOST: http://localhost:8000

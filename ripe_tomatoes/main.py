@@ -15,7 +15,7 @@ app.add_middleware(
 )
 
 
-@app.get("/api/launch-details")
+@app.get("/api/launch")
 def launch_details():
     return {
         "launch_details": {
