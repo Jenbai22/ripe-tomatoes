@@ -15,3 +15,6 @@ Today, I worked on:
 ## Jan 6
 
 Today, I worked on:
+
+1. Today i worked with Jen and she was able to help me fix my bug. I had two things I had to do, first I had to enter a command before building my docker files. Second, i deleted my project in my computer, cloned it down again and that fixed the second bug.
+2.
