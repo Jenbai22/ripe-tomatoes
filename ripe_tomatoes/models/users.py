@@ -16,7 +16,7 @@ class UserIn(BaseModel):
     email: str
     password: str
 
-class UserOut(UserIn):
+class UserOut(BaseModel):
     id: int
 
 class UsersOut(BaseModel):
