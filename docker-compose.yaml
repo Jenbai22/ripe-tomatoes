@@ -16,6 +16,7 @@ services:
       DATABASE_URL: postgresql://username:password@postgres/tomatoes
       WAIT_HOST: postgres:5432
       PORT: 8000
+      SIGNING_KEY: e1705a6893115fc7525efdbe2af901f27acb689c0beab8a5fe6968483f51bf5a
   postgres:
     image: postgres:14.5-bullseye
     volumes:
