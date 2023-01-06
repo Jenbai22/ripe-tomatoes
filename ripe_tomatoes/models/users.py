@@ -9,3 +9,6 @@ class UserIn(BaseModel):
 
 class UserOut(UserIn):
     id: int
+
+class UsersOut(BaseModel):
+    users: list[UserOut]
