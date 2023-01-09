@@ -15,11 +15,11 @@ class UserQueries:
                 result = db.execute(
                     """
                     SELECT id
-                         , username
-                         , firstname
-                         , lastname
-                         , email
-                         , hashed_password
+                        , username
+                        , firstname
+                        , lastname
+                        , email
+                        , hashed_password
                     FROM users
                     WHERE username = %s;
                     """,
