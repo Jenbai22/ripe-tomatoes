@@ -18,3 +18,9 @@ Today, I worked on:
 
 1. Today i worked with Jen and she was able to help me fix my bug. I had two things I had to do, first I had to enter a command before building my docker files. Second, i deleted my project in my computer, cloned it down again and that fixed the second bug.
 2. Today did group coding and we were able to find get a new user working as well as a bearer token to work when a new user is created.
+
+## Jan 9
+
+Today, I worked on:
+
+1. We have been cont with team coding and have made some progress. Our backend looks pretty close to being completed and we started to do some protection for our backend. Tmw we will start on the front wit some limited use to it.
