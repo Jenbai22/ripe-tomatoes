@@ -16,14 +16,19 @@ async def get_reviews(
             "reviews": queries.get_all_reviews(),
         }
 
+
 @router.post("/reviews", response_model=ReviewOut)
 async def create_review(
     review: ReviewIn,
+    response: Response,
     user_data: dict = Depends(authenticator.get_current_account_data),
     queries: ReviewQueries = Depends()
 ):
-    if user_data:
+    if review.dict()['username'] == user_data['username']:
         return queries.create_review(review)
+    else:
+        response.status_code = 403
+
 
 @router.put("/reviews/{review_id}", response_model=ReviewIn)
 def update_review(
@@ -33,12 +38,15 @@ def update_review(
     queries: ReviewQueries = Depends(),
     user_data: dict = Depends(authenticator.get_current_account_data)
 ):
-    if user_data:
+    if review_in.dict()['username'] == user_data['username']:
         review = queries.update_review(review_id, review_in)
         if review is None:
             response.status_code = 404
         else:
             return review
+    else:
+        response.status_code = 403
+
 
 @router.delete("/reviews/{review_id}", response_model=bool)
 async def delete_review(
@@ -47,5 +55,4 @@ async def delete_review(
     user_data: dict = Depends(authenticator.get_current_account_data)
 ):
     if user_data:
-        queries.delete_review(review_id)
-        return True
+        return queries.delete_review(review_id)
