@@ -65,7 +65,7 @@ class UserQueries:
                     """
                     INSERT INTO users (firstname, lastname, hashed_password, email, username)
                     VALUES (%s, %s, %s, %s, %s)
-                    RETURNING id;
+                    RETURNING id, username;
                     """,
                     [
                     data.firstname,

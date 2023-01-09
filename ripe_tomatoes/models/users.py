@@ -18,6 +18,7 @@ class UserIn(BaseModel):
 
 class UserOut(BaseModel):
     id: int
+    username: str
 
 class UsersOut(BaseModel):
     users: list[User]

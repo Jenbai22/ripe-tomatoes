@@ -13,5 +13,9 @@ class ReviewIn(BaseModel):
     imdb: str
     username: str
 
+class ReviewOut(ReviewIn):
+    id: int
+    posted: datetime
+
 class ReviewsOut(BaseModel):
     reviews: list[Review]
