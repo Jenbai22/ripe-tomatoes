@@ -1,3 +1,7 @@
+1/9/22
+Pair coded and got the full CRUD for the reviews, and made
+progress on double layered protection for them
+
 1/6/22
 Pair coded and got the full CRUD, auth and token working
 for the user
