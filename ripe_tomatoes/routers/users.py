@@ -21,7 +21,7 @@ router = APIRouter(tags=["users"])
 # def create_user(user_in: UserIn, queries: UserQueries = Depends()):
 #    return queries.create_user(user_in)
 
-@router.post("/api/users", response_model=UserToken | HttpError)
+@router.post("/users", response_model=UserToken | HttpError)
 async def create_account(
     info: UserIn,
     request: Request,

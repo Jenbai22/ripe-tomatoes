@@ -13,6 +13,7 @@ services:
     volumes:
       - ./ripe_tomatoes:/app
     environment:
+      OMDB_KEY: 7c7456b5
       DATABASE_URL: postgresql://username:password@postgres/tomatoes
       WAIT_HOST: postgres:5432
       PORT: 8000
