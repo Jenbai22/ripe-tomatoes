@@ -80,7 +80,6 @@ class ReviewQueries:
                     params = [
                         data.body,
                         data.imdb,
-                        data.posted,
                         data.username,
                         review_id,
                     ]
@@ -89,7 +88,6 @@ class ReviewQueries:
                         UPDATE reviews
                         SET body = %s
                         , imdb = %s
-                        , posted = %s
                         , username = %s
                         WHERE id = %s
                         RETURNING id, body, imdb, posted, username
