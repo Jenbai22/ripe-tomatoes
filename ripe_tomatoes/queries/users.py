@@ -93,7 +93,6 @@ class UserQueries:
                 params = [
                     data.firstname,
                     data.lastname,
-                    data.password,
                     data.email,
                     data.username,
                     user_id,
@@ -102,12 +101,11 @@ class UserQueries:
                     """
                     UPDATE users
                     SET firstname = %s
-                      , lastname = %s
-                      , hashed_password = %s
-                      , email = %s
-                      , username = %s
+                        , lastname = %s
+                        , email = %s
+                        , username = %s
                     WHERE id = %s
-                    RETURNING id, firstname, lastname, hashed_password, email, username
+                    RETURNING id, firstname, lastname, email, username
                     """,
                     params,
                 )
