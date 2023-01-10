@@ -3,7 +3,7 @@ from jwtdown_fastapi.authentication import Token
 from authenticator import authenticator
 from .token import UserToken
 from pydantic import BaseModel
-from models.users import UserIn, UserOut, UsersOut
+from models.users import UserIn, UserOut, UsersOut, UserUpdate
 from queries.users import UserQueries
 
 
@@ -17,10 +17,6 @@ class HttpError(BaseModel):
 
 router = APIRouter(tags=["users"])
 
-# @router.post("/users/", response_model=UserOut)
-# def create_user(user_in: UserIn, queries: UserQueries = Depends()):
-#    return queries.create_user(user_in)
-
 @router.post("/users", response_model=UserToken | HttpError)
 async def create_account(
     info: UserIn,
@@ -29,13 +25,7 @@ async def create_account(
     repo: UserQueries = Depends(),
 ):
     hashed_password = authenticator.hash_password(info.password)
-    # try:
     user = repo.create_user(info, hashed_password)
-    # except DuplicateAccountError:
-    #     raise HTTPException(
-    #         status_code=status.HTTP_400_BAD_REQUEST,
-    #         detail="Cannot create an account with those credentials",
-    #     )
     form = UserForm(username=info.username, password=info.password)
     token = await authenticator.login(response, request, form, repo)
     return UserToken(user=user, **token.dict())
@@ -47,16 +37,23 @@ def users_list(queries: UserQueries = Depends()):
         "users": queries.get_all_users(),
     }
 
+@router.get("/users/{user_username}", response_model=UsersOut)
+def user_get(user_username: str, queries: UserQueries = Depends()):
+    return {
+        "user": queries.get(user_username),
+    }
+
 @router.put("/users/{user_id}", response_model=UserOut)
 def update_user(
     user_id: int,
-    user_in: UserIn,
+    user_update: UserUpdate,
     response: Response,
     queries: UserQueries = Depends(),
 ):
-    record = queries.update_user(user_id, user_in)
+    record = queries.update_user(user_id, user_update)
     if record is None:
-        response.status_code = 404
+        raise HTTPException(status_code = 404, detail= "No Such User Exists") 
+
     else:
         return record
 
