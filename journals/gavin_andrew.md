@@ -1,3 +1,7 @@
+1/10/22
+Pair coded and organized the react front end, and began to
+work on basic functionality and authorization
+
 1/9/22
 Pair coded and got the full CRUD for the reviews, and made
 progress on double layered protection for them
