@@ -9,14 +9,15 @@ class UserToken(Token):
     user: UserOut
 
 
-@router.get("/token", response_model=UserToken | None)
+@router.get("/token")
 async def get_token(
     request: Request,
     user: User = Depends(authenticator.get_user_data_for_cookie)
-) -> UserToken | None:
+):
     if user and authenticator.cookie_name in request.cookies:
         return {
             "access_token": request.cookies[authenticator.cookie_name],
             "type": "Bearer",
             "user": user,
         }
+

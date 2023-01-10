@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-function Home() {
+export default function Home() {
   const [example, setExample] = useState(true);
 
   useEffect(() => {
@@ -16,5 +16,3 @@ function Home() {
     </>
   );
 }
-
-export default Home;
