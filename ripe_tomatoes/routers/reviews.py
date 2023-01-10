@@ -16,36 +16,31 @@ async def get_reviews(
             "reviews": queries.get_all_reviews(),
         }
 
-
 @router.post("/reviews", response_model=ReviewOut)
 async def create_review(
     review: ReviewIn,
-    response: Response,
     user_data: dict = Depends(authenticator.get_current_account_data),
     queries: ReviewQueries = Depends()
 ):
-    if review.dict()['username'] == user_data['username']:
+    if user_data:
         return queries.create_review(review)
-    else:
-        response.status_code = 403
 
 
 @router.put("/reviews/{review_id}", response_model=ReviewIn)
 def update_review(
     review_id: int,
     review_in: ReviewIn,
-    response: Response,
     queries: ReviewQueries = Depends(),
     user_data: dict = Depends(authenticator.get_current_account_data)
 ):
     if review_in.dict()['username'] == user_data['username']:
         review = queries.update_review(review_id, review_in)
         if review is None:
-            response.status_code = 404
+            raise HTTPException(status_code = 404, detail= "No Such Review Exists") 
         else:
             return review
     else:
-        response.status_code = 403
+        raise HTTPException(status_code = 403, detail= "Access Denied") 
 
 
 @router.delete("/reviews/{review_id}", response_model=bool)
