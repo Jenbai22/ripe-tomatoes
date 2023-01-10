@@ -93,7 +93,7 @@ class UserQueries:
                 params = [
                     data.firstname,
                     data.lastname,
-                    data.hashed_password,
+                    data.password,
                     data.email,
                     data.username,
                     user_id,
