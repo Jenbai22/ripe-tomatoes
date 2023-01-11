@@ -2,6 +2,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Navbar from "react-bootstrap/Navbar";
 import { useState, useEffect } from "react";
+import useToken from "./Auth";
 
 function LoginModal(props) {
   return (
@@ -44,15 +45,10 @@ function Nav() {
   }, []);
 
   const handleLogout = async () => {
-    const response = await fetch("http://localhost:8000/token", {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    if (response.ok) {
-      console.log(response);
-      setToken("");
+    if (token) {
+      const url = `${process.env.REACT_APP_RIPE_TOMATOES_API_HOST}/token`;
+      await fetch(url, { method: "delete", credentials: "include" });
+      setToken(null);
     }
   };
 
