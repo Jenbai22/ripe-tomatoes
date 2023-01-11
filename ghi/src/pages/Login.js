@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useToken } from "../Auth";
 
 export default function Login() {

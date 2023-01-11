@@ -5,7 +5,6 @@ import Login from "./pages/Login";
 import { useToken, AuthProvider } from "./Auth";
 
 function GetToken() {
-  // Get token from JWT cookie (if already logged in)
   useToken();
   return null;
 }
