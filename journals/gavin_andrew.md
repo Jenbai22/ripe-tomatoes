@@ -1,3 +1,7 @@
+1/11/23
+Pair coded and finished react front end authorization, and
+a nav bar with limited styling
+
 1/10/22
 Pair coded and organized the react front end, and began to
 work on basic functionality and authorization
