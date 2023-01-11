@@ -31,3 +31,11 @@ Today, I worked on:
 
 1. Today it was my turn to drive for our Grp. We still cont to do Grp coding and as a team we are excited that we are not having any drama. Ok, maybe one. Mikey's name was inserted as Micky, we all had a laugh about it and Mikey was playfully upset about it.
 2. We are getting really close to getting our AuthProvider to work. We into is populating but we are not happy that it is to long. We are going to try to tackle it tmw and we are able to start the front end.
+
+## Jan 11
+
+Today, I worked on:
+
+1. It was Mikey's turn to be in the driver seat. We cont team coding and cont to make progress with Auth. We have the ability for a user to log in and log out and a bearer token is successful.
+2. We did do some React and we had a few issues that seemed silly now. We did successfully install bootstrap, but we forgot to rebuild. Second was we forgot to import a CSS file into our app page and as soon as Candice came in she was able to see that issues and we fixed our last mistake.
+3. Tmw we work on the Register Page.
