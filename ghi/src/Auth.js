@@ -6,22 +6,20 @@ export function getToken() {
   return internalToken;
 }
 
-// export async function getTokenInternal() {
-//   const url = `${process.env.REACT_APP_RIPE_TOMATOES_API_HOST}/token/`;
-//   try {
-//     const response = await fetch(url, {
-//       credentials: "include",
-//     });
-//     if (response.ok) {
-//       const data = await response.json();
-//       console.log(data);
-//       internalToken = data.access_token;
-//       console.log("************", internalToken);
-//       return internalToken;
-//     }
-//   } catch (e) {}
-//   return false;
-// }
+export async function getTokenInternal() {
+  const url = `${process.env.REACT_APP_RIPE_TOMATOES_API_HOST}/token`;
+  try {
+    const response = await fetch(url, {
+      credentials: "include",
+    });
+    if (response.ok) {
+      const data = await response.json();
+      internalToken = data.access_token;
+      return internalToken;
+    }
+  } catch (e) {}
+  return false;
+}
 
 function handleErrorMessage(error) {
   if ("error" in error) {
@@ -46,11 +44,11 @@ function handleErrorMessage(error) {
 
 export const AuthContext = createContext({
   token: null,
-  setToken: () => [],
+  setToken: () => null,
 });
 
 export const AuthProvider = ({ children }) => {
-  const [token, setToken] = useState([]);
+  const [token, setToken] = useState(null);
 
   return (
     <AuthContext.Provider value={{ token, setToken }}>
@@ -65,15 +63,15 @@ export function useToken() {
   const { token, setToken } = useAuthContext();
   const navigate = useNavigate();
 
-  //   useEffect(() => {
-  //     async function fetchToken() {
-  //         const token = await getTokenInternal();
-  //         setToken(token);
-  //     }
-  //     if (!token) {
-  //       fetchToken();
-  //     }
-  //   }, [setToken, token]);
+  useEffect(() => {
+    async function fetchToken() {
+      const token = await getTokenInternal();
+      setToken(token);
+    }
+    if (!token) {
+      fetchToken();
+    }
+  }, [setToken, token]);
 
   async function logout() {
     if (token) {
@@ -86,7 +84,7 @@ export function useToken() {
   }
 
   async function login(username, password) {
-    const url = `${process.env.REACT_APP_RIPE_TOMATOES_API_HOST}/token/`;
+    const url = `${process.env.REACT_APP_RIPE_TOMATOES_API_HOST}/token`;
     const form = new FormData();
     form.append("username", username);
     form.append("password", password);
@@ -96,10 +94,8 @@ export function useToken() {
       body: form,
     });
     if (response.ok) {
-      const data = await response.json();
-      console.log(data, username);
-      internalToken = data.access_token;
-      setToken([internalToken, username]);
+      const token = await getTokenInternal();
+      setToken(token);
       return;
     }
     let error = await response.json();
@@ -107,7 +103,7 @@ export function useToken() {
   }
 
   async function signup(username, password, email, firstName, lastName) {
-    const url = `${process.env.REACT_APP_RIPE_TOMATOES_API_HOST}/users/`;
+    const url = `${process.env.REACT_APP_RIPE_TOMATOES_API_HOST}/api/accounts/`;
     const response = await fetch(url, {
       method: "post",
       body: JSON.stringify({
