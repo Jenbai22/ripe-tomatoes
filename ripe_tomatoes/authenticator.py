@@ -31,7 +31,7 @@ class MyAuthenticator(Authenticator):
     def get_user_data_for_cookie(self, user: User):
         # Return the username and the data for the cookie.
         # You must return TWO values from this method.
-        return user.email, UserOut(**user.dict())
+        return user.username, UserOut(**user.dict())
 
 
 authenticator = MyAuthenticator(os.environ["SIGNING_KEY"])
