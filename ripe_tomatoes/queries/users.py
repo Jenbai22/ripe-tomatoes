@@ -83,6 +83,8 @@ class UserQueries:
                     for i, column in enumerate(cur.description):
                         record[column.name] = row[i]
 
+                print('**********record', record)
+
                 return record
 
     def update_user(self, user_id, data):
