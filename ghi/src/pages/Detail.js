@@ -1,30 +1,29 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useAuthContext } from "../Auth";
 
 export default function Detail() {
-  const { token } = useAuthContext();
-
-  // const parseJwt = (token) => {
-  //   if (!token) {
-  //     return;
-  //   }
-  //   const base64Url = token.split(".")[1];
-  //   const base64 = base64Url.replace("-", "+").replace("_", "/");
-  //   return JSON.parse(window.atob(base64));
-  // };
-
-  // const username = parseJwt(token).account.username;
-
+  let [token, setToken] = useState("");
+  let [loggedIn, setLoggedIn] = useState(false);
   let { imdb } = useParams();
   const [formData, setFormData] = useState({
     imdb: imdb,
     body: "",
-    // username: username,
+    username: "",
   });
 
   useEffect(() => {
-    async function getData() {}
+    async function getData() {
+      const url = `${process.env.REACT_APP_RIPE_TOMATOES_API_HOST}/token`;
+      const response = await fetch(url, {
+        credentials: "include",
+      });
+      if (response.ok) {
+        const data = await response.json();
+        setLoggedIn(true);
+        setToken(data.access_token);
+        formData.username = data.user.username;
+      }
+    }
     getData();
   }, []);
 
@@ -55,11 +54,19 @@ export default function Detail() {
 
   return (
     <>
-      <div>detail page || imdb is "{imdb}"</div>
-      <form onSubmit={handleSubmit} id="form">
-        <input onChange={handleFormChange} name="body" type="text" />
-        <button type="submit">Post</button>
-      </form>
+      {loggedIn ? (
+        <body>
+          <div>detail page || imdb is "{imdb}"</div>
+          <form onSubmit={handleSubmit} id="form">
+            <input onChange={handleFormChange} name="body" type="text" />
+            <button type="submit">Post</button>
+          </form>
+        </body>
+      ) : (
+        <body>
+          <div id="loading">not logged in</div>
+        </body>
+      )}
     </>
   );
 }
