@@ -1,14 +1,18 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Detail from "./pages/Detail";
-import Home from "./pages/Home";
+import LoginForm from "./Login";
+import UserList from "./UsersList";
 
 function App() {
+  const domain = /https:\/\/[^/]+/;
+  const basename = process.env.PUBLIC_URL.replace(domain, "");
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="movies" element={<Home />} />
-        <Route path="movies/:imdb" element={<Detail />} />
-      </Routes>
+    <BrowserRouter basename={basename}>
+      <div className="container">
+        <Routes>
+          <Route path="/users" element={<UserList />} />
+          <Route path="/login" element={<LoginForm />} />
+        </Routes>
+      </div>
     </BrowserRouter>
   );
 }
