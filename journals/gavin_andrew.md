@@ -1,3 +1,7 @@
+1/12/21
+Pair coded and made various progress with the front end;
+styling remains limited but near functionality completion
+
 1/11/23
 Pair coded and finished react front end authorization, and
 a nav bar with limited styling
