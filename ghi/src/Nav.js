@@ -108,6 +108,7 @@ function Nav() {
       const url = `${process.env.REACT_APP_RIPE_TOMATOES_API_HOST}/token`;
       await fetch(url, { method: "delete", credentials: "include" });
       setToken(null);
+      window.location.reload();
     }
   };
 
@@ -115,7 +116,7 @@ function Nav() {
     <>
       {token ? (
         <Navbar bg="dark" variant="dark">
-          <Button pull-right variant="secondary" onClick={handleLogout}>
+          <Button variant="secondary" onClick={handleLogout}>
             Logout
           </Button>
           <div
