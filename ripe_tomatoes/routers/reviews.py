@@ -5,6 +5,11 @@ from queries.reviews import ReviewQueries
 
 router = APIRouter(tags=["reviews"])
 
+@router.get("/reviews/{imdb}", response_model=ReviewsOut)
+def get_reviews_by_imdb(imdb: str, queries: ReviewQueries = Depends()):
+    return {
+        "reviews": queries.get_reviews_by_imdb(imdb)
+    }
 
 @router.get("/reviews", response_model=ReviewsOut)
 async def get_reviews(
@@ -36,11 +41,11 @@ def update_review(
     if review_in.dict()['username'] == user_data['username']:
         review = queries.update_review(review_id, review_in)
         if review is None:
-            raise HTTPException(status_code = 404, detail= "No Such Review Exists") 
+            raise HTTPException(status_code = 404, detail= "No Such Review Exists")
         else:
             return review
     else:
-        raise HTTPException(status_code = 403, detail= "Access Denied") 
+        raise HTTPException(status_code = 403, detail= "Access Denied")
 
 
 @router.delete("/reviews/{review_id}", response_model=bool)
