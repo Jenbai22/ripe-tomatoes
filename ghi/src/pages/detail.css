@@ -1,0 +1,59 @@
+#row {
+    padding: 0%;
+    margin: 2%;
+}
+
+#row {
+  display: flex;
+}
+
+#column {
+  flex: 50%;
+}
+
+
+
+#reviews {
+    font-size: 16px;
+    max-height: 75vh;
+    max-width: 100%;
+    background-color: #3f3f3f;
+    overflow-y:scroll;
+}
+#review {
+    height: 10%;
+    padding: 2%;
+    margin: 2%;
+    background-color: #ffff;
+    color: black;
+}
+
+#username {
+
+}
+
+#body {
+
+}
+
+form {
+    padding-top: 10px;
+    display: flex;
+    background: #fff;
+}
+
+form input {
+    flex: 1;
+    /* border: none;
+    outline: none; */
+}
+
+form button {
+    background: tomato;
+    padding: 10px, 50px;
+    border: none;
+    outline: none;
+    color: #fff;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
