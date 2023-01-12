@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import moment from "moment"
+import "./detail.css";
 
 export default function Detail() {
   let [token, setToken] = useState("");
@@ -23,11 +25,11 @@ export default function Detail() {
         let data = await response.json();
         if (data) {
           setLoggedIn(true);
-          setToken(data.access_token);
+          setToken(data);
           formData.username = data.user.username;
         }
       }
-      response = await fetch(`https://www.omdbapi.com/?apikey=7c7456b5&i=${imdb}`)
+      response = await fetch(`${process.env.REACT_APP_RIPE_TOMATOES_API_HOST}/searchimdb/${imdb}`)
       if (response.ok) {
         const data = await response.json()
         setMovie(data)
@@ -57,7 +59,7 @@ export default function Detail() {
       body: JSON.stringify(formData),
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${token.access_token}`,
       },
     };
     const response = await fetch("http://localhost:8000/reviews", config);
@@ -73,21 +75,30 @@ export default function Detail() {
   return (
     <>
       {loggedIn ? (
-        <>
-          <div>detail page || imdb is "{imdb}"</div>
-          <div>{movie.Title} ({movie.Year})</div>
-          <div>Reviews</div>
-          <div>
-              {reviews.map(review =>
-                <div key={review.id}>Username: {review.username} | Body: {review.body}</div>
+        <main>
+          <div id="row">
+            <div id="column">
+              <div>{movie.Title} ({movie.Year})</div>
+              <img src={movie.Poster}/>
+              <div>{movie.Plot}</div>
+            </div>
+            <div id="column">
+              <div>Reviews</div>
+              <div id="reviews">
+                {reviews.map(review =>
+                <div id="review" key={review.id}>
+                  <div id="username">{review.username} ({moment(review.posted).subtract(6, 'hours').calendar()})</div>
+                  <div id="body">{review.body}</div>
+                </div>
                 )}
-                <div/>
+              </div>
+              <form id="form" onSubmit={handleSubmit}>
+                <input onChange={handleFormChange} name="body" type="text" placeholder="Write your review" />
+                <button type="submit">Post</button>
+              </form>
+            </div>
           </div>
-          <form onSubmit={handleSubmit} id="form">
-            <input onChange={handleFormChange} name="body" type="text" />
-            <button type="submit">Post</button>
-          </form>
-        </>
+        </main>
       ) : (
         <>
           <div id="loading">not logged in</div>
@@ -96,3 +107,4 @@ export default function Detail() {
     </>
   );
 }
+// utcOffset("+25:00")
