@@ -174,3 +174,16 @@ form button:hover {
     font-size: 25px;
     height: 48vh;
 } */
+
+.edit-button {
+  float: right;
+  background: rgb(0, 0, 0);
+  border: none;
+  outline: none;
+  color: #fff;
+  letter-spacing: 1px;
+  cursor: pointer;
+  opacity: 0.8;
+  border-radius: 0px;
+  width: 10%;
+}
