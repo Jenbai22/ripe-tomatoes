@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 import moment from "moment"
 import "./detail.css";
 
 export default function Detail() {
+  const topRef = useRef(null)
+
   let [token, setToken] = useState("");
   let [loggedIn, setLoggedIn] = useState(false);
 
@@ -65,8 +67,9 @@ export default function Detail() {
     const response = await fetch("http://localhost:8000/reviews", config);
     if (response.ok) {
       const d = await response.json()
-      setReviews(prevState => [...prevState, {id: d.id, body: d.body, imdb: d.imdb, posted: d.posted, username: d.username}]);
+      setReviews(prevState => [{id: d.id, body: d.body, imdb: d.imdb, posted: d.posted, username: d.username}, ...prevState]);
       document.getElementById("form").reset();
+      topRef.current?.scrollIntoView({behavior: 'smooth'});
     } else {
       console.log("Failed to post review");
     }
@@ -125,13 +128,22 @@ export default function Detail() {
         <main>
           <div id="row">
             <div id="column">
-              <div>{movie.Title} ({movie.Year})</div>
-              <img src={movie.Poster}/>
-              <div>{movie.Plot}</div>
+              <div id="movie-card">
+                <div id="title">{movie.Title} ({movie.Year})</div>
+                  <div id="poster">
+                    <img src={movie.Poster}></img>
+                  </div>
+                  {/* <div id="details">
+                    <div>{movie.Genre}</div>
+                    <div>{movie.Runtime}</div>
+                  </div> */}
+                <div id="plot">{movie.Plot}</div>
+              </div>
             </div>
             <div id="column">
-              <div>Reviews</div>
+              <div id="reviews-title">Reviews</div>
               <div id="reviews">
+                <div ref={topRef}/>
                 {reviews.map(review =>{
                   if (review.username == formData.username){
                     return (
@@ -156,13 +168,13 @@ export default function Detail() {
                   else {
                 <div id="review" key={review.id}>
 
-                  <div id="username">{review.username} ({moment(review.posted).subtract(6, 'hours').calendar()})</div>
-                  <div id="body">{review.body}</div>
+                  <div id="username">{review.username}<span id="date"> {moment(review.posted).subtract(6, 'hours').calendar()}</span></div>
+                  <div>{review.body}</div>
                 </div>
                 }})}
               </div>
               <form id="form" onSubmit={handleSubmit}>
-                <input onChange={handleFormChange} name="body" type="text" placeholder="Write your review" />
+                <textarea onChange={handleFormChange} name="body" type="text" placeholder="What's on your mind~!" />
                 <button type="submit">Post</button>
               </form>
             </div>
