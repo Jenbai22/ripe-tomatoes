@@ -37,6 +37,12 @@ def users_list(queries: UserQueries = Depends()):
         "users": queries.get_all_users(),
     }
 
+@router.get("/users/{user_username}", response_model=UsersOut)
+def user_get(user_username: str, queries: UserQueries = Depends()):
+    return {
+        "user": queries.get(user_username),
+    }
+
 @router.put("/users/{user_id}", response_model=UserOut)
 def update_user(
     user_id: int,
@@ -46,7 +52,7 @@ def update_user(
 ):
     record = queries.update_user(user_id, user_update)
     if record is None:
-        raise HTTPException(status_code = 404, detail= "No Such User Exists") 
+        raise HTTPException(status_code = 404, detail= "No Such User Exists")
 
     else:
         return record

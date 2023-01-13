@@ -1,16 +1,23 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Detail from "./pages/Detail";
 import Home from "./pages/Home";
+import Nav from"./Nav.js"
+import { useToken, AuthProvider } from "./Auth";
 
-function App() {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="movies" element={<Home />} />
-        <Route path="movies/:imdb" element={<Detail />} />
-      </Routes>
-    </BrowserRouter>
-  );
+function GetToken() {
+  useToken();
+  return null;
 }
 
-export default App;
+export default function App() {
+  return (
+    <AuthProvider>
+      <Nav/>
+      <GetToken />
+      <Routes>
+        <Route path="" element={<Home />} />
+        <Route path="/:imdb" element={<Detail />} />
+      </Routes>
+    </AuthProvider>
+  );
+}

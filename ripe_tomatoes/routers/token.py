@@ -12,7 +12,7 @@ class UserToken(Token):
 @router.get("/token", response_model=UserToken | None)
 async def get_token(
     request: Request,
-    user: User = Depends(authenticator.get_user_data_for_cookie)
+    user: User = Depends(authenticator.try_get_current_account_data)
 ) -> UserToken | None:
     if user and authenticator.cookie_name in request.cookies:
         return {
