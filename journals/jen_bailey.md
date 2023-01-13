@@ -25,3 +25,13 @@ Today we worked on:
 We fixed the response codes and now they all work. We also fixed a bug that we noticed in the update user function.
 Gavin had worked on some react pages last night so we all looked over those and decided we would not use Redux.
 We started on the frontend authentication, we are able to login and get the token although are having some issues with setting the state which we will need to fix tomorrow.
+
+## Jan 11
+
+Today we worked on:
+We fixed the front end login. We started working on the navbar and login modal. We had some issues with the bootstrap but realized we had not imported the bootstrap CSS into the index file. We then had issues with being able to log out but fixed it by taking a closer look at the Auth file. We now have a navbar and functioning logout button and login modal. Tomorrow we will work on the sign up modal and home page.
+
+## Jan 12
+
+Today we worked on:
+We completed the signup modal with code Gavin had prepared earlier. We contemplated routing the sign up modal to the login modal after submission but instead decided to automatically log the user in. We then worked on the home page showing a few movies and adding the search functionality. Once the search functionality is submitted the cards displayed contain a link that redirects the user to the movie detail page when they click on it. We added the movie details to the detail page along with the list of reviews and post function. Tomorrow we will work on allowing users to edit or delete their own reviews, rerouting the logout to the home page and adding a home button in the Navbar.
