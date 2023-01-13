@@ -72,6 +72,53 @@ export default function Detail() {
     }
   };
 
+  function EditModal() {
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const [review, setReview] = useState({
+    body:"",
+    username: ""
+  });
+
+  const handleFormChange = (e) => {
+    setFormData({
+      ...review,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    handleClose();
+    e.preventDefault();
+
+    const url = `${process.env.REACT_APP_RIPE_TOMATOES_API_HOST}/review`;
+    const response = await fetch(url, {
+      method: "POST",
+      body: JSON.stringify(formData),
+      headers: {
+        "Content-Type": "application/json",
+      }
+    });
+    if (response.ok) {
+      setShow(false);
+      const url = `${process.env.REACT_APP_RIPE_TOMATOES_API_HOST}/token`;
+      let form = new FormData();
+      form.append("username", formData.username);
+      form.append("password", formData.password);
+      const response = await fetch(url, {
+        method: "POST",
+        credentials: "include",
+        body: form,
+      });
+      if (response.ok) {
+        window.location.reload();
+        return;
+      }
+      return;
+    }
+  };
+
   return (
     <>
       {loggedIn ? (
@@ -85,12 +132,34 @@ export default function Detail() {
             <div id="column">
               <div>Reviews</div>
               <div id="reviews">
-                {reviews.map(review =>
+                {reviews.map(review =>{
+                  if (review.username == formData.username){
+                    return (
+                      <div id="review" key={review.id}>
+                        <div id="username">
+                          {review.username} (
+                          {moment(review.posted)
+                            .subtract(6, "hours")
+                            .calendar()}
+                          )
+                        </div>
+                        <div id="body">
+                          {review.body}{" "}
+                          <EditModal
+                            show={editModalShow}
+                            onHide={() => setEditModalShow(false)}
+                          ></EditModal>
+                        </div>
+                      </div>
+                    );
+                  }
+                  else {
                 <div id="review" key={review.id}>
+
                   <div id="username">{review.username} ({moment(review.posted).subtract(6, 'hours').calendar()})</div>
                   <div id="body">{review.body}</div>
                 </div>
-                )}
+                }})}
               </div>
               <form id="form" onSubmit={handleSubmit}>
                 <input onChange={handleFormChange} name="body" type="text" placeholder="Write your review" />
@@ -107,4 +176,3 @@ export default function Detail() {
     </>
   );
 }
-// utcOffset("+25:00")
