@@ -45,3 +45,9 @@ Today, I worked on:
 Today, I worked on:
 
 1. Today we cont team coding and we cleared up a lot of the front end functions. We got the detail page mostly working, the search bar up and running, and now we have to start to fix a few cosmetic issues for those pages.
+
+## Jan 13
+
+Today, I worked on:
+
+1. Today we cont with team coding and we fixed a lot of minor issues we had. We had issues yesterday with adding a review and today we got that working. A user can search for a movie and leave a review on the detail page.
