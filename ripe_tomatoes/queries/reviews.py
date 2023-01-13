@@ -13,7 +13,7 @@ class ReviewQueries:
                     SELECT id, body, imdb, username, posted
                     FROM reviews
                     WHERE imdb = %s
-                    ORDER BY posted;
+                    ORDER BY posted DESC;
                 """,
                     [imdb]
                 ),
