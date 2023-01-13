@@ -3,54 +3,6 @@ import { useParams } from "react-router-dom";
 import moment from "moment";
 import "./detail.css";
 
-// function EditModal() {
-//   const [show, setShow] = useState(false);
-//   const handleClose = () => setShow(false);
-//   const handleShow = () => setShow(true);
-//   const [review, setReview] = useState({
-//     body: "",
-//     username: "",
-//   });
-
-//   const handleFormChange = (e) => {
-//     setFormData({
-//       ...review,
-//       [e.target.name]: e.target.value,
-//     });
-//   };
-
-//   const handleSubmit = async (e) => {
-//     handleClose();
-//     e.preventDefault();
-
-//     const url = `${process.env.REACT_APP_RIPE_TOMATOES_API_HOST}/review`;
-//     const response = await fetch(url, {
-//       method: "POST",
-//       body: JSON.stringify(formData),
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//     });
-//     if (response.ok) {
-//       setShow(false);
-//       const url = `${process.env.REACT_APP_RIPE_TOMATOES_API_HOST}/token`;
-//       let form = new FormData();
-//       form.append("username", formData.username);
-//       form.append("password", formData.password);
-//       const response = await fetch(url, {
-//         method: "POST",
-//         credentials: "include",
-//         body: form,
-//       });
-//       if (response.ok) {
-//         window.location.reload();
-//         return;
-//       }
-//       return;
-//     }
-//   };
-// }
-
 export default function Detail() {
   const topRef = useRef(null);
 
@@ -136,6 +88,29 @@ export default function Detail() {
     }
   };
 
+  const handleEditSubmit = async (e) => {
+    e.preventDefault();
+    const id = e.target.id
+    const url = `${process.env.REACT_APP_RIPE_TOMATOES_API_HOST}/reviews/${id}`;
+    const response = await fetch(url, {
+      method: "PUT",
+      body: JSON.stringify(formData),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token.access_token}`
+      }});
+      if (response.ok) {
+        const data = await response.json();
+        let r = [...reviews]
+        for (let x of r) {
+          if (x.id == id) {
+            x.body = data.body;
+          }
+        }
+        setReviews(r)
+      }
+    }
+
   return (
     <>
       {loggedIn ? (
@@ -164,35 +139,24 @@ export default function Detail() {
                   if (review.username == formData.username) {
                     return (
                       <div id="review" key={review.id}>
-                        <div id="username">
-                          {review.username} (
-                          {moment(review.posted)
-                            .subtract(6, "hours")
-                            .calendar()}
-                          )
-                        </div>
+                        <div id="username">{review.username}<span id="date"> {moment(review.posted).subtract(6, "hours").calendar()}</span></div>
                         <div id="body">
-                          {review.body}{" "}
-                          {/* <EditModal
-                            show={editModalShow}
-                            onHide={() => setEditModalShow(false)}
-                          ></EditModal> */}
+                          {review.body}
+                          <span>
+                            <button className="edit-button" onClick={handleEditSubmit} id={review.id}>
+                              Edit
+                            </button>
+                          </span>
                         </div>
                       </div>
                     );
                   } else {
+                    return (
                     <div id="review" key={review.id}>
-                      <div id="username">
-                        {review.username}
-                        <span id="date">
-                          {" "}
-                          {moment(review.posted)
-                            .subtract(6, "hours")
-                            .calendar()}
-                        </span>
-                      </div>
+                      <div id="username">{review.username}<span id="date"> {moment(review.posted).subtract(6, "hours").calendar()}</span></div>
                       <div>{review.body}</div>
-                    </div>;
+                    </div>
+                    )
                   }
                 })}
               </div>
@@ -210,7 +174,7 @@ export default function Detail() {
         </main>
       ) : (
         <>
-          <div id="loading">not logged in</div>
+          <div id="loading">Not Logged In</div>
         </>
       )}
     </>
