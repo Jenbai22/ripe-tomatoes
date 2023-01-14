@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Detail from "./pages/Detail";
 import Home from "./pages/Home";
-import Nav from"./Nav.js"
+import Nav from"./pages/nav/Nav"
 import { useToken, AuthProvider } from "./Auth";
 
 function GetToken() {

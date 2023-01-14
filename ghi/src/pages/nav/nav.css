@@ -1,0 +1,54 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+body {
+	background-color: #eee;
+}
+
+nav {
+	position: relative;
+	z-index: 99;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background-color: #000;
+	color: #FFF;
+	padding: 1rem 1.5rem;
+}
+
+nav h1 {
+	letter-spacing: 5px;
+	padding: 0.5rem 1rem;
+	padding-right: calc(1rem - 5px);
+	border: 3px solid white;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+nav h1:hover {
+	color: crimson;
+  border-color: crimson;
+  cursor: pointer;
+}
+
+.menu {
+  display: flex;
+	align-items: center;
+	margin: 0 -1rem;
+}
+
+.menu div {
+	margin: 0 1rem;
+	color: white;
+	transition: 0.3s;
+  font-size: 18px;
+}
+
+.menu div:hover {
+	color: crimson;
+  cursor: pointer;
+}

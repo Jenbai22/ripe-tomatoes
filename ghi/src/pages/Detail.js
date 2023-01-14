@@ -113,7 +113,6 @@ export default function Detail() {
 
   return (
     <>
-      {loggedIn ? (
         <main>
           <div id="row">
             <div id="column">
@@ -161,22 +160,28 @@ export default function Detail() {
                 })}
               </div>
               <form id="form" onSubmit={handleSubmit}>
+              {loggedIn ? (
                 <textarea
                   onChange={handleFormChange}
                   name="body"
                   type="text"
                   placeholder="What's on your mind~!"
                 />
+              ) : (
+                <textarea
+                  id='comment-denied'
+                  onChange={handleFormChange}
+                  name="body"
+                  type="text"
+                  placeholder="Sign up or login in to comment!"
+                  disabled
+                  />
+              )}
                 <button type="submit">Post</button>
               </form>
             </div>
           </div>
         </main>
-      ) : (
-        <>
-          <div id="loading">Not Logged In</div>
-        </>
-      )}
     </>
   );
 }
