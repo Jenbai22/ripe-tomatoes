@@ -17,6 +17,7 @@ export default function Detail() {
     imdb: imdb,
     body: "",
     username: "",
+    edited: 0
   });
 
   useEffect(() => {
@@ -43,6 +44,14 @@ export default function Detail() {
           );
           if (response.ok) {
             let data = await response.json();
+            for (let x of data.reviews) {
+              if (x.edited == 1) {
+                x.edited = "(edited)"
+                console.log(x)
+              } else {
+                x.edited = ""
+              }
+            }
             setReviews(data.reviews);
           }
         }
@@ -59,6 +68,7 @@ export default function Detail() {
   };
 
   const handleSubmit = async (e) => {
+    formData.edited = 0
     e.preventDefault();
     const config = {
       method: "post",
@@ -89,6 +99,7 @@ export default function Detail() {
   };
 
   const handleEdit = async (e) => {
+    formData.edited = 1
     e.preventDefault();
     const id = e.target.id
     const url = `${process.env.REACT_APP_RIPE_TOMATOES_API_HOST}/reviews/${id}`;
@@ -102,7 +113,9 @@ export default function Detail() {
     if (response.ok) {
       const data = await response.json();
       let r = [...reviews]
-      r[r.findIndex(x => x.id == id)].body = data.body
+      let i = r.findIndex(x => x.id == id)
+      r[i].body = data.body
+      r[i].edited = "(edited)"
       setReviews(r)
     }
   }
@@ -152,12 +165,12 @@ export default function Detail() {
                   if (review.username == formData.username) {
                     return (
                       <div id="review" key={review.id}>
-                        <div id="username">{review.username}<span id="date"> {moment(review.posted).subtract(6, "hours").calendar()}</span>
-                        <span>
-                          <button className="edit-button" onClick={handleEdit} id={review.id}>edit</button>
-                        </span>
+                        <div id="username">{review.username}<span id="date"> {moment(review.posted).subtract(6, "hours").calendar()} {review.edited}</span>
                         <span>
                           <button className="delete-button" onClick={handleDelete} id={review.id}>delete</button>
+                        </span>
+                        <span>
+                          <button className="edit-button" onClick={handleEdit} id={review.id}>edit</button>
                         </span>
                       </div>
                         <div id="body">
@@ -168,7 +181,7 @@ export default function Detail() {
                   } else {
                     return (
                     <div id="review" key={review.id}>
-                      <div id="username">{review.username}<span id="date"> {moment(review.posted).subtract(6, "hours").calendar()}</span></div>
+                      <div id="username">{review.username}<span id="date"> {moment(review.posted).subtract(6, "hours").calendar()} {review.edited}</span></div>
                       <div>{review.body}</div>
                     </div>
                     )

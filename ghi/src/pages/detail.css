@@ -180,7 +180,7 @@ form button:hover {
 
 .delete-button {
     float: right;
-    margin-right:1vh;
+    margin-left: 1vh;
     background: rgb(0, 0, 0);
     border: none;
     outline: none;

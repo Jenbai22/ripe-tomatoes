@@ -10,7 +10,7 @@ class ReviewQueries:
             with conn.cursor() as cur:
                 cur.execute(
                     """
-                    SELECT id, body, imdb, username, posted
+                    SELECT id, body, imdb, username, posted, edited
                     FROM reviews
                     WHERE imdb = %s
                     ORDER BY posted DESC;
@@ -32,7 +32,7 @@ class ReviewQueries:
             with conn.cursor() as cur:
                 cur.execute(
                     """
-                    SELECT id, body, imdb, posted, username
+                    SELECT id, body, imdb, posted, username, edited
                     FROM reviews
                     ORDER BY posted;
                 """
@@ -52,14 +52,15 @@ class ReviewQueries:
             with conn.cursor() as cur:
                 cur.execute(
                     """
-                    INSERT INTO reviews (body, imdb, username)
-                    VALUES (%s, %s, %s)
-                    RETURNING id, posted, body, imdb, username;
+                    INSERT INTO reviews (body, imdb, username, edited)
+                    VALUES (%s, %s, %s, %s)
+                    RETURNING id, posted, body, imdb, username, edited;
                     """,
                     [
                     data.body,
                     data.imdb,
                     data.username,
+                    data.edited,
                 ]
                 )
 
@@ -79,6 +80,7 @@ class ReviewQueries:
                         data.body,
                         data.imdb,
                         data.username,
+                        data.edited,
                         review_id,
                     ]
                     cur.execute(
@@ -87,8 +89,9 @@ class ReviewQueries:
                         SET body = %s
                         , imdb = %s
                         , username = %s
+                        , edited = %s
                         WHERE id = %s
-                        RETURNING id, body, imdb, posted, username
+                        RETURNING id, body, imdb, posted, username, edited
                         """,
                         params,
                     )
