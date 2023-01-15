@@ -30,6 +30,7 @@ body::-webkit-scrollbar-track {
 }
 
 
+
 div::-webkit-scrollbar {
     width:2vw;
 }
@@ -132,7 +133,7 @@ form textarea:hover {
 
 form button {
     font-size: 28px;
-    background: crimson;
+    background: black;
     padding: 10px, 50px;
     border: none;
     outline: none;
@@ -142,11 +143,65 @@ form button {
     opacity:0.8;
     width: 20%;
     border-radius: 0 10px 10px 0;
+    transition: .3s;
 }
 
 form button:hover {
     opacity: 1;
+    background: crimson;
 }
+
+#comment-denied {
+    font-size: 24px;
+}
+
+.edit-button {
+    float: right;
+    background: rgb(0, 0, 0);
+    border: none;
+    outline: none;
+    color: #fff;
+    letter-spacing: 1px;
+    opacity: 0.8;
+    border-radius: 0px;
+    width: 10%;
+    white-space: nowrap;
+}
+
+.edit-button:hover {
+    background: goldenrod;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    color: #fff;
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+.delete-button {
+    float: right;
+    margin-right:1vh;
+    background: rgb(0, 0, 0);
+    border: none;
+    outline: none;
+    color: #fff;
+    letter-spacing: 1px;
+    opacity: 0.8;
+    border-radius: 0px;
+    width: 10%;
+    white-space: nowrap;
+}
+
+.delete-button:hover {
+    background: crimson;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    color: #fff;
+    cursor: pointer;
+    opacity: 0.8;
+}
+
 
 
 #movie-card {
@@ -156,7 +211,6 @@ form button:hover {
     width: 80vh;
     background-color: #3f3f3f;
     border-radius: 10px;
-    /* position: relative; */
 }
 
 #title {
@@ -166,43 +220,32 @@ form button:hover {
     color: white;
 }
 
-#plot {
-    width: 60vh;
-    background-color: white;
-    box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
-    border-radius: 10px;
-    padding: 1rem;
+#row-details {
+    display: flex;
+}
+
+#column-details {
+    flex: 50%;
 }
 
 #poster {
     width: 30vh;
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
-    margin: 0rem 0vh 4vh 0vh;
-    /* float: left; */
+    margin-bottom: 4vh;
+    float: left;
 }
-/*
-#details {
+
+#info {
     margin-left: 35vh;
     color: white;
     font-size: 25px;
-    height: 48vh;
-} */
-
-.edit-button {
-  float: right;
-  background: rgb(0, 0, 0);
-  border: none;
-  outline: none;
-  color: #fff;
-  letter-spacing: 1px;
-  cursor: pointer;
-  opacity: 0.8;
-  border-radius: 0px;
-  width: 10%;
-  white-space: nowrap;
 }
 
-#comment-denied {
-    font-size: 24px;
+#plot {
+    width: 60vh;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+    border-radius: 10px;
+    padding: 1rem;
 }

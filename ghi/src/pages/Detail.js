@@ -88,7 +88,7 @@ export default function Detail() {
     }
   };
 
-  const handleEditSubmit = async (e) => {
+  const handleEdit = async (e) => {
     e.preventDefault();
     const id = e.target.id
     const url = `${process.env.REACT_APP_RIPE_TOMATOES_API_HOST}/reviews/${id}`;
@@ -99,17 +99,29 @@ export default function Detail() {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token.access_token}`
       }});
-      if (response.ok) {
-        const data = await response.json();
-        let r = [...reviews]
-        for (let x of r) {
-          if (x.id == id) {
-            x.body = data.body;
-          }
-        }
-        setReviews(r)
-      }
+    if (response.ok) {
+      const data = await response.json();
+      let r = [...reviews]
+      r[r.findIndex(x => x.id == id)].body = data.body
+      setReviews(r)
     }
+  }
+
+  const handleDelete = async (e) => {
+    const id = e.target.id
+    const url = `${process.env.REACT_APP_RIPE_TOMATOES_API_HOST}/reviews/${id}`;
+    const response = await fetch(url, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token.access_token}`
+      }});
+    if (response.ok) {
+      let r = [...reviews]
+      r.splice(r.findIndex(x => x.id == id), 1)
+      setReviews(r)
+    }
+  }
 
   return (
     <>
@@ -117,16 +129,18 @@ export default function Detail() {
           <div id="row">
             <div id="column">
               <div id="movie-card">
-                <div id="title">
-                  {movie.Title} ({movie.Year})
-                </div>
-                <div id="poster">
-                  <img src={movie.Poster}></img>
-                </div>
-                {/* <div id="details">
-                    <div>{movie.Genre}</div>
-                    <div>{movie.Runtime}</div>
-                  </div> */}
+                <div id="title">{movie.Title} ({movie.Year})</div>
+                  <div id="row-details">
+                    <div id="column-details">
+                      <div id="poster">
+                        <img src={movie.Poster}></img>
+                      </div>
+                      <div id="info">
+                          <div>{movie.Genre}</div>
+                          <div>{movie.Runtime}</div>
+                      </div>
+                    </div>
+                  </div>
                 <div id="plot">{movie.Plot}</div>
               </div>
             </div>
@@ -138,14 +152,16 @@ export default function Detail() {
                   if (review.username == formData.username) {
                     return (
                       <div id="review" key={review.id}>
-                        <div id="username">{review.username}<span id="date"> {moment(review.posted).subtract(6, "hours").calendar()}</span></div>
+                        <div id="username">{review.username}<span id="date"> {moment(review.posted).subtract(6, "hours").calendar()}</span>
+                        <span>
+                          <button className="edit-button" onClick={handleEdit} id={review.id}>edit</button>
+                        </span>
+                        <span>
+                          <button className="delete-button" onClick={handleDelete} id={review.id}>delete</button>
+                        </span>
+                      </div>
                         <div id="body">
                           {review.body}
-                          <span>
-                            <button className="edit-button" onClick={handleEditSubmit} id={review.id}>
-                              edit
-                            </button>
-                          </span>
                         </div>
                       </div>
                     );

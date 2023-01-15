@@ -112,3 +112,5 @@ class ReviewQueries:
                     """,
                     [review_id],
                 )
+
+                return True
