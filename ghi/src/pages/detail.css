@@ -1,5 +1,6 @@
 main {
-    background-color: rgb(168, 168, 168);
+    /* background-color: rgb(168, 168, 168); */
+    background-color: rgb(39, 39, 39);
     max-height: 100%;
 }
 
@@ -96,6 +97,8 @@ textarea::-webkit-scrollbar-track {
 }
 
 #reviews-title {
+    margin-top: 1rem;
+    color: white;
     font-size: 48px;
     font-weight: bold;
 }
@@ -110,13 +113,13 @@ textarea::-webkit-scrollbar-track {
     animation-duration: 2s;
 }
 
-form {
+#review-form {
     padding-top: 10px;
     display: flex;
     height: 10%;
 }
 
-form textarea {
+#review-form textarea {
     text-align: left;
     flex: 1;
     border-radius: 10px 0px 0px 10px;
@@ -127,14 +130,13 @@ form textarea {
     resize: none;
 }
 
-form textarea:hover {
+#review-form textarea:hover {
     opacity: 1;
 }
 
-form button {
+#review-form button {
     font-size: 28px;
     background: black;
-    padding: 10px, 50px;
     border: none;
     outline: none;
     color: #fff;
@@ -146,7 +148,7 @@ form button {
     transition: .3s;
 }
 
-form button:hover {
+#review-form button:hover {
     opacity: 1;
     background: crimson;
 }
@@ -230,7 +232,6 @@ form button:hover {
 
 #poster {
     width: 30vh;
-    border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
     margin-bottom: 4vh;
     float: left;

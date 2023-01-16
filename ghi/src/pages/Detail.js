@@ -188,7 +188,7 @@ export default function Detail() {
                   }
                 })}
               </div>
-              <form id="form" onSubmit={handleSubmit}>
+              <form id="review-form" onSubmit={handleSubmit}>
               {loggedIn ? (
                 <textarea
                   onChange={handleFormChange}

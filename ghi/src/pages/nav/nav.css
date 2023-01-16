@@ -5,10 +5,6 @@
 	font-family: sans-serif;
 }
 
-body {
-	background-color: #eee;
-}
-
 nav {
 	position: relative;
 	z-index: 99;
@@ -17,7 +13,16 @@ nav {
 	align-items: center;
 	background-color: #000;
 	color: #FFF;
+	border: solid 0.3em black;
+	border-bottom-color: #FFF;
 	padding: 1rem 1.5rem;
+	transition: 0.3s;
+	white-space: nowrap;
+}
+
+nav:hover {
+	border-bottom-color: crimson;
+  	box-shadow: crimson 0px 22px 70px 4px;
 }
 
 nav h1 {

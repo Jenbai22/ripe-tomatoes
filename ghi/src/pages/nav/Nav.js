@@ -238,7 +238,7 @@ function Nav() {
             <Link to={'/'} style={{ textDecoration: 'none', color: 'white' }}>
               <h1>RIPE TOMATOES</h1>
             </Link>
-            <div class="menu">
+            <div className="menu">
               <div>logged in as [ {token.user.username} ]</div>
               <div onClick={handleLogout}>logout</div>
             </div>

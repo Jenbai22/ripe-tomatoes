@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
-import Card from 'react-bootstrap/Card';
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
 import { Link } from "react-router-dom";
+import "./home.css"
 
 export default function Home() {
   const [movies, setMovies] = useState([]);
@@ -10,10 +8,12 @@ export default function Home() {
 
   useEffect(() => {
     async function getData() {
-      const response = await fetch(`${process.env.REACT_APP_RIPE_TOMATOES_API_HOST}/searchname/spiderman`)
+      const response = await fetch(`${process.env.REACT_APP_RIPE_TOMATOES_API_HOST}/searchname/batman`)
       if (response.ok) {
-        const data = await response.json()
-        setMovies(data.Search)
+        let data = await response.json()
+        data = data.Search
+        data = data.filter(x => x.Poster != 'N/A')
+        setMovies(data)
       }
     }
     getData();
@@ -27,40 +27,32 @@ export default function Home() {
     e.preventDefault();
     const response = await fetch(`${process.env.REACT_APP_RIPE_TOMATOES_API_HOST}/searchname/${search}`);
     if (response.ok) {
-      const data = await response.json();
-      setMovies(data.Search);
+      let data = await response.json();
+      data = data.Search
+      data = data.filter(x => x.Poster != 'N/A')
+      setMovies(data)
     }
   }
 
-
-
   return (
-    <main style={{backgroundColor: "rgb(61,72,73)"}}>
-      <form  onSubmit={handleSearch}>
+    <main id="home-page">
+      <form id="home-form" onSubmit={handleSearch}>
         <div style={{width: '100%', textAlign:'center'}}>
-          <input className="my-4" style={{backgroundColor:"grey"}} onChange={handleFormChange} name="search" type="text" />
-          <button style={{backgroundColor:"grey"}} type="submit">Search</button>
+          <input onChange={handleFormChange} name="search" type="text" />
+          <button>search!</button>
         </div>
       </form>
-      <Row md={4}>
+      <div className="home-grid">
         {movies.map(movie =>
-          <Col key={movie.imdbID}>
-            <div className="m-3">
-              <Card border='danger'>
-                <Link to={`/${movie.imdbID}`}>
-                  <Card.Img variant="top" src={movie.Poster !== 'N/A' ? movie.Poster : 'https://i2.cdn.turner.com/money/galleries/2010/news/1001/gallery.americas_biggest_ripoffs/images/movie_popcorn.ju.jpg'} alt={movie.Title}/>
-                </Link>
-                <Card.Body>
-                  <Card.Title>{movie.Title}</Card.Title>
-                </Card.Body>
-                <Card.Footer>
-                  <small className="text-muted">{movie.Year}</small>
-                </Card.Footer>
-              </Card>
-            </div>
-          </Col>
+          <div className="home-item" key={movie.imdbID}>
+            <Link to={`/${movie.imdbID}`}>
+              <div id="home-poster">
+                <img src={movie.Poster} alt={movie.Title}/>
+              </div>
+            </Link>
+          </div>
         )}
-      </Row>
+      </div>
     </main>
   );
 }
