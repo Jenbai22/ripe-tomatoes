@@ -119,7 +119,7 @@ textarea::-webkit-scrollbar-track {
     height: 10%;
 }
 
-#review-form textarea {
+#post-area {
     text-align: left;
     flex: 1;
     border-radius: 10px 0px 0px 10px;
@@ -130,11 +130,23 @@ textarea::-webkit-scrollbar-track {
     resize: none;
 }
 
-#review-form textarea:hover {
+#post-area:hover {
     opacity: 1;
 }
 
-#review-form button {
+#post-area-denied {
+    font-size: 24px;
+    text-align: left;
+    flex: 1;
+    border-radius: 10px 0px 0px 10px;
+    border: none;
+    outline: none;
+    opacity: 0.8;
+    padding: 0.85rem;
+    resize: none;
+}
+
+#post-button {
     font-size: 28px;
     background: black;
     border: none;
@@ -148,13 +160,18 @@ textarea::-webkit-scrollbar-track {
     transition: .3s;
 }
 
-#review-form button:hover {
-    opacity: 1;
-    background: crimson;
+#post-button.editingmode {
+    background: goldenrod;
 }
 
-#comment-denied {
-    font-size: 24px;
+#post-button.editingmode:hover {
+    opacity: 1;
+    background: goldenrod;
+}
+
+#post-button:hover {
+    opacity: 1;
+    background: crimson;
 }
 
 .edit-button {
@@ -168,6 +185,10 @@ textarea::-webkit-scrollbar-track {
     border-radius: 0px;
     width: 10%;
     white-space: nowrap;
+}
+
+.edit-button.active {
+    background: goldenrod;
 }
 
 .edit-button:hover {
@@ -222,23 +243,19 @@ textarea::-webkit-scrollbar-track {
     color: white;
 }
 
-#row-details {
-    display: flex;
-}
-
 #column-details {
-    flex: 50%;
+    display: flex;
+    align-items: flex-start;
+    justify-items: center;
 }
 
 #poster {
-    width: 30vh;
     box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
     margin-bottom: 4vh;
-    float: left;
 }
 
 #info {
-    margin-left: 35vh;
+    margin-left: 5vh;
     color: white;
     font-size: 25px;
 }
