@@ -1,6 +1,6 @@
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import Navbar from "react-bootstrap/Navbar";
+import Alert from 'react-bootstrap/Alert';
 import Form from "react-bootstrap/Form";
 
 import { useState, useEffect } from "react";
@@ -9,6 +9,7 @@ import "./nav.css"
 
 function LoginModal() {
   const [show, setShow] = useState(false);
+  const [alertShow, setAlertShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [formData, setFormData] = useState({
@@ -24,7 +25,6 @@ function LoginModal() {
   };
 
   const handleSubmit = async (e) => {
-    handleClose();
     e.preventDefault();
     document.getElementById("form").reset();
 
@@ -38,14 +38,19 @@ function LoginModal() {
       body: form,
     });
     if (response.ok) {
+      handleClose();
       window.location.reload();
       return;
+    } else {
+      setAlertShow(true)
+      setTimeout(() => {
+        setAlertShow(false);
+      }, "5000")
     }
   };
-
   return (
     <>
-      <div onClick={handleShow}>sign in</div>
+      <div onClick={handleShow}>Sign In</div>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
@@ -69,6 +74,7 @@ function LoginModal() {
               <Form.Label>Password</Form.Label>
               <Form.Control type="password" name="password" autoFocus />
             </Form.Group>
+            {alertShow && <Alert variant={'danger'}>Invalid username or password</Alert>}
           </Form>
         </Modal.Body>
         <Modal.Footer>
@@ -85,6 +91,8 @@ function LoginModal() {
 }
 
 function SignupModal() {
+  const [signupFail, setSignupFail] = useState(false);
+  const [characterFail, setCharacterFail] = useState(false)
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -104,40 +112,54 @@ function SignupModal() {
   };
 
   const handleSubmit = async (e) => {
-    handleClose();
     e.preventDefault();
-    document.getElementById("form").reset();
-
-    const url = `${process.env.REACT_APP_RIPE_TOMATOES_API_HOST}/users`;
-    const response = await fetch(url, {
-      method: "POST",
-      body: JSON.stringify(formData),
-      headers: {
-        "Content-Type": "application/json",
+    if (Object.values(formData).includes("")) {
+      setCharacterFail(true)
+      setTimeout(() => {
+        setCharacterFail(false);
+      }, "5000")
+    } else {
+      try {
+        let url = `${process.env.REACT_APP_RIPE_TOMATOES_API_HOST}/users`;
+        let response = await fetch(url, {
+          method: "POST",
+          body: JSON.stringify(formData),
+          headers: {
+            "Content-Type": "application/json",
+          }
+        });
+        console.log(response)
+        if (response.ok) {
+          setShow(false);
+          let url = `${process.env.REACT_APP_RIPE_TOMATOES_API_HOST}/token`;
+          let form = new FormData();
+          form.append("username", formData.username);
+          form.append("password", formData.password);
+          let response = await fetch(url, {
+            method: "POST",
+            credentials: "include",
+            body: form,
+          } );
+          if (response.ok) {
+            document.getElementById("form").reset();
+            handleClose();
+            window.location.reload();
+            return;
+          }
+        }
       }
-    });
-    if (response.ok) {
-      setShow(false);
-      const url = `${process.env.REACT_APP_RIPE_TOMATOES_API_HOST}/token`;
-      let form = new FormData();
-      form.append("username", formData.username);
-      form.append("password", formData.password);
-      const response = await fetch(url, {
-        method: "POST",
-        credentials: "include",
-        body: form,
-      });
-      if (response.ok) {
-        window.location.reload();
-        return;
+      catch {
+        setSignupFail(true)
+        setTimeout(() => {
+          setSignupFail(false);
+        }, "5000")
       }
-      return;
     }
   };
 
   return (
     <>
-      <div onClick={handleShow}>sign up</div>
+      <div onClick={handleShow}>Sign Up</div>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
@@ -186,6 +208,8 @@ function SignupModal() {
               <Form.Label>Password</Form.Label>
               <Form.Control type="password" name="password" autoFocus />
             </Form.Group>
+            {signupFail && <Alert variant={'danger'}>Username or email already exists</Alert>}
+            {characterFail && <Alert variant={'danger'}>No empty fields</Alert>}
           </Form>
         </Modal.Body>
         <Modal.Footer>
