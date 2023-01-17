@@ -32,7 +32,6 @@ function LoginModal() {
     const form = new FormData();
     form.append("username", formData.username);
     form.append("password", formData.password);
-    console.log(formData.username);
     const response = await fetch(url, {
       method: "POST",
       credentials: "include",

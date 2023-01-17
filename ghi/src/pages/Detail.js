@@ -50,7 +50,6 @@ export default function Detail() {
             for (let x of data.reviews) {
               if (x.edited == 1) {
                 x.edited = "(edited)"
-                console.log(x)
               } else {
                 x.edited = ""
               }
@@ -75,7 +74,6 @@ export default function Detail() {
       formData.edited = 1
       e.preventDefault();
       const url = `${process.env.REACT_APP_RIPE_TOMATOES_API_HOST}/reviews/${reviewUnderEdit}`;
-      console.log(url)
       const response = await fetch(url, {
         method: "PUT",
         body: JSON.stringify(formData),
