@@ -2,7 +2,10 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Navbar from "react-bootstrap/Navbar";
 import Form from "react-bootstrap/Form";
+
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import "./nav.css"
 
 function LoginModal() {
   const [show, setShow] = useState(false);
@@ -29,7 +32,6 @@ function LoginModal() {
     const form = new FormData();
     form.append("username", formData.username);
     form.append("password", formData.password);
-    console.log(formData.username);
     const response = await fetch(url, {
       method: "POST",
       credentials: "include",
@@ -43,9 +45,7 @@ function LoginModal() {
 
   return (
     <>
-      <Button variant="secondary" onClick={handleShow}>
-        Login
-      </Button>
+      <div onClick={handleShow}>sign in</div>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
@@ -137,9 +137,8 @@ function SignupModal() {
 
   return (
     <>
-      <Button variant="secondary" onClick={handleShow}>
-        Sign Up
-      </Button>
+      <div onClick={handleShow}>sign up</div>
+
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Sign Up</Modal.Title>
@@ -233,36 +232,31 @@ function Nav() {
   return (
     <>
       {token ? (
-        <Navbar bg="dark" variant="dark">
-          <ul className="nav navbar-nav navbar-right" >
-            <li>
-              <Button  variant="secondary" onClick={handleLogout}>
-                Logout
-              </Button>
-            </li>
-          </ul>
-          <div
-            style={{
-              fontSize: "20px",
-              color: "white",
-              marginLeft: "auto",
-              marginRight: "20px",
-            }}
-          >
-            Hi, {token.user.username}
-          </div>
-        </Navbar>
+        <header>
+          <nav>
+            <Link to={'/'} style={{ textDecoration: 'none', color: 'white' }}>
+              <h1>RIPE TOMATOES</h1>
+            </Link>
+            <div className="menu">
+              <div>logged in as [ {token.user.username} ]</div>
+              <div onClick={handleLogout}>logout</div>
+            </div>
+          </nav>
+        </header>
       ) : (
-        <Navbar bg="dark">
-          <LoginModal
-            show={loginModalShow}
-            onHide={() => setLoginModalShow(false)}
-          ></LoginModal>
-          <SignupModal
-            show={signupModalShow}
-            onHide={() => setSignupModalShow(false)}
-          ></SignupModal>
-        </Navbar>
+        <>
+        <header>
+          <nav>
+            <Link to={'/'} style={{ textDecoration: 'none', color: 'white' }}>
+              <h1>RIPE TOMATOES</h1>
+            </Link>
+            <div class="menu">
+              <LoginModal show={loginModalShow} onHide={() => setLoginModalShow(false)}></LoginModal>
+              <SignupModal show={signupModalShow} onHide={() => setSignupModalShow(false)}></SignupModal>
+            </div>
+          </nav>
+        </header>
+        </>
       )}
     </>
   );
