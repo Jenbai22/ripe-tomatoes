@@ -35,3 +35,8 @@ We fixed the front end login. We started working on the navbar and login modal. 
 
 Today we worked on:
 We completed the signup modal with code Gavin had prepared earlier. We contemplated routing the sign up modal to the login modal after submission but instead decided to automatically log the user in. We then worked on the home page showing a few movies and adding the search functionality. Once the search functionality is submitted the cards displayed contain a link that redirects the user to the movie detail page when they click on it. We added the movie details to the detail page along with the list of reviews and post function. Tomorrow we will work on allowing users to edit or delete their own reviews, rerouting the logout to the home page and adding a home button in the Navbar.
+
+## Jan 13
+
+Today we worked on:
+We attempted to create an edit modal for logged in users to be able to edit their reviews. We could not get the modal to access the correct review id and spent some time trying to get it to work. We are going to move away from the modal and have the user edit the review in the bottom text input bar.

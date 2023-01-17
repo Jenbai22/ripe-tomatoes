@@ -90,26 +90,27 @@ export default function Detail() {
 
   const handleEditSubmit = async (e) => {
     e.preventDefault();
-    const id = e.target.id
+    const id = e.target.id;
     const url = `${process.env.REACT_APP_RIPE_TOMATOES_API_HOST}/reviews/${id}`;
     const response = await fetch(url, {
       method: "PUT",
       body: JSON.stringify(formData),
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token.access_token}`
-      }});
-      if (response.ok) {
-        const data = await response.json();
-        let r = [...reviews]
-        for (let x of r) {
-          if (x.id == id) {
-            x.body = data.body;
-          }
+        Authorization: `Bearer ${token.access_token}`,
+      },
+    });
+    if (response.ok) {
+      const data = await response.json();
+      let r = [...reviews];
+      for (let x of r) {
+        if (x.id == id) {
+          x.body = data.body;
         }
-        setReviews(r)
       }
+      setReviews(r);
     }
+  };
 
   return (
     <>
@@ -139,11 +140,23 @@ export default function Detail() {
                   if (review.username == formData.username) {
                     return (
                       <div id="review" key={review.id}>
-                        <div id="username">{review.username}<span id="date"> {moment(review.posted).subtract(6, "hours").calendar()}</span></div>
+                        <div id="username">
+                          {review.username}
+                          <span id="date">
+                            {" "}
+                            {moment(review.posted)
+                              .subtract(6, "hours")
+                              .calendar()}
+                          </span>
+                        </div>
                         <div id="body">
                           {review.body}
                           <span>
-                            <button className="edit-button" onClick={handleEditSubmit} id={review.id}>
+                            <button
+                              className="edit-button"
+                              onClick={handleEditSubmit}
+                              id={review.id}
+                            >
                               Edit
                             </button>
                           </span>
@@ -152,11 +165,19 @@ export default function Detail() {
                     );
                   } else {
                     return (
-                    <div id="review" key={review.id}>
-                      <div id="username">{review.username}<span id="date"> {moment(review.posted).subtract(6, "hours").calendar()}</span></div>
-                      <div>{review.body}</div>
-                    </div>
-                    )
+                      <div id="review" key={review.id}>
+                        <div id="username">
+                          {review.username}
+                          <span id="date">
+                            {" "}
+                            {moment(review.posted)
+                              .subtract(6, "hours")
+                              .calendar()}
+                          </span>
+                        </div>
+                        <div>{review.body}</div>
+                      </div>
+                    );
                   }
                 })}
               </div>

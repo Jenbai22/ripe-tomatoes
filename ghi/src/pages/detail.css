@@ -1,171 +1,183 @@
 main {
-    background-color: rgb(168, 168, 168);
-    max-height: 100vh;
+  background-color: rgb(168, 168, 168);
+  max-height: 100%;
 }
 
 #row {
-    display: flex;
+  display: flex;
 }
 
 #column {
-    margin-left: 2%;
-    margin-right: 2%;
-    margin-bottom: 2%;
-    flex: 50%;
+  margin-left: 2%;
+  margin-right: 2%;
+  margin-bottom: 2%;
+  flex: 50%;
 }
-
-
 
 div::-webkit-scrollbar {
-    width:2vw;
+  width: 2vw;
 }
 div::-webkit-scrollbar-thumb {
-    background-color: #7778;
+  background-color: #7778;
 }
 
 div::-webkit-scrollbar-thumb:hover {
-    background-color: #777;
+  background-color: #777;
 }
 
 div::-webkit-scrollbar-track {
-    background-color: #555;
+  background-color: #555;
 }
 
 textarea::-webkit-scrollbar {
-    width:2vw;
+  width: 2vw;
 }
 textarea::-webkit-scrollbar-thumb {
-    background-color: #9998;
+  background-color: #9998;
 }
 
 textarea::-webkit-scrollbar-thumb:hover {
-    background-color: #999;
+  background-color: #999;
 }
 
 textarea::-webkit-scrollbar-track {
-    background-color: #555;
+  background-color: #555;
 }
 
 #reviews {
-    border-radius: 10px;
-    font-size: 16px;
-    max-height: 75vh;
-    max-width: 100vh;
-    overflow-wrap: break-word;
-    background-color: #3f3f3f;
-    overflow-y: scroll;
-    box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+  border-radius: 10px;
+  font-size: 16px;
+  max-height: 75vh;
+  max-width: 100vh;
+  overflow-wrap: break-word;
+  background-color: #3f3f3f;
+  overflow-y: scroll;
+  box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
 }
 
 @keyframes reviewinit {
-  0%   {background-color: white; color:black}
-  50%  {background-color: rgba(128, 128, 128, 0.5); color: white}
-  100%  {background-color: white; color:black}
+  0% {
+    background-color: white;
+    color: black;
+  }
+  50% {
+    background-color: rgba(128, 128, 128, 0.5);
+    color: white;
+  }
+  100% {
+    background-color: white;
+    color: black;
+  }
 }
 
 @keyframes dateinit {
-  0%   {color: #777}
-  50%  {color: white}
-  100%  {color:#777}
+  0% {
+    color: #777;
+  }
+  50% {
+    color: white;
+  }
+  100% {
+    color: #777;
+  }
 }
 
 #review {
-    height: 10%;
-    padding: 2%;
-    margin: 2%;
-    background-color: white;
-    color: black;
-    border-radius: 10px;
-    animation-name: reviewinit;
-    animation-duration: 2s;
+  height: 10%;
+  padding: 2%;
+  margin: 2%;
+  background-color: white;
+  color: black;
+  border-radius: 10px;
+  animation-name: reviewinit;
+  animation-duration: 2s;
 }
 
 #reviews-title {
-    font-size: 48px;
-    font-weight: bold;
+  font-size: 48px;
+  font-weight: bold;
 }
 
 #username {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 #date {
-    color:#777;
-    animation-name: dateinit;
-    animation-duration: 2s;
+  color: #777;
+  animation-name: dateinit;
+  animation-duration: 2s;
 }
 
 form {
-    padding-top: 10px;
-    display: flex;
-    height: 10%;
+  padding-top: 10px;
+  display: flex;
+  height: 10%;
 }
 
 form textarea {
-    text-align: left;
-    flex: 1;
-    border-radius: 10px 0px 0px 10px;
-    border: none;
-    outline: none;
-    opacity: 0.8;
-    padding: 0.85rem;
-    resize: none;
+  text-align: left;
+  flex: 1;
+  border-radius: 10px 0px 0px 10px;
+  border: none;
+  outline: none;
+  opacity: 0.8;
+  padding: 0.85rem;
+  resize: none;
 }
 
 form textarea:hover {
-    opacity: 1;
+  opacity: 1;
 }
 
 form button {
-    font-size: 28px;
-    background: rgb(0, 0, 0);
-    padding: 10px, 50px;
-    border: none;
-    outline: none;
-    color: #fff;
-    letter-spacing: 1px;
-    cursor: pointer;
-    opacity:0.8;
-    width: 20%;
-    border-radius: 0 10px 10px 0;
+  font-size: 28px;
+  background: rgb(0, 0, 0);
+  padding: 10px, 50px;
+  border: none;
+  outline: none;
+  color: #fff;
+  letter-spacing: 1px;
+  cursor: pointer;
+  opacity: 0.8;
+  width: 20%;
+  border-radius: 0 10px 10px 0;
 }
 
 form button:hover {
-    opacity: 1;
+  opacity: 1;
 }
 
-
 #movie-card {
-    box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
-    margin-top: 5vh;
-    padding: 2vh 10vh 4vh 10vh;
-    width: 80vh;
-    background-color: #3f3f3f;
-    border-radius: 10px;
-    position: relative;
+  box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+  margin-top: 5vh;
+  padding: 2vh 10vh 4vh 10vh;
+  width: 80vh;
+  background-color: #3f3f3f;
+  border-radius: 10px;
+  position: relative;
 }
 
 #title {
-    font-size: 48px;
-    font-weight: bold;
-    margin-bottom: 2vh;
-    color: white;
+  font-size: 48px;
+  font-weight: bold;
+  margin-bottom: 2vh;
+  color: white;
 }
 
 #plot {
-    width: 60vh;
-    background-color: white;
-    box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
-    border-radius: 10px;
-    padding: 1rem;
+  width: 60vh;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+  border-radius: 10px;
+  padding: 1rem;
 }
 
 #poster {
-    width: 30vh;
-    border-radius: 10px;
-    box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
-    margin: 0rem 0vh 4vh 0vh;
-    /* float: left; */
+  width: 30vh;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+  margin: 0rem 0vh 4vh 0vh;
+  /* float: left; */
 }
 /*
 #details {

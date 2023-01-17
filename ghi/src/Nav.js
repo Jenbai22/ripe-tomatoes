@@ -89,9 +89,9 @@ function SignupModal() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [formData, setFormData] = useState({
-    firstname:"",
-    lastname:"",
-    email:"",
+    firstname: "",
+    lastname: "",
+    email: "",
     username: "",
     password: "",
   });
@@ -114,7 +114,7 @@ function SignupModal() {
       body: JSON.stringify(formData),
       headers: {
         "Content-Type": "application/json",
-      }
+      },
     });
     if (response.ok) {
       setShow(false);
@@ -146,7 +146,7 @@ function SignupModal() {
         </Modal.Header>
         <Modal.Body>
           <Form id="form">
-                        <Form.Group
+            <Form.Group
               className="mb-3"
               controlId="exampleForm.ControlInput1"
               onChange={handleFormChange}
@@ -154,7 +154,7 @@ function SignupModal() {
               <Form.Label>Firstname</Form.Label>
               <Form.Control name="firstname" type="text" autoFocus />
             </Form.Group>
-                        <Form.Group
+            <Form.Group
               className="mb-3"
               controlId="exampleForm.ControlInput2"
               onChange={handleFormChange}
@@ -162,7 +162,7 @@ function SignupModal() {
               <Form.Label>Lastname</Form.Label>
               <Form.Control name="lastname" type="text" autoFocus />
             </Form.Group>
-                        <Form.Group
+            <Form.Group
               className="mb-3"
               controlId="exampleForm.ControlInput3"
               onChange={handleFormChange}
@@ -181,7 +181,6 @@ function SignupModal() {
             <Form.Group
               className="mb-3"
               controlId="exampleForm.ControlInput5"
-
               onChange={handleFormChange}
             >
               <Form.Label>Password</Form.Label>
@@ -234,9 +233,9 @@ function Nav() {
     <>
       {token ? (
         <Navbar bg="dark" variant="dark">
-          <ul className="nav navbar-nav navbar-right" >
+          <ul className="nav navbar-nav navbar-right">
             <li>
-              <Button  variant="secondary" onClick={handleLogout}>
+              <Button variant="secondary" onClick={handleLogout}>
                 Logout
               </Button>
             </li>
