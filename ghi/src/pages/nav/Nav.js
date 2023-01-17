@@ -130,7 +130,6 @@ function SignupModal() {
             "Content-Type": "application/json",
           },
         });
-        console.log(response);
         if (response.ok) {
           setShow(false);
           let url = `${process.env.REACT_APP_RIPE_TOMATOES_API_HOST}/token`;
@@ -143,9 +142,9 @@ function SignupModal() {
             body: form,
           });
           if (response.ok) {
+            window.location.reload();
             document.getElementById("form").reset();
             handleClose();
-            window.location.reload();
             return;
           }
         }
@@ -276,7 +275,7 @@ function Nav() {
               <Link to={"/"} style={{ textDecoration: "none", color: "white" }}>
                 <h1>RIPE TOMATOES</h1>
               </Link>
-              <div class="menu">
+              <div className="menu">
                 <LoginModal
                   show={loginModalShow}
                   onHide={() => setLoginModalShow(false)}
