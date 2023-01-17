@@ -186,6 +186,18 @@ textarea::-webkit-scrollbar-track {
   background: crimson;
 }
 
+.char-limit-error {
+    display: none;
+    transition: 0.3s;
+    font-size: 20px
+}
+
+.char-limit-error.active {
+    font-weight: bold;
+    color: crimson;
+    display: flex;
+}
+
 .edit-button {
   float: right;
   background: rgb(0, 0, 0);

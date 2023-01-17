@@ -70,67 +70,76 @@ export default function Detail() {
   };
 
   const handleSubmit = async (e) => {
-    if (isEditing) {
-      formData.edited = 1;
-      e.preventDefault();
-      const url = `${process.env.REACT_APP_RIPE_TOMATOES_API_HOST}/reviews/${reviewUnderEdit}`;
-      const response = await fetch(url, {
-        method: "PUT",
-        body: JSON.stringify(formData),
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token.access_token}`,
-        },
-      });
-      if (response.ok) {
-        const data = await response.json();
-        let r = [...reviews];
-        let i = r.findIndex((x) => x.id == reviewUnderEdit);
-        r[i].body = data.body;
-        r[i].edited = "(edited)";
-        setReviews(r);
-        formData.body = "";
+    e.preventDefault();
+    if (formData.body.length >= 1 && formData.body.length <= 1000) {
+      if (isEditing) {
+        formData.edited = 1;
+        e.preventDefault();
+        const url = `${process.env.REACT_APP_RIPE_TOMATOES_API_HOST}/reviews/${reviewUnderEdit}`;
+        const response = await fetch(url, {
+          method: "PUT",
+          body: JSON.stringify(formData),
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token.access_token}`,
+          },
+        });
+        if (response.ok) {
+          const data = await response.json();
+          let r = [...reviews];
+          let i = r.findIndex((x) => x.id == reviewUnderEdit);
+          r[i].body = data.body;
+          r[i].edited = "(edited)";
+          setReviews(r);
+          formData.body = "";
 
-        setIsEditing(false);
-        const editButton = document.querySelector(`#edit${reviewUnderEdit}`);
-        editButton.classList.toggle("active");
-        const postButton = document.querySelector("#post-button");
-        postButton.classList.toggle("editingmode");
-        postButton.innerHTML = "Post";
-        const postArea = document.querySelector("#post-area");
-        postArea.value = "";
+          setIsEditing(false);
+          const editButton = document.querySelector(`#edit${reviewUnderEdit}`);
+          editButton.classList.toggle("active");
+          const postButton = document.querySelector("#post-button");
+          postButton.classList.toggle("editingmode");
+          postButton.innerHTML = "Post";
+          const postArea = document.querySelector("#post-area");
+          postArea.value = "";
+        }
+      } else {
+        formData.edited = 0;
+        e.preventDefault();
+        const config = {
+          method: "post",
+          body: JSON.stringify(formData),
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token.access_token}`,
+          },
+        };
+        const response = await fetch("http://localhost:8000/reviews", config);
+        if (response.ok) {
+          const d = await response.json();
+          setReviews((prevState) => [
+            {
+              id: d.id,
+              body: d.body,
+              imdb: d.imdb,
+              posted: d.posted,
+              username: d.username,
+            },
+            ...prevState,
+          ]);
+          formData.body = "";
+          topRef.current?.scrollIntoView({ behavior: "smooth" });
+          document.querySelector("#post-area").value = "";
+          document.getElementById("form").reset();
+        } else {
+          console.log("Failed to post review");
+        }
       }
     } else {
-      formData.edited = 0;
-      e.preventDefault();
-      const config = {
-        method: "post",
-        body: JSON.stringify(formData),
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token.access_token}`,
-        },
-      };
-      const response = await fetch("http://localhost:8000/reviews", config);
-      if (response.ok) {
-        const d = await response.json();
-        setReviews((prevState) => [
-          {
-            id: d.id,
-            body: d.body,
-            imdb: d.imdb,
-            posted: d.posted,
-            username: d.username,
-          },
-          ...prevState,
-        ]);
-        formData.body = "";
-        document.querySelector("#post-area").value = "";
-        document.getElementById("form").reset();
-        topRef.current?.scrollIntoView({ behavior: "smooth" });
-      } else {
-        console.log("Failed to post review");
-      }
+      const charError = document.querySelector(".char-limit-error");
+      charError.classList.toggle("active");
+      setTimeout(() => {
+        charError.classList.toggle("active");
+      }, "5000");
     }
   };
 
@@ -255,6 +264,9 @@ export default function Detail() {
                   );
                 }
               })}
+            </div>
+            <div className="char-limit-error">
+              Character limit between 1 and 1000
             </div>
             <form id="review-form" onSubmit={handleSubmit}>
               {loggedIn ? (
