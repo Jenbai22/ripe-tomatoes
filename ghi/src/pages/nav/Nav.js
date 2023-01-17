@@ -1,11 +1,11 @@
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import Alert from 'react-bootstrap/Alert';
+import Alert from "react-bootstrap/Alert";
 import Form from "react-bootstrap/Form";
 
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import "./nav.css"
+import "./nav.css";
 
 function LoginModal() {
   const [show, setShow] = useState(false);
@@ -42,10 +42,10 @@ function LoginModal() {
       window.location.reload();
       return;
     } else {
-      setAlertShow(true)
+      setAlertShow(true);
       setTimeout(() => {
         setAlertShow(false);
-      }, "5000")
+      }, "5000");
     }
   };
   return (
@@ -74,7 +74,9 @@ function LoginModal() {
               <Form.Label>Password</Form.Label>
               <Form.Control type="password" name="password" autoFocus />
             </Form.Group>
-            {alertShow && <Alert variant={'danger'}>Invalid username or password</Alert>}
+            {alertShow && (
+              <Alert variant={"danger"}>Invalid username or password</Alert>
+            )}
           </Form>
         </Modal.Body>
         <Modal.Footer>
@@ -92,14 +94,14 @@ function LoginModal() {
 
 function SignupModal() {
   const [signupFail, setSignupFail] = useState(false);
-  const [characterFail, setCharacterFail] = useState(false)
+  const [characterFail, setCharacterFail] = useState(false);
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [formData, setFormData] = useState({
-    firstname:"",
-    lastname:"",
-    email:"",
+    firstname: "",
+    lastname: "",
+    email: "",
     username: "",
     password: "",
   });
@@ -114,10 +116,10 @@ function SignupModal() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (Object.values(formData).includes("")) {
-      setCharacterFail(true)
+      setCharacterFail(true);
       setTimeout(() => {
         setCharacterFail(false);
-      }, "5000")
+      }, "5000");
     } else {
       try {
         let url = `${process.env.REACT_APP_RIPE_TOMATOES_API_HOST}/users`;
@@ -126,9 +128,8 @@ function SignupModal() {
           body: JSON.stringify(formData),
           headers: {
             "Content-Type": "application/json",
-          }
+          },
         });
-        console.log(response)
         if (response.ok) {
           setShow(false);
           let url = `${process.env.REACT_APP_RIPE_TOMATOES_API_HOST}/token`;
@@ -139,20 +140,19 @@ function SignupModal() {
             method: "POST",
             credentials: "include",
             body: form,
-          } );
+          });
           if (response.ok) {
+            window.location.reload();
             document.getElementById("form").reset();
             handleClose();
-            window.location.reload();
             return;
           }
         }
-      }
-      catch {
-        setSignupFail(true)
+      } catch {
+        setSignupFail(true);
         setTimeout(() => {
           setSignupFail(false);
-        }, "5000")
+        }, "5000");
       }
     }
   };
@@ -167,7 +167,7 @@ function SignupModal() {
         </Modal.Header>
         <Modal.Body>
           <Form id="form">
-                        <Form.Group
+            <Form.Group
               className="mb-3"
               controlId="exampleForm.ControlInput1"
               onChange={handleFormChange}
@@ -175,7 +175,7 @@ function SignupModal() {
               <Form.Label>Firstname</Form.Label>
               <Form.Control name="firstname" type="text" autoFocus />
             </Form.Group>
-                        <Form.Group
+            <Form.Group
               className="mb-3"
               controlId="exampleForm.ControlInput2"
               onChange={handleFormChange}
@@ -183,7 +183,7 @@ function SignupModal() {
               <Form.Label>Lastname</Form.Label>
               <Form.Control name="lastname" type="text" autoFocus />
             </Form.Group>
-                        <Form.Group
+            <Form.Group
               className="mb-3"
               controlId="exampleForm.ControlInput3"
               onChange={handleFormChange}
@@ -202,14 +202,15 @@ function SignupModal() {
             <Form.Group
               className="mb-3"
               controlId="exampleForm.ControlInput5"
-
               onChange={handleFormChange}
             >
               <Form.Label>Password</Form.Label>
               <Form.Control type="password" name="password" autoFocus />
             </Form.Group>
-            {signupFail && <Alert variant={'danger'}>Username or email already exists</Alert>}
-            {characterFail && <Alert variant={'danger'}>No empty fields</Alert>}
+            {signupFail && (
+              <Alert variant={"danger"}>Username or email already exists</Alert>
+            )}
+            {characterFail && <Alert variant={"danger"}>No empty fields</Alert>}
           </Form>
         </Modal.Body>
         <Modal.Footer>
@@ -258,7 +259,7 @@ function Nav() {
       {token ? (
         <header>
           <nav>
-            <Link to={'/'} style={{ textDecoration: 'none', color: 'white' }}>
+            <Link to={"/"} style={{ textDecoration: "none", color: "white" }}>
               <h1>RIPE TOMATOES</h1>
             </Link>
             <div className="menu">
@@ -269,17 +270,23 @@ function Nav() {
         </header>
       ) : (
         <>
-        <header>
-          <nav>
-            <Link to={'/'} style={{ textDecoration: 'none', color: 'white' }}>
-              <h1>RIPE TOMATOES</h1>
-            </Link>
-            <div className="menu">
-              <LoginModal show={loginModalShow} onHide={() => setLoginModalShow(false)}></LoginModal>
-              <SignupModal show={signupModalShow} onHide={() => setSignupModalShow(false)}></SignupModal>
-            </div>
-          </nav>
-        </header>
+          <header>
+            <nav>
+              <Link to={"/"} style={{ textDecoration: "none", color: "white" }}>
+                <h1>RIPE TOMATOES</h1>
+              </Link>
+              <div className="menu">
+                <LoginModal
+                  show={loginModalShow}
+                  onHide={() => setLoginModalShow(false)}
+                ></LoginModal>
+                <SignupModal
+                  show={signupModalShow}
+                  onHide={() => setSignupModalShow(false)}
+                ></SignupModal>
+              </div>
+            </nav>
+          </header>
         </>
       )}
     </>
