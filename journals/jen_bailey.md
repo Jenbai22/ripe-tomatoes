@@ -40,3 +40,8 @@ We completed the signup modal with code Gavin had prepared earlier. We contempla
 
 Today we worked on:
 We attempted to create an edit modal for logged in users to be able to edit their reviews. We could not get the modal to access the correct review id and spent some time trying to get it to work. We are going to move away from the modal and have the user edit the review in the bottom text input bar.
+
+## Jan 14
+
+Today we worked on:
+Gavin worked on the edit and delete button over the weekend so we checked through the code. We added error alerts on the post review method, login, sign up and search bar. We fixed the user update endpoint. Tomorrow we are going to work on the tests.
