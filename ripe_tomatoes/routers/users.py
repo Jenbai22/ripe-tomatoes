@@ -3,7 +3,7 @@ from jwtdown_fastapi.authentication import Token
 from authenticator import authenticator
 from .token import UserToken
 from pydantic import BaseModel
-from models.users import UserIn, UserOut, UsersOut, UserUpdate
+from models.users import UserIn, UserOut, UsersOut, UserUpdate, User
 from queries.users import UserQueries
 
 
@@ -37,11 +37,14 @@ def users_list(queries: UserQueries = Depends()):
         "users": queries.get_all_users(),
     }
 
-@router.get("/users/{user_username}", response_model=UsersOut)
+@router.get("/users/{user_username}", response_model=User)
 def user_get(user_username: str, queries: UserQueries = Depends()):
-    return {
-        "user": queries.get(user_username),
-    }
+    record = queries.get(user_username)
+    if record is None:
+        raise HTTPException(status_code = 404, detail= "No Such User Exists")
+
+    else:
+        return record
 
 @router.put("/users/{user_id}", response_model=UserOut)
 def update_user(
