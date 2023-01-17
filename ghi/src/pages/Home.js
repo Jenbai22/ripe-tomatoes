@@ -6,6 +6,7 @@ export default function Home() {
   const [movies, setMovies] = useState([]);
   const [search, setSearch] = useState("");
   const [characterError, setCharacterError] = useState(false);
+  const [noResultsError, setNoResultsError] = useState(false)
 
   useEffect(() => {
     async function getData() {
@@ -34,14 +35,22 @@ export default function Home() {
       );
       if (response.ok) {
         let data = await response.json();
-        console.log(data);
-        data = data.Search;
-        data = data.filter((x) => x.Poster != "N/A");
-        setMovies(data);
+        if (!(data.Error)) {
+          data = data.Search;
+          data = data.filter((x) => x.Poster != "N/A");
+          setMovies(data);
+        } else {
+          setNoResultsError(true);
+          setTimeout(() => {
+            setNoResultsError(false)
+          }, "5000")
+        }
       }
     } else {
       setCharacterError(true);
-
+      setTimeout(() => {
+        setCharacterError(false)
+      }, "5000")
     }
   };
 
@@ -53,11 +62,8 @@ export default function Home() {
           <button>search!</button>
         </div>
       </form>
-      {characterError && (
-        <div id="character-error">
-          Search must be longer than two characters
-        </div>
-      )}
+      {characterError && (<div className="home-error">Search must be longer than two characters</div>)}
+      {noResultsError && (<div className="home-error">Movie not found</div>)}
       <div className="home-grid">
         {movies.map((movie) => (
           <div className="home-item" key={movie.imdbID}>
