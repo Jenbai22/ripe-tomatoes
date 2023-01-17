@@ -51,3 +51,9 @@ Today, I worked on:
 Today, I worked on:
 
 1. Today we cont with team coding and we fixed a lot of minor issues we had. We had issues yesterday with adding a review and today we got that working. A user can search for a movie and leave a review on the detail page.
+
+## Jan 17
+
+Today, I worked on:
+
+1. We cont with Team coding. We fixed a few minor bugs and added some error messages. When a user logs in and has incomplete fields they get a message telling them that things are missing. We also added a Search message where a movie title has to meet the required length to be successful or they will also get an error message.
