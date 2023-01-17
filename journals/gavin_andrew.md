@@ -1,4 +1,10 @@
-1/12/21
+1/17/23
+Over the weekend, was able to sit down and complete
+styling, and the detail page.
+Today we pair coded and handled various error messages,
+and organized
+
+1/12/23
 Pair coded and made various progress with the front end;
 styling remains limited but near functionality completion
 
