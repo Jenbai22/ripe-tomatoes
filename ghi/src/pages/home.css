@@ -1,6 +1,6 @@
 .home-page {
   padding: 20vh;
-    margin-left: 5rem;
+  margin-left: 5rem;
 }
 
 .home-grid {
@@ -28,9 +28,9 @@
 }
 
 #home-form {
-    padding-top: 5vh;
-    display: flex;
-    height: 10%;
+  padding-top: 5vh;
+  display: flex;
+  height: 10%;
 }
 
 #home-form input {
@@ -45,7 +45,7 @@
 }
 
 #home-form input:hover {
-    opacity: 1;
+  opacity: 1;
 }
 
 #home-form button {
@@ -56,33 +56,57 @@
   outline: none;
   color: #fff;
   cursor: pointer;
-  opacity:0.8;
-  transition: .3s;
+  opacity: 0.8;
+  transition: 0.3s;
   width: 10%;
-      border-radius: 0 10px 10px 0;
+  border-radius: 0 10px 10px 0;
 }
 
 #home-form button:hover {
-    opacity: 1;
-    background: crimson;
+  opacity: 1;
+  background: crimson;
+}
+
+#character-error {
+  color: crimson;
+  text-align: center;
+  padding-top: 2vh;
+  font-size: 20px;
 }
 
 @media (min-width: 400px) {
-  .home-grid { grid-template-columns: repeat(1, 1fr); margin-left: 13vh; padding-bottom: 5vh; }
+  .home-grid {
+    grid-template-columns: repeat(1, 1fr);
+    margin-left: 13vh;
+    padding-bottom: 5vh;
+  }
 }
 
 @media (min-width: 600px) {
-  .home-grid { grid-template-columns: repeat(1, 1fr); margin-left: 25vh; padding-bottom: 5vh; }
+  .home-grid {
+    grid-template-columns: repeat(1, 1fr);
+    margin-left: 25vh;
+    padding-bottom: 5vh;
+  }
 }
 
 @media (min-width: 800px) {
-  .home-grid { grid-template-columns: repeat(2, 1fr); margin-left: 10vh; }
+  .home-grid {
+    grid-template-columns: repeat(2, 1fr);
+    margin-left: 10vh;
+  }
 }
 
 @media (min-width: 1200px) {
-  .home-grid { grid-template-columns: repeat(3, 1fr); margin-left: 10vh; }
+  .home-grid {
+    grid-template-columns: repeat(3, 1fr);
+    margin-left: 10vh;
+  }
 }
 
 @media (min-width: 1600px) {
-  .home-grid { grid-template-columns: repeat(4, 1fr); margin-left: 20vh; }
+  .home-grid {
+    grid-template-columns: repeat(4, 1fr);
+    margin-left: 20vh;
+  }
 }

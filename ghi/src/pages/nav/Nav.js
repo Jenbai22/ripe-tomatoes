@@ -250,7 +250,7 @@ function Nav() {
             <Link to={'/'} style={{ textDecoration: 'none', color: 'white' }}>
               <h1>RIPE TOMATOES</h1>
             </Link>
-            <div class="menu">
+            <div className="menu">
               <LoginModal show={loginModalShow} onHide={() => setLoginModalShow(false)}></LoginModal>
               <SignupModal show={signupModalShow} onHide={() => setSignupModalShow(false)}></SignupModal>
             </div>
