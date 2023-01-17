@@ -1,0 +1,88 @@
+.home-page {
+  padding: 20vh;
+    margin-left: 5rem;
+}
+
+.home-grid {
+  max-width: 1600px;
+  display: grid;
+  margin: 0 auto;
+  margin-top: 10vh;
+  margin-left: none;
+  gap: 4rem;
+}
+
+.home-item {
+  display: flex;
+  align-items: center;
+  justify-items: center;
+}
+
+#home-poster {
+  box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+  transition: 0.3s;
+}
+
+#home-poster:hover {
+  box-shadow: crimson 0px 22px 70px 4px;
+}
+
+#home-form {
+    padding-top: 5vh;
+    display: flex;
+    height: 10%;
+}
+
+#home-form input {
+  font-size: 30px;
+  text-align: left;
+  flex: 1;
+  border-radius: 10px 0px 0px 10px;
+  border: none;
+  outline: none;
+  opacity: 0.8;
+  padding: 1vh;
+}
+
+#home-form input:hover {
+    opacity: 1;
+}
+
+#home-form button {
+  font-size: 30px;
+  background: black;
+  padding: 1vh;
+  border: none;
+  outline: none;
+  color: #fff;
+  cursor: pointer;
+  opacity:0.8;
+  transition: .3s;
+  width: 10%;
+      border-radius: 0 10px 10px 0;
+}
+
+#home-form button:hover {
+    opacity: 1;
+    background: crimson;
+}
+
+@media (min-width: 400px) {
+  .home-grid { grid-template-columns: repeat(1, 1fr); margin-left: 13vh; padding-bottom: 5vh; }
+}
+
+@media (min-width: 600px) {
+  .home-grid { grid-template-columns: repeat(1, 1fr); margin-left: 25vh; padding-bottom: 5vh; }
+}
+
+@media (min-width: 800px) {
+  .home-grid { grid-template-columns: repeat(2, 1fr); margin-left: 10vh; }
+}
+
+@media (min-width: 1200px) {
+  .home-grid { grid-template-columns: repeat(3, 1fr); margin-left: 10vh; }
+}
+
+@media (min-width: 1600px) {
+  .home-grid { grid-template-columns: repeat(4, 1fr); margin-left: 20vh; }
+}
