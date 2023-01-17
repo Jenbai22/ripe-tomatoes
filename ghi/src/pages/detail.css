@@ -1,5 +1,5 @@
 main {
-  background-color: rgb(168, 168, 168);
+  background-color: rgb(39, 39, 39);
   max-height: 100%;
 }
 
@@ -12,6 +12,21 @@ main {
   margin-right: 2%;
   margin-bottom: 2%;
   flex: 50%;
+}
+
+body::-webkit-scrollbar {
+  width: 1vw;
+}
+body::-webkit-scrollbar-thumb {
+  background-color: #7778;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+  background-color: #777;
+}
+
+body::-webkit-scrollbar-track {
+  background-color: #555;
 }
 
 div::-webkit-scrollbar {
@@ -94,6 +109,8 @@ textarea::-webkit-scrollbar-track {
 }
 
 #reviews-title {
+  margin-top: 1rem;
+  color: white;
   font-size: 48px;
   font-weight: bold;
 }
@@ -108,13 +125,13 @@ textarea::-webkit-scrollbar-track {
   animation-duration: 2s;
 }
 
-form {
+#review-form {
   padding-top: 10px;
   display: flex;
   height: 10%;
 }
 
-form textarea {
+#post-area {
   text-align: left;
   flex: 1;
   border-radius: 10px 0px 0px 10px;
@@ -125,14 +142,25 @@ form textarea {
   resize: none;
 }
 
-form textarea:hover {
+#post-area:hover {
   opacity: 1;
 }
 
-form button {
+#post-area-denied {
+  font-size: 24px;
+  text-align: left;
+  flex: 1;
+  border-radius: 10px 0px 0px 10px;
+  border: none;
+  outline: none;
+  opacity: 0.8;
+  padding: 0.85rem;
+  resize: none;
+}
+
+#post-button {
   font-size: 28px;
-  background: rgb(0, 0, 0);
-  padding: 10px, 50px;
+  background: black;
   border: none;
   outline: none;
   color: #fff;
@@ -141,10 +169,72 @@ form button {
   opacity: 0.8;
   width: 20%;
   border-radius: 0 10px 10px 0;
+  transition: 0.3s;
 }
 
-form button:hover {
+#post-button.editingmode {
+  background: goldenrod;
+}
+
+#post-button.editingmode:hover {
   opacity: 1;
+  background: goldenrod;
+}
+
+#post-button:hover {
+  opacity: 1;
+  background: crimson;
+}
+
+.edit-button {
+  float: right;
+  background: rgb(0, 0, 0);
+  border: none;
+  outline: none;
+  color: #fff;
+  letter-spacing: 1px;
+  opacity: 0.8;
+  border-radius: 0px;
+  width: 10%;
+  white-space: nowrap;
+}
+
+.edit-button.active {
+  background: goldenrod;
+}
+
+.edit-button:hover {
+  background: goldenrod;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  color: #fff;
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.delete-button {
+  float: right;
+  margin-left: 1vh;
+  background: rgb(0, 0, 0);
+  border: none;
+  outline: none;
+  color: #fff;
+  letter-spacing: 1px;
+  opacity: 0.8;
+  border-radius: 0px;
+  width: 10%;
+  white-space: nowrap;
+}
+
+.delete-button:hover {
+  background: crimson;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  color: #fff;
+  cursor: pointer;
+  opacity: 0.8;
 }
 
 #movie-card {
@@ -154,7 +244,6 @@ form button:hover {
   width: 80vh;
   background-color: #3f3f3f;
   border-radius: 10px;
-  position: relative;
 }
 
 #title {
@@ -164,38 +253,27 @@ form button:hover {
   color: white;
 }
 
+#column-details {
+  display: flex;
+  align-items: flex-start;
+  justify-items: center;
+}
+
+#poster {
+  box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+  margin-bottom: 4vh;
+}
+
+#info {
+  margin-left: 5vh;
+  color: white;
+  font-size: 25px;
+}
+
 #plot {
   width: 60vh;
   background-color: white;
   box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
   border-radius: 10px;
   padding: 1rem;
-}
-
-#poster {
-  width: 30vh;
-  border-radius: 10px;
-  box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
-  margin: 0rem 0vh 4vh 0vh;
-  /* float: left; */
-}
-/*
-#details {
-    margin-left: 35vh;
-    color: white;
-    font-size: 25px;
-    height: 48vh;
-} */
-
-.edit-button {
-  float: right;
-  background: rgb(0, 0, 0);
-  border: none;
-  outline: none;
-  color: #fff;
-  letter-spacing: 1px;
-  cursor: pointer;
-  opacity: 0.8;
-  border-radius: 0px;
-  width: 10%;
 }
