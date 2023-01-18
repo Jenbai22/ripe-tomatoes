@@ -67,7 +67,7 @@
   background: crimson;
 }
 
-#character-error {
+.home-error {
   color: crimson;
   text-align: center;
   padding-top: 2vh;
