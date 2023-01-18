@@ -13,13 +13,11 @@ def get_reviews_by_imdb(imdb: str, queries: ReviewQueries = Depends()):
 
 @router.get("/reviews", response_model=ReviewsOut)
 async def get_reviews(
-    user_data: dict = Depends(authenticator.get_current_account_data),
     queries: ReviewQueries = Depends()
 ):
-    if user_data:
-        return {
-            "reviews": queries.get_all_reviews(),
-        }
+    return {
+        "reviews": queries.get_all_reviews(),
+    }
 
 @router.post("/reviews", response_model=ReviewOut)
 async def create_review(
