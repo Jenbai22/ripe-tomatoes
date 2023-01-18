@@ -186,6 +186,25 @@ export default function Detail() {
     }
   };
 
+  const handleAddFavorite = async (e) => {
+    e.preventDefault();
+    const favorite = { username: formData.username, imdb: formData.imdb };
+    const url = `${process.env.REACT_APP_RIPE_TOMATOES_API_HOST}/favorites`;
+    const response = await fetch(url, {
+      method: "post",
+      body: JSON.stringify(favorite),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token.access_token}`,
+      },
+    });
+    if (response.ok) {
+      //change state of favorite button\
+      const data = await response.json();
+      console.log(data);
+    }
+  };
+
   return (
     <>
       <main>
@@ -205,6 +224,7 @@ export default function Detail() {
                 </div>
               </div>
               <div id="plot">{movie.Plot}</div>
+              <button onClick={handleAddFavorite}>Add to Favorites</button>
             </div>
           </div>
           <div id="column">
