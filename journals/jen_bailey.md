@@ -34,7 +34,7 @@ We fixed the front end login. We started working on the navbar and login modal. 
 ## Jan 12
 
 Today we worked on:
-We completed the signup modal with code Gavin had prepared earlier. We contemplated routing the sign up modal to the login modal after submission but instead decided to automatically log the user in. We then worked on the home page showing a few movies and adding the search functionality. Once the search functionality is submitted the cards displayed contain a link that redirects the user to the movie detail page when they click on it. We added the movie details to the detail page along with the list of reviews and post function. Tomorrow we will work on allowing users to edit or delete their own reviews, rerouting the logout to the home page and adding a home button in the Navbar.
+We completed the sign up modal with code Gavin had prepared earlier. We contemplated routing the sign up modal to the login modal after submission but instead decided to automatically log the user in. We then worked on the home page showing a few movies and adding the search functionality. Once the search functionality is submitted the cards displayed contain a link that redirects the user to the movie detail page when they click on it. We added the movie details to the detail page along with the list of reviews and post function. Tomorrow we will work on allowing users to edit or delete their own reviews, rerouting the logout to the home page and adding a home button in the Navbar.
 
 ## Jan 13
 
