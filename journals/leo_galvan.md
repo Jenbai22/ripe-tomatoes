@@ -57,3 +57,9 @@ Today, I worked on:
 Today, I worked on:
 
 1. We cont with Team coding. We fixed a few minor bugs and added some error messages. When a user logs in and has incomplete fields they get a message telling them that things are missing. We also added a Search message where a movie title has to meet the required length to be successful or they will also get an error message.
+
+## Jan 18
+
+Today, I worked on:
+
+1. We worked on putting together our test and we had a few hiccups but we pulled together like a team we got all of our test to pass. We work great as a team and cont our team coding.
