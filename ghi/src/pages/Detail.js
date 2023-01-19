@@ -188,7 +188,7 @@ export default function Detail() {
 
   const handleAddFavorite = async (e) => {
     e.preventDefault();
-    const favorite = { username: formData.username, imdb: formData.imdb };
+    const favorite = { username: formData.username, imdb: formData.imdb, poster: movie.Poster };
     const url = `${process.env.REACT_APP_RIPE_TOMATOES_API_HOST}/favorites`;
     const response = await fetch(url, {
       method: "post",

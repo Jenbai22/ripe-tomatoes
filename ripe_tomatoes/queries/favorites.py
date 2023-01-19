@@ -9,7 +9,7 @@ class FavoriteQueries:
             with conn.cursor() as cur:
                 cur.execute(
                     """
-                    SELECT id, imdb, username
+                    SELECT id, imdb, username, poster
                     FROM favorites
                     WHERE username = %s
                     ORDER BY id;
@@ -31,7 +31,7 @@ class FavoriteQueries:
             with conn.cursor() as cur:
                 cur.execute(
                     """
-                    SELECT id, imdb, username
+                    SELECT id, imdb, username, poster
                     FROM favorites
                     ORDER BY id;
                 """
@@ -51,13 +51,14 @@ class FavoriteQueries:
             with conn.cursor() as cur:
                 cur.execute(
                     """
-                    INSERT INTO favorites (imdb, username)
-                    VALUES (%s, %s)
-                    RETURNING id, imdb, username;
+                    INSERT INTO favorites (imdb, username, poster)
+                    VALUES (%s, %s, %s)
+                    RETURNING id, imdb, username, poster;
                     """,
                     [
                     data.imdb,
                     data.username,
+                    data.poster,
                 ]
                 )
 

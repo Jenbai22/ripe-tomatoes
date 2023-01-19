@@ -1,0 +1,69 @@
+#background {
+  background-color: pink;
+}
+
+#your-favorites {
+    font-size: 50px;
+    color: white;
+    margin-bottom: 6vh;
+    user-select: none;
+}
+
+.favorites-page {
+  padding: 7vh 20vh 20vh 20vh;
+}
+
+.favorites-grid {
+  max-width: 1600px;
+  display: grid;
+  margin: 0 auto;
+  margin-left: none;
+  gap: 4rem;
+}
+
+.favorites-item {
+  display: flex;
+  align-items: center;
+  justify-items: center;
+}
+
+#favorites-poster {
+  box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+  transition: 0.3s;
+}
+
+#favorites-poster:hover {
+  box-shadow: crimson 0px 22px 70px 4px;
+}
+
+@media (min-width: 400px) {
+  .favorites-grid {
+    grid-template-columns: repeat(1, 1fr);
+    padding-bottom: 5vh;
+  }
+}
+
+@media (min-width: 600px) {
+  .favorites-grid {
+    grid-template-columns: repeat(1, 1fr);
+    padding-bottom: 5vh;
+  }
+}
+
+@media (min-width: 800px) {
+  .favorites-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1200px) {
+  .favorites-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1600px) {
+  .favorites-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
