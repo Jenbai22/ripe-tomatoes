@@ -31,12 +31,50 @@
 
 ## Jan 12th 2023
 
-Accomplishments:
+-With code prepped by Gavin before hand, we finishe dthe sign up modal.
+-Completed fuinctionality so that the signup modal would directly let the user login after submission.
+-Fixed the home page so that a few movies and their cards would show up and added a search bar to find other movies. The cards also link to an indivdiual movie page where users can read reviews and if signed in, they can leave reviews themselves.
 
 ## Jan 13th 2023
 
-Accomplishments:
+-Attempted to create edit and delete buttons in the reviews of a signed in user.
+-The edit button was suppposed to open up a modal but we ran into some issues there and ultimately decied to move away from that idea.
 
 ## Jan 17th 2023
 
-Accomplishments:
+-Gavin had worked on some new implementations on the edit and delete buttons, moving away from bootstrap and instead going back to css/html.
+-We added error messages and limitations to the reviews, login, signup, and search bar.
+-We plan on working on tests tomorrow but it seems like we have a mostly completed implementation from our original vision on the excalidraw.
+
+## Jan 18th 2023
+
+-Each of us designed tests for the project and troubleshooted as a group when any of us would come across any issues.
+-Started to lay out a favorites router, query, and modal in our dream branch as we start to work towards stretch goals. We want to eventually create a user page which links certain
+
+## Jan 19th 2023
+
+-
+
+## Jan 20th 2023
+
+-
+
+## Jan 23th 2023
+
+-
+
+## Jan 24th 2023
+
+-
+
+## Jan 25th 2023
+
+-
+
+## Jan 26th 2023
+
+-
+
+## Jan 27th 2023
+
+-

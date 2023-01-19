@@ -50,7 +50,7 @@ function LoginModal() {
   };
   return (
     <>
-      <div onClick={handleShow}>Sign In</div>
+      <div onClick={handleShow}>sign in</div>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
@@ -159,7 +159,7 @@ function SignupModal() {
 
   return (
     <>
-      <div onClick={handleShow}>Sign Up</div>
+      <div onClick={handleShow}>sign up</div>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
@@ -263,6 +263,9 @@ function Nav() {
               <h1>RIPE TOMATOES</h1>
             </Link>
             <div className="menu">
+              <Link to={"/favorites"} style={{ textDecoration: "none", color: "white" }}>
+                <div>your favorites</div>
+              </Link>
               <div>logged in as [ {token.user.username} ]</div>
               <div onClick={handleLogout}>logout</div>
             </div>
