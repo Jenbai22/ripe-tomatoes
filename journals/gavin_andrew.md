@@ -1,3 +1,11 @@
+1/19/23
+Pair coded and finished the favorites page, and add and
+remove favorite on detail
+
+1/18/23
+Pair coded and completed making the favorites table and CRUD,
+and made our 5 tests
+
 1/17/23
 Over the weekend, was able to sit down and complete
 styling, and the detail page.
