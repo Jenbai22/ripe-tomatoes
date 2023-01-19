@@ -289,3 +289,23 @@ textarea::-webkit-scrollbar-track {
   border-radius: 10px;
   padding: 1rem;
 }
+
+.add-faves {
+  font-size: 18px;
+  padding: 1vh;
+  cursor: pointer;
+  background-color: black;
+  color: white;
+  outline: none;
+  border: none;
+  opacity: 0.8;
+  transition: 0.3s;
+  white-space: nowrap;
+  margin-top: 2vh;
+  box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+}
+
+.add-faves:hover {
+  background-color: crimson;
+  opacity: 0.8;
+}

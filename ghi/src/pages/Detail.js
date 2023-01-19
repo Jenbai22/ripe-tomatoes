@@ -16,6 +16,9 @@ export default function Detail() {
   let [isEditing, setIsEditing] = useState(false);
   let [reviewUnderEdit, setReviewUnderEdit] = useState(false);
 
+  let [isFavorited, setIsFavorited] = useState(false);
+  let [favoritedId, setFavoritedId] = useState("")
+
   const [formData, setFormData] = useState({
     imdb: imdb,
     body: "",
@@ -35,16 +38,12 @@ export default function Detail() {
           formData.username = data.user.username;
         }
       }
-      response = await fetch(
-        `${process.env.REACT_APP_RIPE_TOMATOES_API_HOST}/searchimdb/${imdb}`
-      );
+      response = await fetch(`${process.env.REACT_APP_RIPE_TOMATOES_API_HOST}/searchimdb/${imdb}`);
       if (response.ok) {
         const data = await response.json();
         setMovie(data);
         if (data.Response) {
-          response = await fetch(
-            `${process.env.REACT_APP_RIPE_TOMATOES_API_HOST}/reviews/${imdb}`
-          );
+          response = await fetch(`${process.env.REACT_APP_RIPE_TOMATOES_API_HOST}/reviews/${imdb}`);
           if (response.ok) {
             let data = await response.json();
             for (let x of data.reviews) {
@@ -55,6 +54,17 @@ export default function Detail() {
               }
             }
             setReviews(data.reviews);
+            response = await fetch(`${process.env.REACT_APP_RIPE_TOMATOES_API_HOST}/favorites/${formData.username}`, { credentials: "include" });
+            if (response.ok) {
+              const d = await response.json()
+              const check = d.favorites.find( ({imdb}) => imdb == formData.imdb)
+              if (check) {
+                const addButton = document.querySelector(".add-faves")
+                addButton.innerHTML = "Remove from favorites";
+                setFavoritedId(check.id)
+                setIsFavorited(true)
+              }
+            }
           }
         }
       }
@@ -166,6 +176,45 @@ export default function Detail() {
     }
   };
 
+  const addedToggle = async (e) => {
+    e.preventDefault()
+
+    if (isFavorited) {
+      const url = `${process.env.REACT_APP_RIPE_TOMATOES_API_HOST}/favorites/${favoritedId}`
+      const response = await fetch(url, {
+          method: "DELETE",
+          headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token.access_token}`,
+          }
+      })
+      if (response.ok) {
+        setIsFavorited(false)
+        const addButton = document.querySelector(".add-faves")
+        addButton.innerHTML = "Add to favorites";
+      }
+    } else {
+      const favorite = { username: formData.username, imdb: formData.imdb, poster: movie.Poster };
+      const url = `${process.env.REACT_APP_RIPE_TOMATOES_API_HOST}/favorites`;
+      const response = await fetch(url, {
+        method: "post",
+        body: JSON.stringify(favorite),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token.access_token}`,
+        },
+      });
+      if (response.ok) {
+        const data = await response.json()
+        setFavoritedId(data.id)
+        setIsFavorited(true)
+        const addButton = document.querySelector(".add-faves")
+        addButton.innerHTML = "Remove from favorites";
+      }
+    }
+
+  }
+
   const handleDelete = async (e) => {
     const id = e.target.id;
     const url = `${process.env.REACT_APP_RIPE_TOMATOES_API_HOST}/reviews/${id}`;
@@ -178,30 +227,8 @@ export default function Detail() {
     });
     if (response.ok) {
       let r = [...reviews];
-      r.splice(
-        r.findIndex((x) => x.id == id),
-        1
-      );
+      r.splice(r.findIndex((x) => x.id == id), 1);
       setReviews(r);
-    }
-  };
-
-  const handleAddFavorite = async (e) => {
-    e.preventDefault();
-    const favorite = { username: formData.username, imdb: formData.imdb, poster: movie.Poster };
-    const url = `${process.env.REACT_APP_RIPE_TOMATOES_API_HOST}/favorites`;
-    const response = await fetch(url, {
-      method: "post",
-      body: JSON.stringify(favorite),
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token.access_token}`,
-      },
-    });
-    if (response.ok) {
-      //change state of favorite button\
-      const data = await response.json();
-      console.log(data);
     }
   };
 
@@ -221,10 +248,10 @@ export default function Detail() {
                 <div id="info">
                   <div>{movie.Genre}</div>
                   <div>{movie.Runtime}</div>
+                  <button className="add-faves" onClick={addedToggle}>Add to Favorites</button>
                 </div>
               </div>
               <div id="plot">{movie.Plot}</div>
-              <button onClick={handleAddFavorite}>Add to Favorites</button>
             </div>
           </div>
           <div id="column">
