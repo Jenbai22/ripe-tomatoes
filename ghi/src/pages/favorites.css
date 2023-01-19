@@ -23,6 +23,7 @@
 
 .favorites-item {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-items: center;
 }
@@ -34,6 +35,19 @@
 
 #favorites-poster:hover {
   box-shadow: crimson 0px 22px 70px 4px;
+}
+
+.favorite-delete {
+  outline: none;
+  border: none;
+  background-color: crimson;
+  color: white;
+  padding: 1vh;
+  opacity: 0.8;
+}
+
+.favorite-delete:hover {
+  opacity: 1;
 }
 
 @media (min-width: 400px) {
