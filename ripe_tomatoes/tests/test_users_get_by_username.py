@@ -1,7 +1,6 @@
 import json
 from fastapi.testclient import TestClient
 from queries.users import UserQueries
-from routers.users import User
 from authenticator import authenticator
 from main import app
 
@@ -9,14 +8,14 @@ client = TestClient(app)
 
 def get_current_account_data_mock():
     return {
-        'username': 'John'
+        'username': 'JJ'
     }
 
 class UserQueriesMock():
-    def get(self, user_username:int):
+    def get(self, user_username:str):
         return {
             'id': 1,
-            'username': 'JJ',
+            'username': user_username,
             'firstname': 'John',
             'lastname': 'Jones',
             'email': 'j@j.com',
@@ -27,7 +26,7 @@ class UserQueriesMock():
 def test_get():
     app.dependency_overrides[UserQueries] = UserQueriesMock
     app.dependency_overrides[authenticator.get_current_account_data] = get_current_account_data_mock
-    user_username = 'Jen'
+    user_username = 'JJ'
 
     res = client.get(f'/users/{user_username}')
 

@@ -15,7 +15,7 @@ def get_current_account_data_mock():
 class ReviewQueriesMock():
     def update_review(self, review_id:int, review: ReviewIn) -> ReviewIn:
         review_dict = review.dict()
-        return ReviewIn(id = review_id, posted = "2023-01-18T17:54:43.832Z", **review_dict)
+        return ReviewIn(**review_dict)
 
 
 def test_update_review():
