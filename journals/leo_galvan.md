@@ -64,3 +64,9 @@ Today, I worked on:
 
 1. We worked on putting together our test and we had a few hiccups but we pulled together like a team we got all of our test to pass. We work great as a team and cont our team coding.
 2. we feel pretty confident with the project and started to work on a new branch called Dream Branch with our stretch goals. We finished adding the backend for a Favorite, where a user can add a movie to their favorite list. We are still working on the front end of that feature.
+
+## Jan 19
+
+Today, I worked on:
+
+1. We cont team coding and stretch goals, we worked on the favorites feature where a user can add it to their account and they can now see all their movie they have added and delete them as well.
