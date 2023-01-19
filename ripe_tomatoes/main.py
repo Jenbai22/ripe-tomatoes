@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routers import users, reviews, omdb, token
+from routers import users, reviews, omdb, token, favorites
 from authenticator import authenticator
 
 import os
@@ -22,3 +22,4 @@ app.include_router(authenticator.router)
 app.include_router(reviews.router)
 app.include_router(omdb.router)
 app.include_router(token.router)
+app.include_router(favorites.router)
