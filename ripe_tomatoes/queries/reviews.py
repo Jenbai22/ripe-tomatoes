@@ -16,7 +16,7 @@ class ReviewQueries:
                     ORDER BY posted DESC;
                 """,
                     [imdb]
-                ),
+                )
 
                 results = []
                 for row in cur.fetchall():
