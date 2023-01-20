@@ -13,8 +13,10 @@ export default function Home() {
 
   useEffect(() => {
     async function getData() {
+      let m = ["batman", "iron man", "avengers", "harry potter", "007", "star wars", "lord of the rings", "godzilla", "x-men"]
+      let choice = m[Math.floor(Math.random() * (9 - 0) + 0)];
       const response = await fetch(
-        `${process.env.REACT_APP_RIPE_TOMATOES_API_HOST}/searchname/batman`
+        `${process.env.REACT_APP_RIPE_TOMATOES_API_HOST}/searchname/${choice}`
       );
       if (response.ok) {
         let data = await response.json();
@@ -42,7 +44,11 @@ export default function Home() {
         if (!(data.Error)) {
           data = data.Search;
           data = data.filter((x) => x.Poster != "N/A");
-          setMovies(data);
+          if (data.length === 0) {
+            setNoResultsError(true)
+          } else {
+            setMovies(data);
+          }
         } else {
           setNoResultsError(true);
           setTimeout(() => {
