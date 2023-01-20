@@ -70,3 +70,9 @@ Today, I worked on:
 Today, I worked on:
 
 1. We cont team coding and stretch goals, we worked on the favorites feature where a user can add it to their account and they can now see all their movie they have added and delete them as well.
+
+## Jan 20
+
+Today, I worked on:
+
+1. We cont team coding and worked on stretched goals. We added some small easter eggs where a small loading screen appears during loading page, add some more things to detail page.
