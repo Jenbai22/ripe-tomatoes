@@ -45,3 +45,7 @@ Today we each created a test for our an endpoint and managed to get all the test
 ## Jan 19
 
 Today we finished the favorites page, and added remove from favorites buttons, once it was all working we merged our dream branch with the main. I worked on some more tests last night on my branch which we merged to main. Tomorrow we are going to attempt to add a clear button to the search bar and add a number of how many people have a movie in their favorites.
+
+## Jan 20
+
+Today we created a favorites count to show how many times a movie has been added to a users favorites. We made it so that random movies show on the homepage. We also added a loading bar to show whilst the page is loading.
