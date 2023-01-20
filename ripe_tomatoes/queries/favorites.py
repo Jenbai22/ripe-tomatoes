@@ -4,6 +4,21 @@ import os
 pool = ConnectionPool(conninfo=os.environ['DATABASE_URL'])
 
 class FavoriteQueries:
+    def get_favorite_count_by_imdb(self, imdb):
+        with pool.connection() as conn:
+            with conn.cursor() as cur:
+                cur.execute(
+                    """
+                    SELECT COUNT(*)
+                    FROM favorites
+                    WHERE imdb = %s;
+                    """,
+                    [imdb]
+                )
+
+                return cur.fetchall()[0][0]
+
+
     def get_favorites_by_username(self, username:str):
         with pool.connection() as conn:
             with conn.cursor() as cur:
