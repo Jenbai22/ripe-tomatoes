@@ -15,7 +15,7 @@ On Monday we are going to work on the protected routers and creating all the cru
 ## Jan 9
 
 Today we worked on:
-We created the protected routers for all the crud functions for reviews and the reviews queries. We created the router and queries for our 3rd party api OMDB.
+We created the protected routers for all the crud functions for reviews and the reviews queries. We created the router and queries for our 3rd party api OMDb.
 We experimented with protecting the edit review to only be edited by the user that created the view. We managed to get that working but did not manage to get it to work for the delete function. We discussed handling this on the front end.
 We realized that out response codes are not working so are going to fix that tomorrow along with starting the front end with react.
 
@@ -41,7 +41,12 @@ We completed the sign up modal with code Gavin had prepared earlier. We contempl
 Today we worked on:
 We attempted to create an edit modal for logged in users to be able to edit their reviews. We could not get the modal to access the correct review id and spent some time trying to get it to work. We are going to move away from the modal and have the user edit the review in the bottom text input bar.
 
-## Jan 14
+## Jan 17
 
 Today we worked on:
 Gavin worked on the edit and delete button over the weekend so we checked through the code. We added error alerts on the post review method, login, sign up and search bar. We fixed the user update endpoint. Tomorrow we are going to work on the tests.
+
+## Jan 18
+
+Today we worked on:
+We each created a test for our an endpoint and managed to get all the tests to pass. We then thought about stretch goals. We decided to create a favorites page so we created a favorites table and finished the backend models, queries and routers for it. We started working on the front end and made a favorite button on the detail page that creates a favorite. Tomorrow we will work on the favorites react page.

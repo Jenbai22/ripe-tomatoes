@@ -1,8 +1,10 @@
 import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import "./favorites.css"
+import ScaleLoader from 'react-spinners/ScaleLoader';
 
 export default function Favorites() {
+    const [loading, setLoading] = useState(true)
     const [favorites, setFavorites] = useState([])
     const [token, setToken] = useState([])
 
@@ -18,6 +20,7 @@ export default function Favorites() {
                     if (response.ok) {
                         let data = await response.json();
                         setFavorites(data.favorites);
+                        setLoading(false)
                     }
                 }
             }
@@ -44,13 +47,17 @@ export default function Favorites() {
     }
 
     return(
+        <>
+        {loading ? (
+            <main><div id="loading"><ScaleLoader size={300} color={"crimson"} loading={loading}/></div></main>
+        ) : (
         <main id="background" className="favorites-page">
         <h1 id="your-favorites">yua faboritess~~ ʕ•́ᴥ•̀ʔっ♡</h1>
             <div className="favorites-grid">
                 {favorites.map((favorite) => (
                 <>
                     <div className="favorites-item" key={favorite.id}>
-                        <button className="favorite-delete" onClick={handleRemove} id={favorite.id}>delete</button>
+                        <button className="favorite-delete" onClick={handleRemove} id={favorite.id}>remove</button>
                         <Link to={`/${favorite.imdb}`}>
                         <div id="favorites-poster">
                             <img src={favorite.poster} alt="poster" />
@@ -61,5 +68,6 @@ export default function Favorites() {
                 ))}
             </div>
         </main>
-    )
+      )}
+    </>)
 }

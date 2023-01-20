@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./home.css";
+import ScaleLoader from 'react-spinners/ScaleLoader';
 
 export default function Home() {
+  const [loading, setLoading] = useState(true)
   const [movies, setMovies] = useState([]);
   const [search, setSearch] = useState("");
   const [characterError, setCharacterError] = useState(false);
-  const [noResultsError, setNoResultsError] = useState(false)
+  const [noResultsError, setNoResultsError] = useState(false);
+
 
   useEffect(() => {
     async function getData() {
@@ -18,6 +21,7 @@ export default function Home() {
         data = data.Search;
         data = data.filter((x) => x.Poster != "N/A");
         setMovies(data);
+        setLoading(false)
       }
     }
     getData();
@@ -55,9 +59,13 @@ export default function Home() {
   };
 
   return (
+    <>
+      {loading ? (
+        <main><div id="loading"><ScaleLoader size={300} color={"crimson"} loading={loading}/></div></main>
+      ) : (
     <main id="home-page">
       <form id="home-form" onSubmit={handleSearch}>
-        <div style={{ width: "100%", textAlign: "center" }}>
+        <div style={{ width: "100%", textAlign: "center"}}>
           <input onChange={handleFormChange} name="search" type="text" />
           <button>search!</button>
         </div>
@@ -76,5 +84,6 @@ export default function Home() {
         ))}
       </div>
     </main>
-  );
+      )}
+  </>);
 }
