@@ -5,6 +5,12 @@ from authenticator import authenticator
 
 router = APIRouter(tags=["favorites"])
 
+@router.get("/favorites/count/{imdb}")
+def get_favorite_count_by_imdb(imdb: str, queries: FavoriteQueries = Depends()):
+    return {
+        "favorites": queries.get_favorite_count_by_imdb(imdb)
+    }
+
 @router.get('/favorites/{username}', response_model=FavoritesOut)
 def get_favorites_by_username(
     username: str,
