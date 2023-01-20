@@ -1,3 +1,7 @@
+1/20/23
+Pair coded and added the favorites count to the detail,
+and added a loading animation
+
 1/19/23
 Pair coded and finished the favorites page, and add and
 remove favorite on detail
