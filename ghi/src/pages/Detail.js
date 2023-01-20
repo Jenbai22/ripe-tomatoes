@@ -2,9 +2,12 @@ import { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 import moment from "moment";
 import "./detail.css";
+import ScaleLoader from 'react-spinners/ScaleLoader';
 
 export default function Detail() {
   const topRef = useRef(null);
+
+  let [loading, setLoading] = useState(true)
 
   let [token, setToken] = useState("");
   let [loggedIn, setLoggedIn] = useState(false);
@@ -18,6 +21,9 @@ export default function Detail() {
 
   let [isFavorited, setIsFavorited] = useState(false);
   let [favoritedId, setFavoritedId] = useState("")
+
+  let [favorites, setFavorites] = useState(0)
+  let [favoriteNotPlural, setFavoriteNotPlural] = useState(false)
 
   const [formData, setFormData] = useState({
     imdb: imdb,
@@ -54,6 +60,17 @@ export default function Detail() {
               }
             }
             setReviews(data.reviews);
+            response = await fetch(`${process.env.REACT_APP_RIPE_TOMATOES_API_HOST}/favorites/count/${formData.imdb}`)
+            if (response.ok) {
+              data = await response.json()
+              setFavorites(data.favorites)
+              if (data.favorites == 1) {
+                setFavoriteNotPlural(true)
+              } else {
+                setFavoriteNotPlural(false)
+              }
+            }
+            setLoading(false)
             response = await fetch(`${process.env.REACT_APP_RIPE_TOMATOES_API_HOST}/favorites/${formData.username}`, { credentials: "include" });
             if (response.ok) {
               const d = await response.json()
@@ -189,6 +206,7 @@ export default function Detail() {
           }
       })
       if (response.ok) {
+        setFavorites(favorites -1)
         setIsFavorited(false)
         const addButton = document.querySelector(".add-faves")
         addButton.innerHTML = "Add to favorites";
@@ -206,11 +224,18 @@ export default function Detail() {
       });
       if (response.ok) {
         const data = await response.json()
+        setFavorites(favorites +1)
         setFavoritedId(data.id)
         setIsFavorited(true)
         const addButton = document.querySelector(".add-faves")
         addButton.innerHTML = "Remove from favorites";
       }
+    }
+
+    if (favorites === 1) {
+      setFavoriteNotPlural(false)
+    } else {
+      setFavoriteNotPlural(true)
     }
 
   }
@@ -234,6 +259,10 @@ export default function Detail() {
 
   return (
     <>
+     {
+      loading ? (
+          <main><div id="loading"><ScaleLoader size={300} color={"crimson"} loading={loading}/></div></main>
+      ) : (
       <main>
         <div id="row">
           <div id="column">
@@ -248,7 +277,10 @@ export default function Detail() {
                 <div id="info">
                   <div>{movie.Genre}</div>
                   <div>{movie.Runtime}</div>
-                  <button className="add-faves" onClick={addedToggle}>Add to Favorites</button>
+                  {loggedIn ? (<button className="add-faves" onClick={addedToggle}>Add to Favorites</button>):
+                  (<button className="add-faves-no-login">Login to Favorite</button>)}
+                  {favoriteNotPlural ? (<div className="favorites-count"><span style={{"color": "red"}}>{favorites}</span> favorite</div>):
+                  (<div className="favorites-count"><span style={{"color": "red"}}>{favorites}</span> favorites</div>)}
                 </div>
               </div>
               <div id="plot">{movie.Plot}</div>
@@ -341,6 +373,7 @@ export default function Detail() {
           </div>
         </div>
       </main>
+    )}
     </>
   );
 }
