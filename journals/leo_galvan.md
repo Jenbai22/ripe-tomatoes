@@ -76,3 +76,9 @@ Today, I worked on:
 Today, I worked on:
 
 1. We cont team coding and worked on stretched goals. We added some small easter eggs where a small loading screen appears during loading page, add some more things to detail page.
+
+## Jan 23
+
+Today, I worked on:
+
+1. Today we look through our code to ensure that it was clean and had no issues.
