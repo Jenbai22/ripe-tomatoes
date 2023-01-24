@@ -1,6 +1,7 @@
 # Ripe Tomatoes
 
 Your one stop shop movie community~!
+
 Search up, review and favorite over 280,000 titles!
 
 ## Team Members
@@ -14,8 +15,11 @@ Search up, review and favorite over 280,000 titles!
 ## Design
 
 [API Design](/docs/api-design.md)
+
 [Data Models](/docs/data-models.md)
+
 [GHI](/docs/ghi.md)
+
 [Integrations](/docs/integrations.md)
 
 ## Intended Market
@@ -41,3 +45,4 @@ Any and all watchers of movies
 5. If using Mac M1 chip run `export DOCKER_DEFAULT_PLATFORM=linux/amd64`
 6. Run `docker compose build`
 7. Run `docker compose up`
+````
