@@ -1,23 +1,23 @@
 ## Signup
 
-![This is an image](/images/signup.gif)
+![This is an image](/docs/images/signup.gif)
 
 ## Login
 
-![This is an image](/images/login.gif)
+![This is an image](/docs/images/login.gif)
 
 ## Logout
 
-![This is an image](/images/logout.gif)
+![This is an image](/docs/images/logout.gif)
 
 ## Search
 
-![This is an image](/images/search.gif)
+![This is an image](/docs/images/search.gif)
 
 ## Reviews
 
-![This is an image](/images/reviews.gif)
+![This is an image](/docs/images/reviews.gif)
 
 ## Favorites
 
-![This is an image](/images/favorites.gif)
+![This is an image](/docs/images/favorites.gif)
