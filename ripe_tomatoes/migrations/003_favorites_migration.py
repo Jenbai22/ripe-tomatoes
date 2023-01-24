@@ -1,5 +1,4 @@
 steps = [
-
     [
         """
         CREATE TABLE favorites (
@@ -11,7 +10,6 @@ steps = [
         """,
         """
         DROP TABLE favorites;
-        """
+        """,
     ]
-
 ]

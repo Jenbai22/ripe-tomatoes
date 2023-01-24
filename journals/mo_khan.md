@@ -53,11 +53,11 @@
 
 ## Jan 19th 2023
 
--
+-Today implemented favorites on the frontend with link to a user's favorites page. User's are also able to add and delete movies from their favorites lists.
 
 ## Jan 20th 2023
 
--
+-Today we implemented our next set of stretch goals which worked on a loading screen in between requests. We also cleaned up some code based off of some errors we noticed during testing about movies that did not have a poster that wasn't filtering out. We also implemented a randomized layout of movies for our home page. Our next goal is to create a more responsive home button and different page/url that it will take users of the site to.
 
 ## Jan 23th 2023
 
