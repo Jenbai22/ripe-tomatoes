@@ -1,8 +1,7 @@
 # Ripe Tomatoes
 
-Your one stop shop movie community~!
-
-````Search up, review and favorite over 280,000 titles!
+``Your one stop shop movie community~!
+``Search up, review and favorite over 280,000 titles!
 
 ## Team Members
 
@@ -14,10 +13,10 @@ Your one stop shop movie community~!
 
 ## Design
 
-[API Design](/docs/api-design.md)
-```[Data Models](/docs/data-models.md)
-```[GHI](/docs/ghi.md)
-```[Integrations](/docs/integrations.md)
+``[API Design](/docs/api-design.md)
+``[Data Models](/docs/data-models.md)
+``[GHI](/docs/ghi.md)
+``[Integrations](/docs/integrations.md)
 
 ## Intended Market
 
