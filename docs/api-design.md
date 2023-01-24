@@ -1,9 +1,7 @@
-### User authentication
-
 ### Get a List of Users
 
-- Endpoint path: /users
-- Endpoint method: GET
+- Endpoint path: `/users`
+- Endpoint method: `GET`
 
 - Headers:
 
@@ -28,8 +26,8 @@
 
 ### Create an Account
 
-- Endpoint path: /users
-- Endpoint method: POST
+- Endpoint path: `/users`
+- Endpoint method: `POST`
 
 - Request shape (form):
 
@@ -58,8 +56,8 @@
 
 ### Get User by Username
 
-- Endpoint path: /users/<str:username>
-- Endpoint method: GET
+- Endpoint path: `/users/<str:username>`
+- Endpoint method: `GET`
 
 - Response: Get user by username
 - Response shape:
@@ -76,8 +74,8 @@
 
 ### Update User
 
-- Endpoint path: /users/<int:user_id>
-- Endpoint method: PUT
+- Endpoint path: `/users/<int:user_id>`
+- Endpoint method: `PUT`
 
 - Request shape (form):
 
@@ -101,8 +99,8 @@
 
 ### Delete User
 
-- Endpoint path: /users/<int:id>
-- Endpoint method: DELETE
+- Endpoint path: `/users/<int:id>`
+- Endpoint method: `DELETE`
 
 - Response: Delete user
 - Response shape (JSON):
@@ -112,8 +110,8 @@
 
 ### Get Token
 
-- Endpoint path: /token
-- Endpoint method: GET
+- Endpoint path: `/token`
+- Endpoint method: `GET`
 
 - Headers:
 
@@ -134,8 +132,8 @@
 
 ### Login
 
-- Endpoint path: /token
-- Endpoint path: POST
+- Endpoint path: `/token`
+- Endpoint path: `POST`
 
 - Request shape (form):
 
@@ -157,8 +155,8 @@
 
 ### Log Out
 
-- Endpoint path: /token
-- Endpoint method: DELETE
+- Endpoint path: `/token`
+- Endpoint method: `DELETE`
 
 - Headers:
 
@@ -172,8 +170,8 @@
 
 ### List Reviews by Corresponding IMDB#
 
-- Endpoint path: /reviews/<str:imdb>
-- Endpoint method: GET
+- Endpoint path: `/reviews/<str:imdb>`
+- Endpoint method: `GET`
 
 - Response: List reviews by imdb
 - Response shape:
@@ -194,8 +192,8 @@
 
 ### List All Reviews
 
-- Endpoint path: /reviews
-- Endpoint method: GET
+- Endpoint path: `/reviews`
+- Endpoint method: `GET`
 
 - Response: List of all existing reviews
 - Response shape:
@@ -216,8 +214,8 @@
 
 ### Create Review
 
-- Endpoint path: /reviews
-- Endpoint method: POST
+- Endpoint path: `/reviews`
+- Endpoint method: `POST`
 
 - Headers:
 
@@ -249,8 +247,8 @@
 
 ### Update Review
 
-- Endpoint path: /reviews/<int:id>
-- Endpoint method: PUT
+- Endpoint path: `/reviews/<int:id>`
+- Endpoint method: `PUT`
 
 - Headers:
 
@@ -280,8 +278,8 @@
 
 ### Delete a Review
 
-- Endpoint path: /reviews/<int:id>
-- Endpoint method: DELETE
+- Endpoint path: `/reviews/<int:id>`
+- Endpoint method: `DELETE`
 
 - Headers:
 
@@ -295,8 +293,8 @@
 
 ### Get Favorite Count By IMDb
 
-- Endpoint path: /favorites/count/<int:id>
-- Endpoint method: GET
+- Endpoint path: `/favorites/count/<int:id>`
+- Endpoint method: `GET`
 
 - Response: How many times a movie has been favorited
 - Response shape:
@@ -309,8 +307,8 @@
 
 ### Get Favorites By Username
 
-- Endpoint path: /favorites/<str:username>
-- Endpoint method: GET
+- Endpoint path: `/favorites/<str:username>`
+- Endpoint method: `GET`
 
 - Response: List of favorites by username
 - Response shape:
@@ -330,8 +328,8 @@
 
 ### Get All Favorites
 
-- Endpoint path: /favorites>
-- Endpoint method: GET
+- Endpoint path: `/favorites`
+- Endpoint method: `GET`
 
 - Response: List of all favorites
 - Response shape:
@@ -351,8 +349,8 @@
 
 ### Create a Favorite
 
-- Endpoint path: /favorites
-- Endpoint method: POST
+- Endpoint path: `/favorites`
+- Endpoint method: `POST`
 
 - Request shape (form):
 
@@ -377,8 +375,8 @@
 
 ### Delete a Favorite
 
-- Endpoint path: /favorites/<int:id>
-- Endpoint method: DELETE
+- Endpoint path: `/favorites/<int:id>`
+- Endpoint method: `DELETE`
 
 - Headers:
 
@@ -392,8 +390,8 @@
 
 ### Search For Movies by Name
 
-- Endpoint path: /searchname/<str:name>
-- Endpoint method: GET
+- Endpoint path: `/searchname/<str:name>`
+- Endpoint method: `GET`
 
 - Response: List of Movies
 - Response shape:
@@ -416,8 +414,8 @@
 
 ### Search For a Movie by IMDb
 
-- Endpoint path: /searchname/<str:imdb>
-- Endpoint method: GET
+- Endpoint path: `/searchname/<str:imdb>`
+- Endpoint method: `GET`
 
 - Response: A movie's details
 - Response shape:
