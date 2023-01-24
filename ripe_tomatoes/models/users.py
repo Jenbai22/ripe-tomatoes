@@ -1,5 +1,6 @@
 from pydantic import BaseModel
 
+
 class User(BaseModel):
     id: int
     username: str
@@ -16,15 +17,18 @@ class UserIn(BaseModel):
     email: str
     password: str
 
+
 class UserUpdate(BaseModel):
     username: str
     firstname: str
     lastname: str
     email: str
 
+
 class UserOut(BaseModel):
     id: int
     username: str
+
 
 class UsersOut(BaseModel):
     users: list[User]

@@ -3,10 +3,10 @@
 }
 
 #your-favorites {
-    font-size: 50px;
-    color: white;
-    margin-bottom: 6vh;
-    user-select: none;
+  font-size: 50px;
+  color: white;
+  margin-bottom: 6vh;
+  user-select: none;
 }
 
 .favorites-page {

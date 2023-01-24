@@ -17,13 +17,10 @@ export default function Home() {
         "iron man",
         "avengers",
         "harry potter",
-        "007",
         "star wars",
-        "lord of the rings",
-        "godzilla",
         "x-men",
       ];
-      let choice = m[Math.floor(Math.random() * (9 - 0) + 0)];
+      let choice = m[Math.floor(Math.random() * (6 - 0) + 0)];
       const response = await fetch(
         `${process.env.REACT_APP_RIPE_TOMATOES_API_HOST}/searchname/${choice}`
       );
