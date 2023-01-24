@@ -88,3 +88,4 @@ Today, I worked on:
 Today, I worked on:
 
 1. We cont with team coding: We worked on the readme file, the tables, and formatting.
+2. We also started to make videos of our project to show functionality. We will use this to make small gifs on our Readme file.
