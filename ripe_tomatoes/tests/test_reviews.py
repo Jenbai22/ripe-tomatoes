@@ -5,9 +5,11 @@ from main import app
 
 client = TestClient(app)
 
-class ReviewQueriesMock():
+
+class ReviewQueriesMock:
     def get_all_reviews(self):
         return []
+
 
 def test_get_all_reviews():
     app.dependency_overrides[ReviewQueries] = ReviewQueriesMock
@@ -16,5 +18,5 @@ def test_get_all_reviews():
 
     assert response.status_code == 200
     assert response.json() == {"reviews": []}
-    
+
     app.dependency_overrides = {}

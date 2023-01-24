@@ -263,7 +263,10 @@ function Nav() {
               <h1>RIPE TOMATOES</h1>
             </Link>
             <div className="menu">
-              <Link to={"/favorites"} style={{ textDecoration: "none", color: "white" }}>
+              <Link
+                to={"/favorites"}
+                style={{ textDecoration: "none", color: "white" }}
+              >
                 <div>your favorites</div>
               </Link>
               <div>logged in as [ {token.user.username} ]</div>

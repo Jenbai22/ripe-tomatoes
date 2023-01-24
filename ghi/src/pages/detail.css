@@ -15,13 +15,13 @@ main {
 }
 
 #loading {
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100vh;
-  }
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+}
 
 body::-webkit-scrollbar {
   width: 1vw;
@@ -196,15 +196,15 @@ textarea::-webkit-scrollbar-track {
 }
 
 .char-limit-error {
-    display: none;
-    transition: 0.3s;
-    font-size: 20px
+  display: none;
+  transition: 0.3s;
+  font-size: 20px;
 }
 
 .char-limit-error.active {
-    font-weight: bold;
-    color: crimson;
-    display: flex;
+  font-weight: bold;
+  color: crimson;
+  display: flex;
 }
 
 .edit-button {

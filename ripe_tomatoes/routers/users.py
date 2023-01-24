@@ -1,5 +1,11 @@
-from fastapi import APIRouter, Depends, Response, HTTPException, status, Request
-from jwtdown_fastapi.authentication import Token
+from fastapi import (
+    APIRouter,
+    Depends,
+    Response,
+    HTTPException,
+    Request,
+)
+
 from authenticator import authenticator
 from .token import UserToken
 from pydantic import BaseModel
@@ -7,15 +13,17 @@ from models.users import UserIn, UserOut, UsersOut, UserUpdate, User
 from queries.users import UserQueries
 
 
-
 class UserForm(BaseModel):
     username: str
     password: str
 
+
 class HttpError(BaseModel):
     detail: str
 
+
 router = APIRouter(tags=["users"])
+
 
 @router.post("/users", response_model=UserToken | HttpError)
 async def create_account(
@@ -37,14 +45,16 @@ def users_list(queries: UserQueries = Depends()):
         "users": queries.get_all_users(),
     }
 
+
 @router.get("/users/{user_username}", response_model=User)
 def user_get(user_username: str, queries: UserQueries = Depends()):
     record = queries.get(user_username)
     if record is None:
-        raise HTTPException(status_code = 404, detail= "No Such User Exists")
+        raise HTTPException(status_code=404, detail="No Such User Exists")
 
     else:
         return record
+
 
 @router.put("/users/{user_id}", response_model=UserOut)
 def update_user(
@@ -55,10 +65,11 @@ def update_user(
 ):
     record = queries.update_user(user_id, user_update)
     if record is None:
-        raise HTTPException(status_code = 404, detail= "No Such User Exists")
+        raise HTTPException(status_code=404, detail="No Such User Exists")
 
     else:
         return record
+
 
 @router.delete("/users/{user_id}", response_model=bool)
 def delete_user(user_id: int, queries: UserQueries = Depends()):
