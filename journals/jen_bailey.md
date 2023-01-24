@@ -49,3 +49,7 @@ Today we finished the favorites page, and added remove from favorites buttons, o
 ## Jan 20
 
 Today we created a favorites count to show how many times a movie has been added to a users favorites. We made it so that random movies show on the homepage. We also added a loading bar to show whilst the page is loading.
+
+## Jan 23
+
+Today we checked through our code to make sure it was clean and there were no comments or console.logs left in there.
