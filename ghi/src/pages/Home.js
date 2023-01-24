@@ -12,8 +12,15 @@ export default function Home() {
 
   useEffect(() => {
     async function getData() {
-      let m = ["batman", "iron man", "avengers", "harry potter", "007", "star wars", "lord of the rings", "godzilla", "x-men"]
-      let choice = m[Math.floor(Math.random() * (9 - 0) + 0)];
+      let m = [
+        "batman",
+        "iron man",
+        "avengers",
+        "harry potter",
+        "star wars",
+        "x-men",
+      ];
+      let choice = m[Math.floor(Math.random() * (6 - 0) + 0)];
       const response = await fetch(
         `${process.env.REACT_APP_RIPE_TOMATOES_API_HOST}/searchname/${choice}`
       );
@@ -44,7 +51,7 @@ export default function Home() {
           data = data.Search;
           data = data.filter((x) => x.Poster != "N/A");
           if (data.length === 0) {
-            setNoResultsError(true)
+            setNoResultsError(true);
           } else {
             setMovies(data);
           }

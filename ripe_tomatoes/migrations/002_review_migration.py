@@ -1,5 +1,4 @@
 steps = [
-
     [
         """
         CREATE TABLE reviews (
@@ -13,7 +12,6 @@ steps = [
         """,
         """
         DROP TABLE reviews;
-        """
+        """,
     ]
-
 ]

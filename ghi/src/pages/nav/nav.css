@@ -1,59 +1,59 @@
 * {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-	font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
 }
 
 nav {
-	position: relative;
-	z-index: 99;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	background-color: #000;
-	color: #FFF;
-	border: solid 0.3em black;
-	border-bottom-color: #FFF;
-	padding: 1rem 1.5rem;
-	transition: 0.3s;
-	white-space: nowrap;
+  position: relative;
+  z-index: 99;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #000;
+  color: #fff;
+  border: solid 0.3em black;
+  border-bottom-color: #fff;
+  padding: 1rem 1.5rem;
+  transition: 0.3s;
+  white-space: nowrap;
 }
 
 nav:hover {
-	border-bottom-color: crimson;
-  	box-shadow: crimson 0px 22px 70px 4px;
+  border-bottom-color: crimson;
+  box-shadow: crimson 0px 22px 70px 4px;
 }
 
 nav h1 {
-	letter-spacing: 5px;
-	padding: 0.5rem 1rem;
-	padding-right: calc(1rem - 5px);
-	border: 3px solid white;
-	text-decoration: none;
-	transition: 0.3s;
+  letter-spacing: 5px;
+  padding: 0.5rem 1rem;
+  padding-right: calc(1rem - 5px);
+  border: 3px solid white;
+  text-decoration: none;
+  transition: 0.3s;
 }
 
 nav h1:hover {
-	color: crimson;
-	border-color: crimson;
-	cursor: pointer;
+  color: crimson;
+  border-color: crimson;
+  cursor: pointer;
 }
 
 .menu {
-	display: flex;
-	align-items: center;
-	margin: 0 -1rem;
+  display: flex;
+  align-items: center;
+  margin: 0 -1rem;
 }
 
 .menu div {
-	margin: 0 1rem;
-	color: white;
-	transition: 0.3s;
-	font-size: 18px;
+  margin: 0 1rem;
+  color: white;
+  transition: 0.3s;
+  font-size: 18px;
 }
 
 .menu div:hover {
-	color: crimson;
-	cursor: pointer;
+  color: crimson;
+  cursor: pointer;
 }
