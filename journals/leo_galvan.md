@@ -82,3 +82,9 @@ Today, I worked on:
 Today, I worked on:
 
 1. Today we look through our code to ensure that it was clean and had no issues.
+
+## Jan 24
+
+Today, I worked on:
+
+1. We cont with team coding: We worked on the readme file, the tables, and formatting.
