@@ -17,36 +17,34 @@ ripe-tomatoes-unit-test-job:
     - cd ripe_tomatoes
     - pip install -r requirements.txt
     - python -m pytest
+# build-front-end-job:
+#   stage: build
+#   image: node:lts-bullseye
+#   needs:
+#     - ripe-tomatoes-unit-test-job
+#     - lint-test-job
+#   variables:
+#     PUBLIC_URL: https://gitlab.com/ripe-tomatoes/ripe-tomatoes.git
+#     REACT_APP_SAMPLE_SERVICE_API_HOST: https://WEBSERVICE_NAME.onrender.com
+#   script:
+#     - cd ghi
+#     - npm install
+#     - npm run build
+#     - cp build/index.html build/404.html
+#   artifacts:
+#     paths:
+#       - ghi/build/
 
-build-api-backend:
-  image: docker:19.03.1
-  stage: build
-  variables:
-    CORS_HOST:
-  services:
-    - docker:19.03.1-dind
-
-    PUBLIC_URL: https://gitlab.com/ripe-tomatoes/ripe-tomatoes.git
-    REACT_APP_SAMPLE_SERVICE_API_HOST: https://WEBSERVICE_NAME.onrender.com
-  script:
-    - cd ghi
-    - npm install
-    - npm run build
-    - cp build/index.html build/404.html
-  artifacts:
-    paths:
-      - ghi/build/
-
-pages:
-  stage: deploy
-  rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
-  dependencies:
-    - build-front-end-job
-  needs:
-    - build-front-end-job
-  script:
-    - mv ghi/build/ public
-  artifacts:
-    paths:
-      - public
+# pages:
+#   stage: deploy
+#   rules:
+#     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+#   dependencies:
+#     - build-front-end-job
+#   needs:
+#     - build-front-end-job
+#   script:
+#     - mv ghi/build/ public
+#   artifacts:
+#     paths:
+#       - public
