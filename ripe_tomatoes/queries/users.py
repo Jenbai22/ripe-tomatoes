@@ -4,6 +4,7 @@ import os
 
 pool = ConnectionPool(conninfo=os.environ["DATABASE_URL"])
 
+
 class UserQueries:
     def get(self, username: str) -> User:
         with pool.connection() as conn:
