@@ -2,7 +2,7 @@ from psycopg_pool import ConnectionPool
 from models.users import User
 import os
 
-pool = ConnectionPool(conninfo='postgresql://username:password@postgres/tomatoes')
+pool = ConnectionPool(conninfo=os.environ["DATABASE_URL"])
 
 class UserQueries:
     def get(self, username: str) -> User:
