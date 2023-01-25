@@ -11,6 +11,10 @@ lint-test-job:
     - flake8 ripe_tomatoes
 
 ripe-tomatoes-unit-test-job:
+  environment:
+    OMDB_KEY: 7c7456b5
+    DATABASE_URL: postgresql://username:password@postgres/tomatoes
+    SIGNING_KEY: e1705a6893115fc7525efdbe2af901f27acb689c0beab8a5fe6968483f51bf5a
   image: python:3-bullseye
   stage: test
   script:
