@@ -39,7 +39,12 @@ class UserQueries:
             with conn.cursor() as cur:
                 cur.execute(
                     """
-                    SELECT id, firstname, lastname, hashed_password, email, username
+                    SELECT id
+                    , firstname
+                    , lastname
+                    , hashed_password
+                    , email
+                    , username
                     FROM users
                     ORDER BY lastname, firstname;
                 """
@@ -59,7 +64,11 @@ class UserQueries:
             with conn.cursor() as cur:
                 cur.execute(
                     """
-                    INSERT INTO users (firstname, lastname, hashed_password, email, username)
+                    INSERT INTO users (firstname
+                    , lastname
+                    , hashed_password
+                    , email
+                    , username)
                     VALUES (%s, %s, %s, %s, %s)
                     RETURNING id, username;
                     """,
