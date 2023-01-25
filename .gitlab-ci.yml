@@ -10,13 +10,13 @@ lint-test-job:
     - pip install flake8
     - flake8 ripe_tomatoes
 
-# ripe-tomatoes-unit-test-job:
-#   image: python:3-bullseye
-#   stage: test
-#   script:
-#     - cd ripe_tomatoes
-#     - pip install -r requirements.txt
-#     - python -m pytest
+ripe-tomatoes-unit-test-job:
+  image: python:3-bullseye
+  stage: test
+  script:
+    - cd ripe_tomatoes
+    - pip install -r requirements.txt
+    - python -m pytest
 
 build-front-end-job:
   stage: build
