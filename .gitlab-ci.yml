@@ -8,15 +8,24 @@ lint-test-job:
   stage: test
   script:
     - pip install flake8
-    - flake8 sample_service
+    - flake8 ripe_tomatoes
+
+ripe-tomatoes-unit-test-job:
+  image: python:3-bullseye
+  stage: test
+  script:
+    - cd ripe_tomatoes
+    - pip install -r requirements.txt
+    - python -m pytest
 
 build-front-end-job:
   stage: build
   image: node:lts-bullseye
   needs:
+    - ripe-tomatoes-unit-test-job
     - lint-test-job
   variables:
-    PUBLIC_URL: https://GROUP_NAME.gitlab.io/PROJECT_NAME/
+    PUBLIC_URL: https://gitlab.com/ripe-tomatoes/ripe-tomatoes.git
     REACT_APP_SAMPLE_SERVICE_API_HOST: https://WEBSERVICE_NAME.onrender.com
   script:
     - cd ghi
