@@ -18,6 +18,12 @@ stages:
 #     - pip install -r requirements.txt
 #     - python -m pytest
 
+services:
+  - postgres:14.2-bullseye
+
+variables:
+  DATABASE_URL: postgresql://postgres:86ea4e15c8c4bf90@http://srv-captain--ripe-tomatoes-db/postgres
+
 build-front-end-job:
   stage: build
   image: node:lts-bullseye
@@ -25,7 +31,7 @@ build-front-end-job:
   # - ripe-tomatoes-unit-test-job
   #   - lint-test-job
   variables:
-    PUBLIC_URL: https://ripe-tomatoes.ripe-tomatoes.gitlab.io
+    PUBLIC_URL: https://ripe-tomatoes.gitlab.io/ripe-tomatoes
     REACT_APP_SAMPLE_SERVICE_API_HOST: http://ripe-tomatoes.sept-ct-5.mod3projects.com
   script:
     - cd ghi
