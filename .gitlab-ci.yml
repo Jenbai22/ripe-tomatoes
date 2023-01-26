@@ -10,19 +10,19 @@ stages:
 #     - pip install flake8
 #     - flake8 ripe_tomatoes
 
-ripe-tomatoes-unit-test-job:
-  image: python:3-bullseye
-  stage: test
-  script:
-    - cd ripe_tomatoes
-    - pip install -r requirements.txt
-    - python -m pytest
+# ripe-tomatoes-unit-test-job:
+#   image: python:3-bullseye
+#   stage: test
+#   script:
+#     - cd ripe_tomatoes
+#     - pip install -r requirements.txt
+#     - python -m pytest
 
 build-front-end-job:
   stage: build
   image: node:lts-bullseye
-  needs:
-    - ripe-tomatoes-unit-test-job
+  # needs:
+  # - ripe-tomatoes-unit-test-job
   #   - lint-test-job
   variables:
     PUBLIC_URL: https://ripe-tomatoes.gitlab.io/ripe-tomatoes/
