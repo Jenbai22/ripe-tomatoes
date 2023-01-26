@@ -23,6 +23,7 @@ services:
 
 variables:
   DATABASE_URL: postgresql://postgres:86ea4e15c8c4bf90@http://srv-captain--ripe-tomatoes-db/postgres
+  SIGNING_KEY: 4330882fb289cd7e85c4ee5381eb7bf463f01ea2e68020daf050ccff66f84245
 
 build-front-end-job:
   stage: build
