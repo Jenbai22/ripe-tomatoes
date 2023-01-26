@@ -98,7 +98,7 @@ export default function Detail() {
       }
     }
     getData();
-  }, []);
+  }, [formData, imdb]);
 
   const handleFormChange = (e) => {
     setFormData({
@@ -292,7 +292,7 @@ export default function Detail() {
                 </div>
                 <div id="column-details">
                   <div id="poster">
-                    <img src={movie.Poster}></img>
+                    <img src={movie.Poster} alt="poster"></img>
                   </div>
                   <div id="info">
                     <div>{movie.Genre}</div>
