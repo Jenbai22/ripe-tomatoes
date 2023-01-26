@@ -53,3 +53,11 @@ Today we created a favorites count to show how many times a movie has been added
 ## Jan 23
 
 Today we checked through our code to make sure it was clean and there were no comments or console.logs left in there.
+
+## Jan 24
+
+Today we worked on our README file and docs. We are now ready to start with deployment.
+
+## Jan 25
+
+Today we worked on deployment but couldn't get them to pass in gitlab. We are going to keep trying tomorrow.
