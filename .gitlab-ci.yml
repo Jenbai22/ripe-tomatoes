@@ -23,6 +23,8 @@ build-api-backend:
   stage: build
   variables:
     CORS_HOST: https://ripe-tomatoes.gitlab.io
+    DATABASE_URL: postgresql://postgres:86ea4e15c8c4bf90@http://srv-captain--ripe-tomatoes-db/postgres
+    SIGNING_KEY: 4330882fb289cd7e85c4ee5381eb7bf463f01ea2e68020daf050ccff66f84245
   services:
     - docker:19.03.1-dind
     - postgres:14.2-bullseye
