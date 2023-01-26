@@ -33,7 +33,7 @@ build-front-end-job:
   #   - lint-test-job
   variables:
     PUBLIC_URL: https://ripe-tomatoes.gitlab.io/ripe-tomatoes
-    REACT_APP_RIPE_TOMATOES_API_HOST: http://ripe-tomatoes.sept-ct-5.mod3projects.com
+    REACT_APP_RIPE_TOMATOES_API_HOST: http://captain.sept-ct-5.mod3projects.com
   script:
     - cd ghi
     - npm install
