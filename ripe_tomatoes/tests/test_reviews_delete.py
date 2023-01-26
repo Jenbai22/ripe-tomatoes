@@ -24,5 +24,5 @@ def test_delete_review():
     review_id = 1
     response = client.delete(f"/reviews/{review_id}")
     assert response.status_code == 200
-    assert response.json() == True
+    assert response.json()
     app.dependency_overrides = {}

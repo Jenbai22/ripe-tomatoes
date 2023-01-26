@@ -45,7 +45,7 @@ export default function Favorites() {
     if (response.ok) {
       let f = [...favorites];
       f.splice(
-        f.findIndex((x) => x.id == id),
+        f.findIndex((x) => x.id === id),
         1
       );
       setFavorites(f);

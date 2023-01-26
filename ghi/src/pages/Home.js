@@ -27,7 +27,7 @@ export default function Home() {
       if (response.ok) {
         let data = await response.json();
         data = data.Search;
-        data = data.filter((x) => x.Poster != "N/A");
+        data = data.filter((x) => x.Poster !== "N/A");
         setMovies(data);
         setLoading(false);
       }
@@ -49,7 +49,7 @@ export default function Home() {
         let data = await response.json();
         if (!data.Error) {
           data = data.Search;
-          data = data.filter((x) => x.Poster != "N/A");
+          data = data.filter((x) => x.Poster !== "N/A");
           if (data.length === 0) {
             setNoResultsError(true);
           } else {
