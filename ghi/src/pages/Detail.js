@@ -57,7 +57,7 @@ export default function Detail() {
           if (response.ok) {
             let data = await response.json();
             for (let x of data.reviews) {
-              if (x.edited == 1) {
+              if (x.edited === 1) {
                 x.edited = "(edited)";
               } else {
                 x.edited = "";
@@ -70,7 +70,7 @@ export default function Detail() {
             if (response.ok) {
               data = await response.json();
               setFavorites(data.favorites);
-              if (data.favorites == 1) {
+              if (data.favorites === 1) {
                 setFavoriteNotPlural(true);
               } else {
                 setFavoriteNotPlural(false);
@@ -84,7 +84,7 @@ export default function Detail() {
             if (response.ok) {
               const d = await response.json();
               const check = d.favorites.find(
-                ({ imdb }) => imdb == formData.imdb
+                ({ imdb }) => imdb === formData.imdb
               );
               if (check) {
                 const addButton = document.querySelector(".add-faves");
@@ -125,7 +125,7 @@ export default function Detail() {
         if (response.ok) {
           const data = await response.json();
           let r = [...reviews];
-          let i = r.findIndex((x) => x.id == reviewUnderEdit);
+          let i = r.findIndex((x) => x.id === reviewUnderEdit);
           r[i].body = data.body;
           r[i].edited = "(edited)";
           setReviews(r);
@@ -190,11 +190,11 @@ export default function Detail() {
     postButton.classList.toggle("editingmode");
     const postArea = document.querySelector("#post-area");
 
-    if (isEditing == false) {
+    if (isEditing === false) {
       setIsEditing(true);
       postButton.innerHTML = "Edit";
       let r = [...reviews];
-      let i = r.findIndex((x) => x.id == parseInt(id.slice(4)));
+      let i = r.findIndex((x) => x.id === parseInt(id.slice(4)));
       postArea.value = r[i].body;
       setReviewUnderEdit(parseInt(id.slice(4)));
     } else {
@@ -267,7 +267,7 @@ export default function Detail() {
     if (response.ok) {
       let r = [...reviews];
       r.splice(
-        r.findIndex((x) => x.id == id),
+        r.findIndex((x) => x.id === id),
         1
       );
       setReviews(r);
@@ -327,7 +327,7 @@ export default function Detail() {
               <div id="reviews">
                 <div ref={topRef} />
                 {reviews.map((review) => {
-                  if (review.username == formData.username) {
+                  if (review.username === formData.username) {
                     return (
                       <div id="review" key={review.id}>
                         <div id="username">
