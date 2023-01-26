@@ -89,3 +89,9 @@ Today, I worked on:
 
 1. We cont with team coding: We worked on the readme file, the tables, and formatting.
 2. We also started to make videos of our project to show functionality. We will use this to make small gifs on our Readme file.
+
+## Jan 24
+
+Today, I worked on:
+
+1. Team coding: today we started the deployment stage. We spent a lot of time waiting on getting answers from the instructors. And I mean we waited cause we are using a new deployment for our projects and had to wait from one instructor for instructions. We did get started on our gitlan-ci.yml and make a CapRover account. We ran into some issues and we will wait til Tmw and talk to Riley for some direction.
