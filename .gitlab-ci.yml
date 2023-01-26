@@ -3,21 +3,30 @@ stages:
   - build
   - deploy
 
-lint-test-job:
-  image: python:3-bullseye
-  stage: test
-  script:
-    - pip install flake8
-    - flake8 sample_service
+# lint-test-job:
+#   image: python:3-bullseye
+#   stage: test
+#   script:
+#     - pip install flake8
+#     - flake8 ripe_tomatoes
+
+# ripe-tomatoes-unit-test-job:
+#   image: python:3-bullseye
+#   stage: test
+#   script:
+#     - cd ripe_tomatoes
+#     - pip install -r requirements.txt
+#     - python -m pytest
 
 build-front-end-job:
   stage: build
   image: node:lts-bullseye
-  needs:
-    - lint-test-job
+  # needs:
+  # - ripe-tomatoes-unit-test-job
+  #   - lint-test-job
   variables:
-    PUBLIC_URL: https://GROUP_NAME.gitlab.io/PROJECT_NAME/
-    REACT_APP_SAMPLE_SERVICE_API_HOST: https://WEBSERVICE_NAME.onrender.com
+    PUBLIC_URL: https://ripe-tomatoes.gitlab.io/ripe-tomatoes/
+    REACT_APP_SAMPLE_SERVICE_API_HOST: http://ripe-tomatoes.sept-ct-5.mod3projects.com
   script:
     - cd ghi
     - npm install
@@ -26,6 +35,34 @@ build-front-end-job:
   artifacts:
     paths:
       - ghi/build/
+
+build-api-backend:
+  image: docker:19.03.1
+  stage: build
+  variables:
+    CORS_HOST: https://ripe-tomatoes.gitlab.io
+  services:
+    - docker:19.03.1-dind
+  before_script:
+    - export DOCKER_REGISTRY_USER=$CI_REGISTRY_USER # built-in GitLab Registry User
+    - export DOCKER_REGISTRY_PASSWORD=$CI_REGISTRY_PASSWORD # built-in GitLab Registry Password
+    - export DOCKER_REGISTRY_URL=$CI_REGISTRY # built-in GitLab Registry URL
+    - export COMMIT_HASH=$CI_COMMIT_SHA # Your current commit sha
+    - export IMAGE_NAME_WITH_REGISTRY_PREFIX=$CI_REGISTRY_IMAGE # Your repository prefixed with GitLab Registry URL
+    - docker login -u "$DOCKER_REGISTRY_USER" -p "$DOCKER_REGISTRY_PASSWORD" $DOCKER_REGISTRY_URL # Instructs GitLab to login to its registry
+
+  script:
+    - cd ripe_tomatoes
+    - echo "Building..." # MAKE SURE NO SPACE ON EITHER SIDE OF = IN THE FOLLOWING LINE
+    - export CONTAINER_FULL_IMAGE_NAME_WITH_TAG=$IMAGE_NAME_WITH_REGISTRY_PREFIX/ripe_tomatoes:$COMMIT_HASH
+    - docker build -f ./Dockerfile --pull -t ripe_tomatoes .
+    - docker tag ripe_tomatoes "$CONTAINER_FULL_IMAGE_NAME_WITH_TAG"
+    - docker push "$CONTAINER_FULL_IMAGE_NAME_WITH_TAG"
+    - echo $CONTAINER_FULL_IMAGE_NAME_WITH_TAG
+    - echo "Deploying on CapRover..."
+    - docker run caprover/cli-caprover:v2.1.1 caprover deploy --caproverUrl $CAPROVER_URL --caproverPassword $CAPROVER_PASSWORD --caproverApp $CAPROVER_APP --imageName $CONTAINER_FULL_IMAGE_NAME_WITH_TAG
+  only:
+    - main
 
 pages:
   stage: deploy

@@ -18,7 +18,7 @@ class UserQueriesMock:
             "firstname": "John",
             "lastname": "Jones",
             "email": "j@j.com",
-            "hashed_password": "$2b$12$xgYwasyV0/4lWZQ.cd5Tcu.QBpJ5.M/4reT7ABEGqB5niOZ1WXPB6",
+            "hashed_password": "$2b$12$xgYwasyV0/4lWZQ",
         }
 
 
