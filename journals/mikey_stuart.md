@@ -19,6 +19,16 @@ Over the weekend, Gavin had some ideas to make our edit/delete functions for rev
 ## Jan 18
 Group coded tests individually and then everyone reviewed each other's tests to get them to work properly. Started on stretch goals with making a "favorites" page for our user's.
 ## Jan 19
-Group coded our new "favorites" page and was able to implement a add and delete button. Also added a count for all the times a movie was favorited. Once we finished we merged our dream branch into main to show favorites in our final project.
+Group coded our new "favorites" page and was able to implement a add and delete button.
 ## Jan 20
-
+Group coded to touch up our page and brainstorm some new stretch goal ideas. Also added a count for all the times a movie was favorited. Once we finished we merged our dream branch into main to show favorites in our final project.
+## Jan 23
+Group coded to do some code organization.
+## Jan 24
+Group coded our README.md and ran a linter to organize our code.
+## Jan 25
+Group coded to try deployment and waited for instruction upon being stuck. Didn't get fully deployed, but did fix a lot of our problems.
+## Jan 26
+Group coded to work on deployment again and by the end of the day we were able to get both our front and back end deployed with help from Dalonte.
+## Jan 27
+Had an error with our deployment code trying to render locally. Fixed our code to show locally for presentation. Finished project and on to studying for exam.
