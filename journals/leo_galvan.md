@@ -107,3 +107,4 @@ Today, I worked on:
 Today, I worked on:
 
 1. Team coding: We were able to get our deployment working. It was working last night but we did not know it. It takes a LONG time for the page to first load up. Once it does it works perfectly. We did add some padding to the search bar cause it looked bad on the deployment side and some minor things here and there, but we feel that it is working great and done for now.
+2. We thought we were finish. We had to clear up some warnings in our console.

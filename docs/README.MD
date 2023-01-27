@@ -31,8 +31,8 @@ Any and all watchers of movies
 - Visitors to the site can take a look around search for movies:
   - They can click on a movie and see info regarding the movie and reviews left by users.
   - A visitor can also create an account, log in, and out.
-- A registed user can leave, edit and delete their reviews on a movie.
-- A registed user can add and remove movies to and from their favorites list.
+- A registered user can leave, edit and delete their reviews on a movie.
+- A registered user can add and remove movies to and from their favorites list.
 
 ## Non-deliverable functionality
 

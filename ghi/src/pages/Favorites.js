@@ -70,20 +70,20 @@ export default function Favorites() {
           <h1 id="your-favorites">yua faboritess~~ ʕ•́ᴥ•̀ʔっ♡</h1>
           <div className="favorites-grid">
             {favorites.map((favorite) => (
-                <div className="favorites-item" key={favorite.id}>
-                  <button
-                    className="favorite-delete"
-                    onClick={handleRemove}
-                    id={favorite.id}
-                  >
-                    remove
-                  </button>
-                  <Link to={`/${favorite.imdb}`}>
-                    <div id="favorites-poster">
-                      <img src={favorite.poster} alt="poster" />
-                    </div>
-                  </Link>
-                </div>
+              <div className="favorites-item" key={favorite.id}>
+                <button
+                  className="favorite-delete"
+                  onClick={handleRemove}
+                  id={favorite.id}
+                >
+                  remove
+                </button>
+                <Link to={`/${favorite.imdb}`}>
+                  <div id="favorites-poster">
+                    <img src={favorite.poster} alt="poster" />
+                  </div>
+                </Link>
+              </div>
             ))}
           </div>
         </main>
