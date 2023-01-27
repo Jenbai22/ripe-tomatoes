@@ -26,7 +26,6 @@ function LoginModal() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    document.getElementById("form").reset();
 
     const url = `${process.env.REACT_APP_RIPE_TOMATOES_API_HOST}/token`;
     const form = new FormData();
@@ -57,7 +56,7 @@ function LoginModal() {
           <Modal.Title>Sign In</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form id="form">
+          <Form>
             <Form.Group
               className="mb-3"
               controlId="exampleForm.ControlInput1"
@@ -121,34 +120,31 @@ function SignupModal() {
         setCharacterFail(false);
       }, "5000");
     } else {
-      try {
-        let url = `${process.env.REACT_APP_RIPE_TOMATOES_API_HOST}/users`;
+      let url = `${process.env.REACT_APP_RIPE_TOMATOES_API_HOST}/users`;
+      let response = await fetch(url, {
+        method: "POST",
+        body: JSON.stringify(formData),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (response.status === 200) {
+        setShow(false);
+        let url = `${process.env.REACT_APP_RIPE_TOMATOES_API_HOST}/token`;
+        let form = new FormData();
+        form.append("username", formData.username);
+        form.append("password", formData.password);
         let response = await fetch(url, {
           method: "POST",
-          body: JSON.stringify(formData),
-          headers: {
-            "Content-Type": "application/json",
-          },
+          credentials: "include",
+          body: form,
         });
         if (response.ok) {
-          setShow(false);
-          let url = `${process.env.REACT_APP_RIPE_TOMATOES_API_HOST}/token`;
-          let form = new FormData();
-          form.append("username", formData.username);
-          form.append("password", formData.password);
-          let response = await fetch(url, {
-            method: "POST",
-            credentials: "include",
-            body: form,
-          });
-          if (response.ok) {
-            window.location.reload();
-            document.getElementById("form").reset();
-            handleClose();
-            return;
-          }
+          window.location.reload();
+          handleClose();
+          return;
         }
-      } catch {
+      } else {
         setSignupFail(true);
         setTimeout(() => {
           setSignupFail(false);
@@ -166,7 +162,7 @@ function SignupModal() {
           <Modal.Title>Sign Up</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form id="form">
+          <Form>
             <Form.Group
               className="mb-3"
               controlId="exampleForm.ControlInput1"

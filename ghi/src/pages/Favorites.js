@@ -70,7 +70,6 @@ export default function Favorites() {
           <h1 id="your-favorites">yua faboritess~~ ʕ•́ᴥ•̀ʔっ♡</h1>
           <div className="favorites-grid">
             {favorites.map((favorite) => (
-              <>
                 <div className="favorites-item" key={favorite.id}>
                   <button
                     className="favorite-delete"
@@ -85,7 +84,6 @@ export default function Favorites() {
                     </div>
                   </Link>
                 </div>
-              </>
             ))}
           </div>
         </main>

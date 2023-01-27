@@ -32,6 +32,8 @@ export default function Detail() {
     edited: 0,
   });
 
+  const formBody = {body: ""}
+
   useEffect(() => {
     async function getData() {
       let url = `${process.env.REACT_APP_RIPE_TOMATOES_API_HOST}/token`;
@@ -77,20 +79,22 @@ export default function Detail() {
               }
             }
             setLoading(false);
-            response = await fetch(
-              `${process.env.REACT_APP_RIPE_TOMATOES_API_HOST}/favorites/${formData.username}`,
-              { credentials: "include" }
-            );
-            if (response.ok) {
-              const d = await response.json();
-              const check = d.favorites.find(
-                ({ imdb }) => imdb === formData.imdb
-              );
-              if (check) {
-                const addButton = document.querySelector(".add-faves");
-                addButton.innerHTML = "Remove from favorites";
-                setFavoritedId(check.id);
-                setIsFavorited(true);
+            if (formData.username !== "") {
+              response = await fetch(
+                `${process.env.REACT_APP_RIPE_TOMATOES_API_HOST}/favorites/${formData.username}`,
+                { credentials: "include" }
+                );
+              if (response.ok) {
+                const d = await response.json();
+                const check = d.favorites.find(
+                  ({ imdb }) => imdb === formData.imdb
+                );
+                if (check) {
+                  const addButton = document.querySelector(".add-faves");
+                  addButton.innerHTML = "Remove from favorites";
+                  setFavoritedId(check.id);
+                  setIsFavorited(true);
+                }
               }
             }
           }
@@ -98,17 +102,16 @@ export default function Detail() {
       }
     }
     getData();
-  }, [formData, imdb]);
+  }, [imdb, formData]);
 
   const handleFormChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    formBody.body = e.target.value
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setFormData({...formData, body: formBody.body});
+    formData.body = formBody.body
     if (formData.body.length >= 1 && formData.body.length <= 1000) {
       if (isEditing) {
         formData.edited = 1;
@@ -170,9 +173,13 @@ export default function Detail() {
           formData.body = "";
           topRef.current?.scrollIntoView({ behavior: "smooth" });
           document.querySelector("#post-area").value = "";
-          document.getElementById("form").reset();
+          document.getElementById("review-form").reset();
         } else {
-          console.log("Failed to post review");
+          const charError = document.querySelector(".post-fail-error");
+          charError.classList.toggle("active");
+          setTimeout(() => {
+            charError.classList.toggle("active");
+          }, "5000");
         }
       }
     } else {
@@ -383,9 +390,8 @@ export default function Detail() {
                   }
                 })}
               </div>
-              <div className="char-limit-error">
-                Character limit between 1 and 1000
-              </div>
+              <div className="char-limit-error">Character limit between 1 and 1000</div>
+              <div className="post-fail-error">Failed to post, please try again later</div>
               <form id="review-form" onSubmit={handleSubmit}>
                 {loggedIn ? (
                   <textarea
@@ -405,9 +411,15 @@ export default function Detail() {
                     disabled
                   />
                 )}
+                {loggedIn ? (
                 <button id="post-button" type="submit">
                   Post
                 </button>
+                ):(
+                <button id="post-button" style={{pointerEvents: "none", userSelect: "none"}}>
+                  Post
+                </button>
+                )}
               </form>
             </div>
           </div>

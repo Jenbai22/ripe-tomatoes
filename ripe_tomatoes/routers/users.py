@@ -32,11 +32,14 @@ async def create_account(
     response: Response,
     repo: UserQueries = Depends(),
 ):
-    hashed_password = authenticator.hash_password(info.password)
-    user = repo.create_user(info, hashed_password)
-    form = UserForm(username=info.username, password=info.password)
-    token = await authenticator.login(response, request, form, repo)
-    return UserToken(user=user, **token.dict())
+    try:
+        hashed_password = authenticator.hash_password(info.password)
+        user = repo.create_user(info, hashed_password)
+        form = UserForm(username=info.username, password=info.password)
+        token = await authenticator.login(response, request, form, repo)
+        return UserToken(user=user, **token.dict())
+    except:
+        raise HTTPException(status_code=409, detail="Username or Email already exists")
 
 
 @router.get("/users", response_model=UsersOut)
