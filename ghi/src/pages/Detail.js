@@ -23,7 +23,6 @@ export default function Detail() {
   let [favoritedId, setFavoritedId] = useState("");
 
   let [favorites, setFavorites] = useState(0);
-  let [favoriteNotPlural, setFavoriteNotPlural] = useState(false);
 
   const [formData, setFormData] = useState({
     imdb: imdb,
@@ -72,11 +71,6 @@ export default function Detail() {
             if (response.ok) {
               data = await response.json();
               setFavorites(data.favorites);
-              if (data.favorites === 1) {
-                setFavoriteNotPlural(true);
-              } else {
-                setFavoriteNotPlural(false);
-              }
             }
             setLoading(false);
             if (formData.username !== "") {
@@ -256,12 +250,6 @@ export default function Detail() {
         addButton.innerHTML = "Remove from favorites";
       }
     }
-
-    if (favorites === 1) {
-      setFavoriteNotPlural(false);
-    } else {
-      setFavoriteNotPlural(true);
-    }
   };
 
   const handleDelete = async (e) => {
@@ -316,17 +304,10 @@ export default function Detail() {
                         Login to Favorite
                       </button>
                     )}
-                    {favoriteNotPlural ? (
-                      <div className="favorites-count">
-                        <span style={{ color: "red" }}>{favorites}</span>{" "}
-                        favorite
-                      </div>
-                    ) : (
-                      <div className="favorites-count">
-                        <span style={{ color: "red" }}>{favorites}</span>{" "}
-                        favorites
-                      </div>
-                    )}
+                    <div className="favorites-count">
+                      <span style={{ color: "red" }}>{favorites}</span>{" "}
+                      favorites
+                    </div>
                   </div>
                 </div>
                 <div id="plot">{movie.Plot}</div>

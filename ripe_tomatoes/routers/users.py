@@ -38,7 +38,7 @@ async def create_account(
         form = UserForm(username=info.username, password=info.password)
         token = await authenticator.login(response, request, form, repo)
         return UserToken(user=user, **token.dict())
-    except ValueError:
+    except Exception:
         raise HTTPException(
             status_code=409,
             detail="Username or Email already exists",
