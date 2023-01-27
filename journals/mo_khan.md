@@ -61,20 +61,20 @@
 
 ## Jan 23th 2023
 
--
+-Today we mostly spendt time looking over the code for code cleanliness and testing.
 
 ## Jan 24th 2023
 
--
+-Today we worked on the ReadMe file. Created the ghi gifs, created api designs, data models, and integrations to implement with the ReadMe.
 
 ## Jan 25th 2023
 
--
+-Today we started working on deployment, setting up our caprover account and working through the git.ci.yml file.
 
 ## Jan 26th 2023
 
--
+-We ran across multiple errors and consulted with other teams, Riley, Dalonte, as well as the helpdesk team on gitlab and were finally able to get the deployed site working.
 
 ## Jan 27th 2023
 
--
+-Worked out final errors and tested to ensure that both the site was running on the server as well as locally. Needed to clear up that the Dockerfile and DockerfileDev were appropriately configured to run on ther server as well as locally.
