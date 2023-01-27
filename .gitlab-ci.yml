@@ -18,24 +18,6 @@ stages:
 #     - pip install -r requirements.txt
 #     - python -m pytest
 
-build-front-end-job:
-  stage: build
-  image: node:lts-bullseye
-  # needs:
-  # - ripe-tomatoes-unit-test-job
-  #   - lint-test-job
-  variables:
-    PUBLIC_URL: https://ripe-tomatoes.gitlab.io/ripe-tomatoes/
-    REACT_APP_SAMPLE_SERVICE_API_HOST: http://ripe-tomatoes.sept-ct-5.mod3projects.com
-  script:
-    - cd ghi
-    - npm install
-    - npm run build
-    - cp build/index.html build/404.html
-  artifacts:
-    paths:
-      - ghi/build/
-
 build-api-backend:
   image: docker:19.03.1
   stage: build
@@ -43,6 +25,7 @@ build-api-backend:
     CORS_HOST: https://ripe-tomatoes.gitlab.io
   services:
     - docker:19.03.1-dind
+    - postgres:14.2-bullseye
   before_script:
     - export DOCKER_REGISTRY_USER=$CI_REGISTRY_USER # built-in GitLab Registry User
     - export DOCKER_REGISTRY_PASSWORD=$CI_REGISTRY_PASSWORD # built-in GitLab Registry Password
@@ -55,14 +38,34 @@ build-api-backend:
     - cd ripe_tomatoes
     - echo "Building..." # MAKE SURE NO SPACE ON EITHER SIDE OF = IN THE FOLLOWING LINE
     - export CONTAINER_FULL_IMAGE_NAME_WITH_TAG=$IMAGE_NAME_WITH_REGISTRY_PREFIX/ripe_tomatoes:$COMMIT_HASH
-    - docker build -f ./Dockerfile --pull -t ripe_tomatoes .
-    - docker tag ripe_tomatoes "$CONTAINER_FULL_IMAGE_NAME_WITH_TAG"
+    - docker build -f ./Dockerfile --pull -t ripe_tomatoes_img .
+    - docker tag ripe_tomatoes_img "$CONTAINER_FULL_IMAGE_NAME_WITH_TAG"
     - docker push "$CONTAINER_FULL_IMAGE_NAME_WITH_TAG"
     - echo $CONTAINER_FULL_IMAGE_NAME_WITH_TAG
     - echo "Deploying on CapRover..."
     - docker run caprover/cli-caprover:v2.1.1 caprover deploy --caproverUrl $CAPROVER_URL --caproverPassword $CAPROVER_PASSWORD --caproverApp $CAPROVER_APP --imageName $CONTAINER_FULL_IMAGE_NAME_WITH_TAG
   only:
     - main
+
+build-front-end-job:
+  stage: build
+  image: node:lts-bullseye
+  # needs:
+  # - ripe-tomatoes-unit-test-job
+  # - lint-test-job
+
+  # https://ripe-tomatoes.gitlab.io/ripe-tomatoes
+  variables:
+    PUBLIC_URL: https://ripe-tomatoes.gitlab.io/ripe-tomatoes
+    REACT_APP_RIPE_TOMATOES_API_HOST: https://ripe-tomatoes.sept-ct-5.mod3projects.com
+  script:
+    - cd ghi
+    - npm install
+    - npm run build
+    - cp build/index.html build/404.html
+  artifacts:
+    paths:
+      - ghi/build/
 
 pages:
   stage: deploy
