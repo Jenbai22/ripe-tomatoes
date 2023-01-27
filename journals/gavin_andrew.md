@@ -1,3 +1,10 @@
+## 1/26/23
+After hours of working through bugs, we were able to properly
+deploy, with now seemingly maybe a few minor bugs remaining.
+
+## 1/25/23
+Started the deployment process
+
 ## 1/24/23
 Shared our screens and finished up working on the README.md;
 ran linters through our code
