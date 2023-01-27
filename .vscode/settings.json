@@ -3,5 +3,5 @@
   "python.formatting.provider": "black",
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "cSpell.words": ["imdb"]
+  "cSpell.words": ["caprover", "imdb", "pytest"]
 }

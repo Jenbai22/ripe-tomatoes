@@ -151,7 +151,10 @@ export default function Detail() {
             Authorization: `Bearer ${token.access_token}`,
           },
         };
-        const response = await fetch("http://localhost:8000/reviews", config);
+        const response = await fetch(
+          `${process.env.REACT_APP_RIPE_TOMATOES_API_HOST}/reviews`,
+          config
+        );
         if (response.ok) {
           const d = await response.json();
           setReviews((prevState) => [

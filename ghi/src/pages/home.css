@@ -7,7 +7,6 @@
   max-width: 1600px;
   display: grid;
   margin: 0 auto;
-  margin-top: 10vh;
   margin-left: none;
   gap: 4rem;
 }
@@ -31,6 +30,7 @@
   padding-top: 5vh;
   display: flex;
   height: 10%;
+  margin-bottom: 10vh;
 }
 
 #home-form input {
@@ -117,5 +117,3 @@
     margin-left: 25vh;
   }
 }
-
-
