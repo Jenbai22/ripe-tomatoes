@@ -61,3 +61,7 @@ Today we worked on our README file and docs. We are now ready to start with depl
 ## Jan 25
 
 Today we worked on deployment but couldn't get them to pass in gitlab. We are going to keep trying tomorrow.
+
+## Jan 26
+
+We managed to deploy our site! It took a lot of troubleshooting, we had to change our database url on caprover and we added cors_host to appconfig. We also had to enable https.
