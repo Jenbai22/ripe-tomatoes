@@ -1,8 +1,9 @@
 from psycopg_pool import ConnectionPool
-from models.reviews import Review, ReviewIn, ReviewOut, ReviewsOut
+from models.reviews import Review
 import os
 
-pool = ConnectionPool(conninfo=os.environ['DATABASE_URL'])
+pool = ConnectionPool(conninfo=os.environ["DATABASE_URL"])
+
 
 class ReviewQueries:
     def get_reviews_by_imdb(self, imdb: int) -> Review:
@@ -15,8 +16,8 @@ class ReviewQueries:
                     WHERE imdb = %s
                     ORDER BY posted DESC;
                 """,
-                    [imdb]
-                ),
+                    [imdb],
+                )
 
                 results = []
                 for row in cur.fetchall():
@@ -57,11 +58,11 @@ class ReviewQueries:
                     RETURNING id, posted, body, imdb, username, edited;
                     """,
                     [
-                    data.body,
-                    data.imdb,
-                    data.username,
-                    data.edited,
-                ]
+                        data.body,
+                        data.imdb,
+                        data.username,
+                        data.edited,
+                    ],
                 )
 
                 record = None
@@ -74,17 +75,17 @@ class ReviewQueries:
                 return record
 
     def update_review(self, review_id, data):
-            with pool.connection() as conn:
-                with conn.cursor() as cur:
-                    params = [
-                        data.body,
-                        data.imdb,
-                        data.username,
-                        data.edited,
-                        review_id,
-                    ]
-                    cur.execute(
-                        """
+        with pool.connection() as conn:
+            with conn.cursor() as cur:
+                params = [
+                    data.body,
+                    data.imdb,
+                    data.username,
+                    data.edited,
+                    review_id,
+                ]
+                cur.execute(
+                    """
                         UPDATE reviews
                         SET body = %s
                         , imdb = %s
@@ -93,17 +94,17 @@ class ReviewQueries:
                         WHERE id = %s
                         RETURNING id, body, imdb, posted, username, edited
                         """,
-                        params,
-                    )
+                    params,
+                )
 
-                    record = None
-                    row = cur.fetchone()
-                    if row is not None:
-                        record = {}
-                        for i, column in enumerate(cur.description):
-                            record[column.name] = row[i]
+                record = None
+                row = cur.fetchone()
+                if row is not None:
+                    record = {}
+                    for i, column in enumerate(cur.description):
+                        record[column.name] = row[i]
 
-                    return record
+                return record
 
     def delete_review(self, review_id):
         with pool.connection() as conn:

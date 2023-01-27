@@ -1,7 +1,8 @@
 from psycopg_pool import ConnectionPool
 import os
 
-pool = ConnectionPool(conninfo=os.environ['DATABASE_URL'])
+pool = ConnectionPool(conninfo=os.environ["DATABASE_URL"])
+
 
 class FavoriteQueries:
     def get_favorite_count_by_imdb(self, imdb):
@@ -13,13 +14,12 @@ class FavoriteQueries:
                     FROM favorites
                     WHERE imdb = %s;
                     """,
-                    [imdb]
+                    [imdb],
                 )
 
                 return cur.fetchall()[0][0]
 
-
-    def get_favorites_by_username(self, username:str):
+    def get_favorites_by_username(self, username: str):
         with pool.connection() as conn:
             with conn.cursor() as cur:
                 cur.execute(
@@ -29,7 +29,7 @@ class FavoriteQueries:
                     WHERE username = %s
                     ORDER BY id;
                 """,
-                    [username]
+                    [username],
                 )
 
                 results = []
@@ -71,10 +71,10 @@ class FavoriteQueries:
                     RETURNING id, imdb, username, poster;
                     """,
                     [
-                    data.imdb,
-                    data.username,
-                    data.poster,
-                ]
+                        data.imdb,
+                        data.username,
+                        data.poster,
+                    ],
                 )
 
                 record = None

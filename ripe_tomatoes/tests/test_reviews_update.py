@@ -1,7 +1,7 @@
 import json
 from fastapi.testclient import TestClient
 from queries.reviews import ReviewQueries
-from routers.reviews import ReviewIn, ReviewOut
+from routers.reviews import ReviewIn
 from authenticator import authenticator
 from main import app
 
@@ -13,32 +13,30 @@ def get_current_account_data_mock():
 
 
 class ReviewQueriesMock:
-    def create_review(self, review: ReviewIn) -> ReviewOut:
+    def update_review(self, review_id: int, review: ReviewIn) -> ReviewIn:
         review_dict = review.dict()
-        return ReviewOut(
-            id=222, posted="2023-01-18T17:54:43.832Z", **review_dict
-        )
+        return ReviewIn(**review_dict)
 
 
-def test_create_review():
+def test_update_review():
     app.dependency_overrides[ReviewQueries] = ReviewQueriesMock
     app.dependency_overrides[
         authenticator.get_current_account_data
     ] = get_current_account_data_mock
-
+    review_id = 1
     review_body = {
         "body": "Love this movie!",
         "imdb": "tt4106306",
         "username": "Jen",
-        "edited": 0,
+        "edited": 1,
     }
 
-    res = client.post("/reviews", json.dumps(review_body))
+    res = client.put(f"/reviews/{review_id}", json.dumps(review_body))
 
     assert res.status_code == 200
     assert res.json()["username"] == "Jen"
     assert res.json()["body"] == "Love this movie!"
     assert res.json()["imdb"] == "tt4106306"
-    assert res.json()["edited"] == 0
+    assert res.json()["edited"] == 1
 
     app.dependency_overrides = {}

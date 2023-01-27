@@ -1,5 +1,4 @@
 steps = [
-
     [
         """
         CREATE TABLE users (
@@ -13,7 +12,6 @@ steps = [
         """,
         """
         DROP TABLE users;
-        """
+        """,
     ]
-
 ]

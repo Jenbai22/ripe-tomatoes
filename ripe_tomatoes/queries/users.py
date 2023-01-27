@@ -1,17 +1,14 @@
-# db stuff goes here - ALL THE SQL
 from psycopg_pool import ConnectionPool
 from models.users import User
 import os
 
-pool = ConnectionPool(conninfo=os.environ['DATABASE_URL'])
+pool = ConnectionPool(conninfo=os.environ["DATABASE_URL"])
+
 
 class UserQueries:
     def get(self, username: str) -> User:
-        # connect the database
         with pool.connection() as conn:
-            # get a cursor (something to run SQL with)
             with conn.cursor() as db:
-                # Run our SELECT statement
                 result = db.execute(
                     """
                     SELECT id
@@ -23,7 +20,7 @@ class UserQueries:
                     FROM users
                     WHERE username = %s;
                     """,
-                    [username]
+                    [username],
                 )
                 record = result.fetchone()
                 if record is None:
@@ -37,13 +34,17 @@ class UserQueries:
                     hashed_password=record[5],
                 )
 
-
     def get_all_users(self):
         with pool.connection() as conn:
             with conn.cursor() as cur:
                 cur.execute(
                     """
-                    SELECT id, firstname, lastname, hashed_password, email, username
+                    SELECT id
+                    , firstname
+                    , lastname
+                    , hashed_password
+                    , email
+                    , username
                     FROM users
                     ORDER BY lastname, firstname;
                 """
@@ -63,17 +64,21 @@ class UserQueries:
             with conn.cursor() as cur:
                 cur.execute(
                     """
-                    INSERT INTO users (firstname, lastname, hashed_password, email, username)
+                    INSERT INTO users (firstname
+                    , lastname
+                    , hashed_password
+                    , email
+                    , username)
                     VALUES (%s, %s, %s, %s, %s)
                     RETURNING id, username;
                     """,
                     [
-                    data.firstname,
-                    data.lastname,
-                    hashed_password,
-                    data.email,
-                    data.username,
-                ]
+                        data.firstname,
+                        data.lastname,
+                        hashed_password,
+                        data.email,
+                        data.username,
+                    ],
                 )
 
                 record = None
@@ -82,9 +87,6 @@ class UserQueries:
                     record = {}
                     for i, column in enumerate(cur.description):
                         record[column.name] = row[i]
-
-                print('**********record', record)
-
                 return record
 
     def update_user(self, user_id, data):
