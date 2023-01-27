@@ -94,4 +94,10 @@ Today, I worked on:
 
 Today, I worked on:
 
-1. Team coding: today we started the deployment stage. We spent a lot of time waiting on getting answers from the instructors. And I mean we waited cause we are using a new deployment for our projects and had to wait from one instructor for instructions. We did get started on our gitlan-ci.yml and make a CapRover account. We ran into some issues and we will wait til Tmw and talk to Riley for some direction.
+1. Team coding: today we started the deployment stage. We spent a lot of time waiting on getting answers from the instructors. And I mean we waited cause we are using a new deployment for our projects and had to wait from one instructor for instructions. We did get started on our gitlab-ci.yml and make a CapRover account. We ran into some issues and we will wait til Tmw and talk to Riley for some direction.
+
+## Jan 24
+
+Today, I worked on:
+
+1. Team coding: We are still working on deploying. We spent all day working on it and waiting on teacher. We finally made some major advance towards the end. We had to change some CORS settings and that allowed the page to show some of our front page. This lead to us having log in issue, but we will tackle this tmw.
