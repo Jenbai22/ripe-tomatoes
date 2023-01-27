@@ -1,3 +1,8 @@
+## 1/27/23
+Smoothed out the remaining bugs with deployment,
+primarily one preventing local and online from running at the same time,
+but ALL DONE!
+
 ## 1/26/23
 After hours of working through bugs, we were able to properly
 deploy, with now seemingly maybe a few minor bugs remaining.
