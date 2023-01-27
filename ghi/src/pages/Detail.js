@@ -270,7 +270,7 @@ export default function Detail() {
     if (response.ok) {
       let r = [...reviews];
       r.splice(
-        r.findIndex((x) => x.id === id),
+        r.findIndex((x) => x.id === Number(id)),
         1
       );
       setReviews(r);
