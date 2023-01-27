@@ -3,20 +3,20 @@ stages:
   - build
   - deploy
 
-# lint-test-job:
-#   image: python:3-bullseye
-#   stage: test
-#   script:
-#     - pip install flake8
-#     - flake8 ripe_tomatoes
+lint-test-job:
+  image: python:3-bullseye
+  stage: test
+  script:
+    - pip install flake8
+    - flake8 ripe_tomatoes
 
-# ripe-tomatoes-unit-test-job:
-#   image: python:3-bullseye
-#   stage: test
-#   script:
-#     - cd ripe_tomatoes
-#     - pip install -r requirements.txt
-#     - python -m pytest
+ripe-tomatoes-unit-test-job:
+  image: python:3-bullseye
+  stage: test
+  script:
+    - cd ripe_tomatoes
+    - pip install -r requirements.txt
+    - python -m pytest
 
 build-api-backend:
   image: docker:19.03.1
@@ -27,16 +27,16 @@ build-api-backend:
     - docker:19.03.1-dind
     - postgres:14.2-bullseye
   before_script:
-    - export DOCKER_REGISTRY_USER=$CI_REGISTRY_USER # built-in GitLab Registry User
-    - export DOCKER_REGISTRY_PASSWORD=$CI_REGISTRY_PASSWORD # built-in GitLab Registry Password
-    - export DOCKER_REGISTRY_URL=$CI_REGISTRY # built-in GitLab Registry URL
-    - export COMMIT_HASH=$CI_COMMIT_SHA # Your current commit sha
-    - export IMAGE_NAME_WITH_REGISTRY_PREFIX=$CI_REGISTRY_IMAGE # Your repository prefixed with GitLab Registry URL
-    - docker login -u "$DOCKER_REGISTRY_USER" -p "$DOCKER_REGISTRY_PASSWORD" $DOCKER_REGISTRY_URL # Instructs GitLab to login to its registry
+    - export DOCKER_REGISTRY_USER=$CI_REGISTRY_USER
+    - export DOCKER_REGISTRY_PASSWORD=$CI_REGISTRY_PASSWORD
+    - export DOCKER_REGISTRY_URL=$CI_REGISTRY
+    - export COMMIT_HASH=$CI_COMMIT_SHA
+    - export IMAGE_NAME_WITH_REGISTRY_PREFIX=$CI_REGISTRY_IMAGE
+    - docker login -u "$DOCKER_REGISTRY_USER" -p "$DOCKER_REGISTRY_PASSWORD" $DOCKER_REGISTRY_URL
 
   script:
     - cd ripe_tomatoes
-    - echo "Building..." # MAKE SURE NO SPACE ON EITHER SIDE OF = IN THE FOLLOWING LINE
+    - echo "Building..."
     - export CONTAINER_FULL_IMAGE_NAME_WITH_TAG=$IMAGE_NAME_WITH_REGISTRY_PREFIX/ripe_tomatoes:$COMMIT_HASH
     - docker build -f ./Dockerfile --pull -t ripe_tomatoes_img .
     - docker tag ripe_tomatoes_img "$CONTAINER_FULL_IMAGE_NAME_WITH_TAG"
@@ -50,11 +50,9 @@ build-api-backend:
 build-front-end-job:
   stage: build
   image: node:lts-bullseye
-  # needs:
-  # - ripe-tomatoes-unit-test-job
-  # - lint-test-job
-
-  # https://ripe-tomatoes.gitlab.io/ripe-tomatoes
+  needs:
+    - ripe-tomatoes-unit-test-job
+    - lint-test-job
   variables:
     PUBLIC_URL: https://ripe-tomatoes.gitlab.io/ripe-tomatoes
     REACT_APP_RIPE_TOMATOES_API_HOST: https://ripe-tomatoes.sept-ct-5.mod3projects.com
