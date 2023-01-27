@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./favorites.css";
 import ScaleLoader from "react-spinners/ScaleLoader";
 
 export default function Favorites() {
+  const navigate = useNavigate();
+
   const [loading, setLoading] = useState(true);
   const [favorites, setFavorites] = useState([]);
   const [token, setToken] = useState([]);
@@ -14,6 +16,9 @@ export default function Favorites() {
       let response = await fetch(url, { credentials: "include" });
       if (response.ok) {
         let data = await response.json();
+        if (data === null) {
+          return navigate("/");
+        }
         setToken(data);
         if (data.user.username) {
           let response = await fetch(
