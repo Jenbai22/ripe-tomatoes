@@ -65,3 +65,7 @@ Today we worked on deployment but couldn't get them to pass in gitlab. We are go
 ## Jan 26
 
 We managed to deploy our site! It took a lot of troubleshooting, we had to change our database url on caprover and we added cors_host to appconfig. We also had to enable https.
+
+## Jan 27
+
+Fixed some bugs to allow our project to run locally and on the server. Took terms to merge our branches to main with our journals.
