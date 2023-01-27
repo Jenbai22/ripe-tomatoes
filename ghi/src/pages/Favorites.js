@@ -34,7 +34,7 @@ export default function Favorites() {
       }
     }
     getData();
-  }, []);
+  }, [navigate]);
 
   const handleRemove = async (e) => {
     e.preventDefault();
