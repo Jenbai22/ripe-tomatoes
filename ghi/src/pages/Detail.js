@@ -121,11 +121,11 @@ export default function Detail() {
         });
         if (response.ok) {
           const data = await response.json();
-          let r = [...reviews];
-          let i = r.findIndex((x) => x.id === reviewUnderEdit);
-          r[i].body = data.body;
-          r[i].edited = "(edited)";
-          setReviews(r);
+          let review = [...reviews];
+          let i = review.findIndex((x) => x.id === reviewUnderEdit);
+          review[i].body = data.body;
+          review[i].edited = "(edited)";
+          setReviews(review);
           formData.body = "";
 
           setIsEditing(false);
@@ -197,9 +197,9 @@ export default function Detail() {
     if (isEditing === false) {
       setIsEditing(true);
       postButton.innerHTML = "Edit";
-      let r = [...reviews];
-      let i = r.findIndex((x) => x.id === parseInt(id.slice(4)));
-      postArea.value = r[i].body;
+      let review = [...reviews];
+      let i = review.findIndex((x) => x.id === parseInt(id.slice(4)));
+      postArea.value = review[i].body;
       setReviewUnderEdit(parseInt(id.slice(4)));
     } else {
       setIsEditing(false);
@@ -263,12 +263,12 @@ export default function Detail() {
       },
     });
     if (response.ok) {
-      let r = [...reviews];
-      r.splice(
-        r.findIndex((x) => x.id === Number(id)),
+      let review = [...reviews];
+      review.splice(
+        review.findIndex((x) => x.id === Number(id)),
         1
       );
-      setReviews(r);
+      setReviews(review);
     }
   };
 
