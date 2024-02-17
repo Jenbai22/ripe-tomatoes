@@ -20,7 +20,7 @@ export default function Home() {
         "star wars",
         "x-men",
       ];
-      let choice = m[Math.floor(Math.random() * (6 - 0) + 0)];
+      let choice = m[Math.floor(Math.random() * 6)];
       const response = await fetch(
         `${process.env.REACT_APP_RIPE_TOMATOES_API_HOST}/searchname/${choice}`
       );
